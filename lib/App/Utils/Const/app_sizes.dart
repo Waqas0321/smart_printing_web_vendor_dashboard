@@ -21,4 +21,21 @@ class AppSizes {
       bottom: getHeightPercentage(bottom),
     );
   }
+
+  bool isMobile(){
+    double screenWidth = Get.width;
+    if(screenWidth >= 10 && screenWidth <= 750){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  bool isDesktop(){
+    double screenWidth = Get.width;
+    if(screenWidth > 750){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }

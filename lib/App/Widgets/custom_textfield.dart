@@ -12,7 +12,8 @@ class CustomTextField extends StatefulWidget {
     this.isValidateFun = false,
     this.errorText = "Please fill this field",
     this.isSuffixIcon = false,
-    this.sendIcon = true,
+    this.icon,
+    this.obsecrureFun = false,
   });
 
   final String hintText;
@@ -21,7 +22,8 @@ class CustomTextField extends StatefulWidget {
   final bool isValidateFun;
   final String errorText;
   final bool isSuffixIcon;
-  final bool sendIcon;
+  final IconData? icon;
+  final bool obsecrureFun;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -38,61 +40,67 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 8,
-            offset: const Offset(0, 3),
+    return TextFormField(
+      controller: widget.controller,
+      cursorColor: AppColors.lightPrimary,
+      obscureText: _isObsecure,
+      style: GoogleFonts.montserrat(
+        fontWeight: FontWeight.w500,
+        fontSize: 18,
+        color: AppColors.black,
+      ),
+      decoration: InputDecoration(
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: AppColors.tertiary,
+            width: 0.7,
           ),
-        ],
-      ),
-      child: TextFormField(
-        controller: widget.controller,
-        cursorColor: AppColors.lightPrimary,
-        obscureText: _isObsecure,
-        style: GoogleFonts.montserrat(
-          fontWeight: FontWeight.w500,
-          fontSize: 18,
-          color: AppColors.black,
         ),
-        decoration: InputDecoration(
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none,
-            ),
-            hintText: widget.hintText,
-            hintStyle: GoogleFonts.montserrat(
-              fontWeight: FontWeight.w500,
-              fontSize: 18,
-              color: AppColors.black.withOpacity(0.5),
-            ),
-            suffixIcon: GestureDetector(
-              onTap: () {
-                setState(() {
-                  _isObsecure = !_isObsecure;
-                });
-              },
-              child: Icon(
-                _isObsecure ? CupertinoIcons.eye_slash : CupertinoIcons.eye,
-                color: AppColors.black.withOpacity(0.5),
-              ),
-            )),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return widget.errorText;
-          } else {
-            return null;
-          }
-        },
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(40),
+          borderSide: BorderSide(
+            color: AppColors.tertiary,
+            width: 0.7,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(40),
+          borderSide: BorderSide(
+            color: AppColors.tertiary,
+            width: 0.7,
+          ),
+        ),
+        hintText: widget.hintText,
+        hintStyle: GoogleFonts.montserrat(
+          fontWeight: FontWeight.w400,
+          fontSize: 18,
+          color: AppColors.tertiary,
+        ),
+        suffixIcon: widget.obsecrureFun? GestureDetector(
+          onTap: () {
+            setState(() {
+              _isObsecure = !_isObsecure;
+            });
+          },
+          child: Icon(
+            _isObsecure ? CupertinoIcons.eye_slash : CupertinoIcons.eye,
+            color: AppColors.tertiary.withOpacity(0.6),
+          ),
+        ): Icon(
+          widget.icon,
+          color: AppColors.tertiary.withOpacity(0.6),
+        ),
       ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return widget.errorText;
+        } else {
+          return null;
+        }
+      },
     );
   }
 }
