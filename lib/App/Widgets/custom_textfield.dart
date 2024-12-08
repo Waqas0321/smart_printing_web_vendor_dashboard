@@ -8,7 +8,7 @@ class CustomTextField extends StatefulWidget {
     super.key,
     this.hintText = 'Enter your text',
     required this.controller,
-    this.isObsecure = false,
+    this.isObsecure = true,
     this.isValidateFun = false,
     this.errorText = "Please fill this field",
     this.isSuffixIcon = false,
@@ -43,7 +43,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return TextFormField(
       controller: widget.controller,
       cursorColor: AppColors.lightPrimary,
-      obscureText: _isObsecure,
+      obscureText: widget.obsecrureFun?_isObsecure: !_isObsecure,
       style: GoogleFonts.montserrat(
         fontWeight: FontWeight.w500,
         fontSize: 18,

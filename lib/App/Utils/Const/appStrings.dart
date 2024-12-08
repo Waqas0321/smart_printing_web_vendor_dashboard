@@ -1,4 +1,4 @@
 class AppStrings{
 
-  static String appTitle = "360 Hours Print";
+  static const String appTitle = "360 Hours Print";
 }

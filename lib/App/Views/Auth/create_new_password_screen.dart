@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:smart_printing_web/App/Controllers/Auth/login_controller.dart';
-import 'package:smart_printing_web/App/Utils/Const/appColors.dart';
-import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
-import 'package:smart_printing_web/App/Utils/Const/app_images.dart';
-import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
-import 'package:smart_printing_web/App/Widgets/custom_text_widget.dart';
-import 'package:smart_printing_web/App/Widgets/custom_textfield.dart';
-import '../../Routes/app_routes_name.dart';
-import '../../Widgets/custom_checkBox.dart';
+import 'package:smart_printing_web/App/Controllers/Auth/create_new_password_controller.dart';
+import '../../Utils/Const/appColors.dart';
+import '../../Utils/Const/app_icons.dart';
+import '../../Utils/Const/app_images.dart';
+import '../../Utils/Const/app_sizes.dart';
+import '../../Widgets/custom_circular_container.dart';
+import '../../Widgets/custom_dialgue_box.dart';
 import '../../Widgets/custom_elevatedButton.dart';
+import '../../Widgets/custom_text_widget.dart';
+import '../../Widgets/custom_textfield.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class CreateNewPasswordScreen extends StatelessWidget {
+  const CreateNewPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    LoginController loginController = Get.put(LoginController());
+    CreateNewPasswordController createNewPasswordController =
+        Get.put(CreateNewPasswordController());
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -49,17 +50,22 @@ class LoginScreen extends StatelessWidget {
                                     alignment: Alignment.topLeft,
                                     child: SvgPicture.asset(AppIcons.appLogo),
                                   ),
-                                ),
-                          isLarge? Gap(AppSizes().getHeightPercentage(10)):Gap(AppSizes().getHeightPercentage(10)),
+                                ),                    isLarge
+                              ? Gap(AppSizes().getHeightPercentage(2))
+                              : Gap(AppSizes().getHeightPercentage(10)),
+                          CustomCircularContainer(
+                            icon: AppIcons.keyIcon,
+                          ),
+                          Gap(AppSizes().getHeightPercentage(5)),
                           CustomTextWidget(
-                            text: "Welcome Back!",
+                            text: "Create a New\nPassword",
                             fontSize: 50,
                             fontWeight: FontWeight.w600,
                             textColor: AppColors.black,
                           ),
                           Gap(AppSizes().getHeightPercentage(2.5)),
                           CustomTextWidget(
-                            text: "Please login to your account",
+                            text: "Please create your new password",
                             fontSize: 20,
                             fontWeight: FontWeight.w400,
                             textColor: AppColors.tertiary,
@@ -70,58 +76,38 @@ class LoginScreen extends StatelessWidget {
                                   ? AppSizes().getWidthPercentage(40)
                                   : AppSizes().getWidthPercentage(90),
                               child: CustomTextField(
-                                  hintText: "Please enter your email here",
+                                  hintText: "New Password",
                                   isSuffixIcon: true,
-                                  icon: Icons.mail_outline_rounded,
-                                  controller: loginController.emailController)),
+                                  obsecrureFun: true,
+                                  controller: createNewPasswordController
+                                      .createPasswordController)),
                           Gap(AppSizes().getHeightPercentage(2)),
                           SizedBox(
                               width: isLarge
                                   ? AppSizes().getWidthPercentage(40)
                                   : AppSizes().getWidthPercentage(90),
                               child: CustomTextField(
-                                  hintText: "Password",
+                                  hintText: "Confirm Password",
                                   isSuffixIcon: true,
                                   obsecrureFun: true,
-                                  controller:
-                                      loginController.passwordController)),
-                          Gap(AppSizes().getHeightPercentage(2)),
-                          SizedBox(
-                            width: isLarge
-                                ? AppSizes().getWidthPercentage(40)
-                                : AppSizes().getWidthPercentage(90),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CustomChexBox(
-                                    text: "Remember me",
-                                    loginController: loginController),
-                                GestureDetector(
-                                  onTap: () {
-                                    Get.toNamed(AppRoutesName.forgetPasswordScreen);
-                                  },
-                                  child: CustomTextWidget(
-                                    text: "Forgot Password?",
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400,
-                                    textColor: AppColors.primary,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                                  controller: createNewPasswordController
+                                      .confirmPasswordController)),
                           Gap(AppSizes().getHeightPercentage(4)),
                           SizedBox(
                             width: isLarge
                                 ? AppSizes().getWidthPercentage(40)
                                 : AppSizes().getWidthPercentage(90),
                             child: CustomElevatedButton(
-                              text: "Login",
+                              text: "Proceed",
                               onPress: () {
-                                Get.toNamed(AppRoutesName.homeScreen);
+                                Get.dialog(
+                                  CustomDialgueBox(),
+                                  barrierDismissible: false, // Prevent closing by tapping outside
+                                );
                               },
                             ),
                           )
+
                         ],
                       ),
                     ),
@@ -135,3 +121,5 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
+
