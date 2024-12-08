@@ -14,6 +14,8 @@ class CustomTextField extends StatefulWidget {
     this.isSuffixIcon = false,
     this.icon,
     this.obsecrureFun = false,
+    this.borderRadius = 40,
+    this.hasPrefixIcon = false,
   });
 
   final String hintText;
@@ -24,6 +26,8 @@ class CustomTextField extends StatefulWidget {
   final bool isSuffixIcon;
   final IconData? icon;
   final bool obsecrureFun;
+  final double borderRadius;
+  final bool hasPrefixIcon;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -43,31 +47,30 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return TextFormField(
       controller: widget.controller,
       cursorColor: AppColors.lightPrimary,
-      obscureText: widget.obsecrureFun?_isObsecure: !_isObsecure,
+      obscureText: widget.obsecrureFun ? _isObsecure : !_isObsecure,
       style: GoogleFonts.montserrat(
         fontWeight: FontWeight.w500,
         fontSize: 18,
         color: AppColors.black,
       ),
       decoration: InputDecoration(
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(widget.borderRadius),
           borderSide: BorderSide(
             color: AppColors.tertiary,
             width: 0.7,
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(40),
+          borderRadius: BorderRadius.circular(widget.borderRadius),
           borderSide: BorderSide(
             color: AppColors.tertiary,
             width: 0.7,
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(40),
+          borderRadius: BorderRadius.circular(widget.borderRadius),
           borderSide: BorderSide(
             color: AppColors.tertiary,
             width: 0.7,
@@ -79,20 +82,27 @@ class _CustomTextFieldState extends State<CustomTextField> {
           fontSize: 18,
           color: AppColors.tertiary,
         ),
-        suffixIcon: widget.obsecrureFun? GestureDetector(
-          onTap: () {
-            setState(() {
-              _isObsecure = !_isObsecure;
-            });
-          },
-          child: Icon(
-            _isObsecure ? CupertinoIcons.eye_slash : CupertinoIcons.eye,
-            color: AppColors.tertiary.withOpacity(0.6),
-          ),
-        ): Icon(
-          widget.icon,
-          color: AppColors.tertiary.withOpacity(0.6),
-        ),
+        prefixIcon: widget.hasPrefixIcon? Icon(
+          Icons.search_sharp,
+          color: AppColors.brown.withOpacity(0.6),
+          size: 25,
+        ):SizedBox.shrink(),
+        suffixIcon: widget.obsecrureFun
+            ? GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _isObsecure = !_isObsecure;
+                  });
+                },
+                child: Icon(
+                  _isObsecure ? CupertinoIcons.eye_slash : CupertinoIcons.eye,
+                  color: AppColors.tertiary.withOpacity(0.6),
+                ),
+              )
+            : Icon(
+                widget.icon,
+                color: AppColors.tertiary.withOpacity(0.6),
+              ),
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {

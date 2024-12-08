@@ -24,7 +24,7 @@ class AppSizes {
 
   bool isMobile(){
     double screenWidth = Get.width;
-    if(screenWidth >= 10 && screenWidth <= 750){
+    if(screenWidth >= 10 && screenWidth <= 800){
       return true;
     }else{
       return false;
@@ -32,7 +32,7 @@ class AppSizes {
   }
   bool isDesktop(){
     double screenWidth = Get.width;
-    if(screenWidth > 750){
+    if(screenWidth > 800){
       return true;
     }else{
       return false;

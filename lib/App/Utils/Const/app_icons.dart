@@ -6,5 +6,7 @@ class AppIcons{
   static const String keyIcon = "${basePath}key_icon.svg";
   static const String CloseSquare = "${basePath}Close Square.svg";
   static const String TickSquare = "${basePath}Tick Square.svg";
+  static const String bell = "${basePath}bell.svg";
+  static const String sidebarIcon = "${basePath}sidebar_icon.png";
 
 }
