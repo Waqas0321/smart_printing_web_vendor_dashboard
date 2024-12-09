@@ -1,29 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-
 import '../Utils/Const/appColors.dart';
 import '../Utils/Const/app_icons.dart';
 import '../Utils/Const/app_sizes.dart';
 import 'custom_text_widget.dart';
-class CustomOverViewCotainer extends StatelessWidget {
-  const CustomOverViewCotainer({
+
+class CustomOverViewContainer extends StatelessWidget {
+  const CustomOverViewContainer({
     super.key,
     this.heading = "6,257",
     this.subHeading = "Total orders",
-    this.subContainerText= "+4.9%",
+    this.subContainerText = "+4.9%",
     this.subContainerColor = AppColors.blue,
+    required this.isLarge,
+    this.iconPath = AppIcons.threeUsers,
+    this.fourInOneLine = false,
   });
+
   final String heading;
   final String subHeading;
   final String subContainerText;
   final Color subContainerColor;
+  final bool isLarge;
+  final String iconPath;
+  final bool fourInOneLine;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: AppSizes()
-          .getCustomPadding(top: 3, bottom: 3, right: 2, left: 2),
+      padding:
+          AppSizes().getCustomPadding(top: 3, bottom: 3, right: 2, left: 2),
       decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(16),
@@ -46,28 +53,38 @@ class CustomOverViewCotainer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomTextWidget(
+                    textAlign: TextAlign.start,
                     text: heading,
                     fontSize: 38,
                     fontWeight: FontWeight.w600,
                     textColor: AppColors.brown,
                   ),
                   Gap(9),
-                  CustomTextWidget(
-                    text: subHeading,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    textColor: AppColors.brown,
+                  SizedBox(
+                    width: fourInOneLine ? 140 : 160,
+                    child: CustomTextWidget(
+                      textAlign: TextAlign.start,
+                      textOverflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      text: subHeading,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      textColor: AppColors.brown,
+                    ),
                   ),
                 ],
               ),
-              Gap(138),
+              Gap(isLarge
+                  ? AppSizes().getWidthPercentage(fourInOneLine ? 0 : 6)
+                  : AppSizes().getWidthPercentage(25)),
               Container(
-                padding: EdgeInsets.all(12),
+                margin: EdgeInsets.only(left: 8),
+                padding: EdgeInsets.all(9),
                 decoration: BoxDecoration(
                     color: subContainerColor.withOpacity(0.3),
                     borderRadius: BorderRadius.circular(6)),
                 child: SvgPicture.asset(
-                  AppIcons.threeUsers,
+                  iconPath,
                   color: subContainerColor,
                 ),
               )
@@ -75,8 +92,7 @@ class CustomOverViewCotainer extends StatelessWidget {
           ),
           Gap(24),
           Container(
-            padding:
-            EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             decoration: BoxDecoration(
                 color: subContainerColor.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(6)),

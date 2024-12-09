@@ -54,7 +54,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         color: AppColors.black,
       ),
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+        contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(widget.borderRadius),
           borderSide: BorderSide(
@@ -82,11 +82,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
           fontSize: 18,
           color: AppColors.tertiary,
         ),
-        prefixIcon: widget.hasPrefixIcon? Icon(
-          Icons.search_sharp,
-          color: AppColors.brown.withOpacity(0.6),
-          size: 25,
-        ):SizedBox.shrink(),
+        prefixIcon: widget.hasPrefixIcon
+            ? Icon(
+                Icons.search_sharp,
+                color: AppColors.brown.withOpacity(0.6),
+                size: 25,
+              )
+            : SizedBox.shrink(),
         suffixIcon: widget.obsecrureFun
             ? GestureDetector(
                 onTap: () {

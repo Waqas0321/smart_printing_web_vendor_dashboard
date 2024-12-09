@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/overview_controller.dart';
 import 'package:smart_printing_web/App/Utils/Const/appColors.dart';
+import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
 
 import '../../Widgets/custom_overview_container.dart';
@@ -35,16 +36,32 @@ class OverviewScreen extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             child: Row(
                               children: [
-                                CustomOverViewCotainer(),
+                                CustomOverViewContainer(
+                                  iconPath: AppIcons.threeUsers,
+                                  isLarge: isLarge,
+                                  heading: "4,230",
+                                  subContainerText: "+1.5%",
+                                  subContainerColor: AppColors.blue,
+                                  subHeading: "Total Orders",
+                                ),
                                 Gap(AppSizes().getWidthPercentage(1)),
-                                CustomOverViewCotainer(
+                                CustomOverViewContainer(
+                                  iconPath: AppIcons.document,
+                                  isLarge: isLarge,
                                   heading: "40,230",
                                   subContainerText: "+10.5%",
-                                  subContainerColor: AppColors.red,
+                                  subContainerColor: AppColors.orange,
                                   subHeading: "Total Earnings",
                                 ),
                                 Gap(AppSizes().getWidthPercentage(1)),
-                                CustomOverViewCotainer(),
+                                CustomOverViewContainer(
+                                  isLarge: isLarge,
+                                  iconPath: AppIcons.wallet,
+                                  heading: "Struggled",
+                                  subContainerText: "+3.9%",
+                                  subContainerColor: AppColors.red,
+                                  subHeading: "Avg Performance Score : 8",
+                                ),
                               ],
                             ),
                           ),
@@ -54,11 +71,32 @@ class OverviewScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              CustomOverViewCotainer(),
+                              CustomOverViewContainer(
+                                iconPath: AppIcons.threeUsers,
+                                isLarge: isLarge,
+                                heading: "4,230",
+                                subContainerText: "+1.5%",
+                                subContainerColor: AppColors.blue,
+                                subHeading: "Total Orders",
+                              ),
                               Gap(AppSizes().getWidthPercentage(1)),
-                              CustomOverViewCotainer(),
+                              CustomOverViewContainer(
+                                iconPath: AppIcons.document,
+                                isLarge: isLarge,
+                                heading: "40,230",
+                                subContainerText: "+10.5%",
+                                subContainerColor: AppColors.orange,
+                                subHeading: "Total Earnings",
+                              ),
                               Gap(AppSizes().getWidthPercentage(1)),
-                              CustomOverViewCotainer(),
+                              CustomOverViewContainer(
+                                isLarge: isLarge,
+                                iconPath: AppIcons.wallet,
+                                heading: "Struggled",
+                                subContainerText: "+3.9%",
+                                subContainerColor: AppColors.red,
+                                subHeading: "Avg Performance Score : 8",
+                              ),
                             ],
                           ),
                         )
