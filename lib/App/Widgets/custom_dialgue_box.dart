@@ -40,14 +40,14 @@ class CustomDialgueBox extends StatelessWidget {
                           Get.back();
                         },
                         child: SvgPicture.asset(
-                          AppIcons.CloseSquare,
+                          AppIcons.closeSquare,
                           height: 20,
                           width: 20,
                         )),
                   ),
                   Gap(6),
                   CustomCircularContainer(
-                    icon: AppIcons.TickSquare,
+                    icon: AppIcons.tickSquare,
                     bgColor: AppColors.primary.withOpacity(0.3),
                   ),
                   Gap(12),

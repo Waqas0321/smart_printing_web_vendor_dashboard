@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/help_screen.dart';
+import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/help_center_screen.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/setting_screen.dart';
 import '../../Views/Vendor Dashboard/estimation_screen.dart';
 import '../../Views/Vendor Dashboard/history_screen.dart';
@@ -16,8 +16,8 @@ class HomeController extends GetxController{
     EstimationScreen(),
     OrdersScreen(),
     HistoryScreen(),
-    SettingScreen(),
-    HelpScreen()
+    SettingsScreen(),
+    HelpCenterScreen()
   ];
 
   void onSidebarItemTap(int index) {

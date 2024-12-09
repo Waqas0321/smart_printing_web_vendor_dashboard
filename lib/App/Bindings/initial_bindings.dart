@@ -2,7 +2,12 @@ import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Controllers/Auth/create_new_password_controller.dart';
 import 'package:smart_printing_web/App/Controllers/Auth/forget_password_controller.dart';
 import 'package:smart_printing_web/App/Controllers/Auth/login_controller.dart';
-
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/estimation_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/help_center_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/history_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/orders_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/overview_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/settings_controller.dart';
 import '../Controllers/Vendor Dashboard/home_controller.dart';
 
 class InitialBindings extends Bindings{
@@ -24,6 +29,30 @@ class InitialBindings extends Bindings{
    //Vendor Dashboard Home
    Get.lazyPut(() => HomeController(),);
    Get.put(() => HomeController(),);
+
+   //Vendor Dashboard OverView
+   Get.lazyPut(() => OverviewController(),);
+   Get.put(() => OverviewController(),);
+
+   //Vendor Dashboard Estimation
+   Get.lazyPut(() => EstimationController(),);
+   Get.put(() => EstimationController(),);
+
+   //Vendor Dashboard Orders
+   Get.lazyPut(() => OrdersController(),);
+   Get.put(() => OrdersController(),);
+
+   //Vendor Dashboard History
+   Get.lazyPut(() => HistoryController(),);
+   Get.put(() => HistoryController(),);
+
+   //Vendor Dashboard Settings
+   Get.lazyPut(() => SettingsController(),);
+   Get.put(() => SettingsController(),);
+
+   //Vendor Dashboard Help Center
+   Get.lazyPut(() => HelpCenterController(),);
+   Get.put(() => HelpCenterController(),);
   }
 
 }
