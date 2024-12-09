@@ -11,5 +11,6 @@ class AppIcons{
   static const String threeUsers = "${basePath}3 User.svg";
   static const String document = "${basePath}Document.svg";
   static const String wallet = "${basePath}Wallet.svg";
+  static const String process = "${basePath}process.svg";
 
 }

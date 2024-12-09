@@ -16,6 +16,7 @@ class CustomOverViewContainer extends StatelessWidget {
     required this.isLarge,
     this.iconPath = AppIcons.threeUsers,
     this.fourInOneLine = false,
+    this.inSetting = false,
   });
 
   final String heading;
@@ -25,6 +26,7 @@ class CustomOverViewContainer extends StatelessWidget {
   final bool isLarge;
   final String iconPath;
   final bool fourInOneLine;
+  final bool inSetting;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +63,7 @@ class CustomOverViewContainer extends StatelessWidget {
                   ),
                   Gap(9),
                   SizedBox(
-                    width: fourInOneLine ? 140 : 160,
+                    width: fourInOneLine ? 140:160,
                     child: CustomTextWidget(
                       textAlign: TextAlign.start,
                       textOverflow: TextOverflow.ellipsis,
@@ -75,7 +77,7 @@ class CustomOverViewContainer extends StatelessWidget {
                 ],
               ),
               Gap(isLarge
-                  ? AppSizes().getWidthPercentage(fourInOneLine ? 0 : 6)
+                  ? AppSizes().getWidthPercentage(fourInOneLine ? 0 : inSetting?4: 6)
                   : AppSizes().getWidthPercentage(25)),
               Container(
                 margin: EdgeInsets.only(left: 8),

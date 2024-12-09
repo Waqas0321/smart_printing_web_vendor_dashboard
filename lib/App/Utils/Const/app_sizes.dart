@@ -13,7 +13,7 @@ class AppSizes {
   }
 
   // Method to get horizontal padding based on screen width percentage
-  EdgeInsets getCustomPadding({double right = 4,double left = 4,double top = 2, double bottom = 2}) {
+  EdgeInsets getCustomPadding({double right = 2,double left = 2,double top = 2, double bottom = 2}) {
     return EdgeInsets.only(
       right: getWidthPercentage(right),
       left: getWidthPercentage(left),
