@@ -12,8 +12,9 @@ import 'custom_text_widget.dart';
 
 class CustomDialgueBox extends StatelessWidget {
   const CustomDialgueBox({
-    super.key,
+    super.key, required this.isLarge,
   });
+  final bool isLarge;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class CustomDialgueBox extends StatelessWidget {
         children: [
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-            width: AppSizes().getWidthPercentage(26),
+            width: isLarge? AppSizes().getWidthPercentage(26):AppSizes().getWidthPercentage(60),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),

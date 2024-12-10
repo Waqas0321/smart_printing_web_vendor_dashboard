@@ -101,7 +101,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
                               text: "Proceed",
                               onPress: () {
                                 Get.dialog(
-                                  CustomDialgueBox(),
+                                  CustomDialgueBox(isLarge: isLarge,),
                                   barrierDismissible: false, // Prevent closing by tapping outside
                                 );
                               },
