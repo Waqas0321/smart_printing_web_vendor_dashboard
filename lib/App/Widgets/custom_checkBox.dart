@@ -16,23 +16,27 @@ class CustomChexBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Obx(
-          () => Checkbox(
-            value: loginController.isChecked.value,
-            onChanged: loginController.toggleCheckbox,
-            activeColor: AppColors.lightPrimary,
-            checkColor: AppColors.tertiary,
+    return SingleChildScrollView(
+      child: Row(
+        children: [
+          Expanded(
+            child: Obx(
+              () => Checkbox(
+                value: loginController.isChecked.value,
+                onChanged: loginController.toggleCheckbox,
+                activeColor: AppColors.lightPrimary,
+                checkColor: AppColors.tertiary,
+              ),
+            ),
           ),
-        ),
-        CustomTextWidget(
-          text: text,
-          fontWeight: FontWeight.w400,
-          fontSize: 18,
-          textColor: AppColors.tertiary,
-        ),
-      ],
+          CustomTextWidget(
+            text: text,
+            fontWeight: FontWeight.w400,
+            fontSize: 18,
+            textColor: AppColors.tertiary,
+          ),
+        ],
+      ),
     );
   }
 }

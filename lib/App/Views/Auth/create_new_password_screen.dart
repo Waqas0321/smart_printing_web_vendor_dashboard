@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Controllers/Auth/create_new_password_controller.dart';
+import '../../Routes/app_routes_name.dart';
 import '../../Utils/Const/appColors.dart';
 import '../../Utils/Const/app_icons.dart';
 import '../../Utils/Const/app_images.dart';
@@ -50,7 +51,8 @@ class CreateNewPasswordScreen extends StatelessWidget {
                                     alignment: Alignment.topLeft,
                                     child: SvgPicture.asset(AppIcons.appLogo),
                                   ),
-                                ),                    isLarge
+                                ),
+                          isLarge
                               ? Gap(AppSizes().getHeightPercentage(2))
                               : Gap(AppSizes().getHeightPercentage(10)),
                           CustomCircularContainer(
@@ -101,13 +103,20 @@ class CreateNewPasswordScreen extends StatelessWidget {
                               text: "Proceed",
                               onPress: () {
                                 Get.dialog(
-                                  CustomDialgueBox(isLarge: isLarge,),
-                                  barrierDismissible: false, // Prevent closing by tapping outside
+                                  CustomDialgueBox(
+                                    isFirst: true,
+                                    isLarge: isLarge,
+                                    onPress: () {
+                                      Get.toNamed(AppRoutesName
+                                          .loginScreen); // Close the dialog
+                                    },
+                                  ),
+                                  barrierDismissible:
+                                      false, // Prevent closing by tapping outside
                                 );
                               },
                             ),
                           )
-
                         ],
                       ),
                     ),
@@ -121,5 +130,3 @@ class CreateNewPasswordScreen extends StatelessWidget {
     );
   }
 }
-
-

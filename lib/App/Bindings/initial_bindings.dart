@@ -2,15 +2,16 @@ import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Controllers/Auth/create_new_password_controller.dart';
 import 'package:smart_printing_web/App/Controllers/Auth/forget_password_controller.dart';
 import 'package:smart_printing_web/App/Controllers/Auth/login_controller.dart';
-import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/processes_controller.dart';
-import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/product_details_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Employee%20Details/emplyees_details_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Processes/processes_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Product_Details/product_details_controller.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/estimation_controller.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/help_center_controller.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/history_controller.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/orders_controller.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/overview_controller.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/settings_controller.dart';
-import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/employees_details_screen.dart';
+import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/Employee%20Details/employees_details_screen.dart';
 import '../Controllers/Vendor Dashboard/home_controller.dart';
 
 class InitialBindings extends Bindings{
@@ -68,6 +69,10 @@ class InitialBindings extends Bindings{
    //Vendor Dashboard Help Center
    Get.lazyPut(() => HelpCenterController(),);
    Get.put(() => HelpCenterController(),);
+
+   //Vendor Employee Details Scree
+   Get.lazyPut(() => EmployeesDetailsController(),);
+   Get.put(() => EmployeesDetailsController(),);
   }
 
 }

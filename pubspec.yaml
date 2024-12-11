@@ -40,6 +40,9 @@ dependencies:
   gap: ^3.0.1
   flutter_svg: ^2.0.16
   fl_chart: ^0.69.2
+  image_picker: ^1.1.2
+  fluttertoast: ^8.2.8
+  intl: ^0.20.1
 
 dev_dependencies:
   flutter_test:

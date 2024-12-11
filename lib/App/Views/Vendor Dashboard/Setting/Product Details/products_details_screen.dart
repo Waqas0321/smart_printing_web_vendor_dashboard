@@ -1,17 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/product_details_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Product_Details/product_details_controller.dart';
 import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Widgets/custom_divider.dart';
-
-import '../../../Utils/Const/appColors.dart';
-import '../../../Utils/Const/app_images.dart';
-import '../../../Utils/Const/app_sizes.dart';
-import '../../../Widgets/custom_container_button.dart';
-import '../../../Widgets/custom_outline_button.dart';
-import '../../../Widgets/custom_row_container.dart';
-import '../../../Widgets/custom_text_widget.dart';
+import '../../../../Utils/Const/appColors.dart';
+import '../../../../Utils/Const/app_images.dart';
+import '../../../../Utils/Const/app_sizes.dart';
+import '../../../../Widgets/custom_container_button.dart';
+import '../../../../Widgets/custom_outline_button.dart';
+import '../../../../Widgets/custom_text_widget.dart';
 
 class ProductsDetailsScreen extends StatelessWidget {
   const ProductsDetailsScreen({super.key});
@@ -55,7 +53,9 @@ class ProductsDetailsScreen extends StatelessWidget {
                         isLarge: isLarge,
                         hasRightIcon: false,
                         text: "Add Product",
-                        onPress: () {},
+                        onPress: () {
+                          productDetailsController.selectedIndexProducts.value = 1;
+                        },
                       )
                     ],
                   ),

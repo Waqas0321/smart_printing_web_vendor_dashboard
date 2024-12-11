@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/Employee%20Details/employee_details_main.dart';
+import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/Processes/processes_main_screen.dart';
+import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/Product%20Details/product_details_main_screen.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/settings_screen.dart';
-import 'employees_details_screen.dart';
-import 'processes_Screen.dart';
-import 'products_details_screen.dart';
+import 'Processes/processes_Screen.dart';
+import 'Product Details/products_details_screen.dart';
 import '../../../Controllers/Vendor Dashboard/Settings/settings_controller.dart';
 import '../../../Utils/Const/app_sizes.dart';
 
@@ -30,9 +32,9 @@ class SettingsMainScreen extends StatelessWidget {
               index: settingsController.selectedIndex.value,
               children: [
                 SettingScreen(),
-                EmployeesDetailsScreen(),
-                ProductsDetailsScreen(),
-                ProcessesScreen(),
+                EmployeeDetailsMainScreen(),
+                ProductDetailsMainScreen(),
+                ProcessesMainScreen(),
               ],
             ),
           );

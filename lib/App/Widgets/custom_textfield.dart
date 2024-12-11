@@ -16,6 +16,8 @@ class CustomTextField extends StatefulWidget {
     this.obsecrureFun = false,
     this.borderRadius = 40,
     this.hasPrefixIcon = false,
+    this.maxLines = 1,
+    this.hintFontSize = 18,
   });
 
   final String hintText;
@@ -28,6 +30,8 @@ class CustomTextField extends StatefulWidget {
   final bool obsecrureFun;
   final double borderRadius;
   final bool hasPrefixIcon;
+  final int maxLines;
+  final double hintFontSize;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -45,6 +49,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      minLines: null,
+      maxLines: widget.maxLines,
       controller: widget.controller,
       cursorColor: AppColors.lightPrimary,
       obscureText: widget.obsecrureFun ? _isObsecure : !_isObsecure,
@@ -54,7 +60,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         color: AppColors.black,
       ),
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        contentPadding: EdgeInsets.symmetric(horizontal: 2, vertical: 3),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(widget.borderRadius),
           borderSide: BorderSide(
@@ -79,7 +85,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         hintText: widget.hintText,
         hintStyle: GoogleFonts.montserrat(
           fontWeight: FontWeight.w400,
-          fontSize: 18,
+          fontSize: widget.hintFontSize,
           color: AppColors.tertiary,
         ),
         prefixIcon: widget.hasPrefixIcon

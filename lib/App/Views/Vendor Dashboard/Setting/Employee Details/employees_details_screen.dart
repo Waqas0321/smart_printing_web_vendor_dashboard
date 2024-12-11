@@ -1,21 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/processes_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Employee%20Details/emplyees_details_controller.dart';
 import 'package:get/get.dart';
+import 'package:smart_printing_web/App/Utils/Const/app_images.dart';
+import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
 import 'package:smart_printing_web/App/Widgets/custom_divider.dart';
-import '../../../Utils/Const/appColors.dart';
-import '../../../Utils/Const/app_sizes.dart';
-import '../../../Widgets/custom_container_button.dart';
-import '../../../Widgets/custom_outline_button.dart';
-import '../../../Widgets/custom_text_widget.dart';
+import 'package:smart_printing_web/App/Widgets/custom_outline_button.dart';
+import 'package:smart_printing_web/App/Widgets/custom_text_widget.dart';
+import '../../../../Utils/Const/appColors.dart';
+import '../../../../Widgets/custom_container_button.dart';
 
-class ProcessesScreen extends StatelessWidget {
-  const ProcessesScreen({super.key});
+class EmployeesDetailsScreen extends StatelessWidget {
+  const EmployeesDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ProcessesController processesController = Get.put(ProcessesController());
+    EmployeesDetailsController employeesDetailsController =
+        Get.put(EmployeesDetailsController());
     return LayoutBuilder(
       builder: (context, constraints) {
         final bool isLarge = AppSizes().isDesktop();
@@ -31,7 +33,7 @@ class ProcessesScreen extends StatelessWidget {
                   Row(
                     children: [
                       CustomTextWidget(
-                        text: "Processes Details",
+                        text: "Employee Details",
                         fontSize: 22,
                         textColor: AppColors.black,
                         fontWeight: FontWeight.w600,
@@ -50,8 +52,10 @@ class ProcessesScreen extends StatelessWidget {
                         containerColor: AppColors.lightPrimary,
                         isLarge: isLarge,
                         hasRightIcon: false,
-                        text: "Process",
-                        onPress: () {},
+                        text: "Add Employee",
+                        onPress: () {
+                          employeesDetailsController.selectedIndexEmployee.value = 1;
+                        },
                       )
                     ],
                   ),
@@ -116,7 +120,7 @@ class ProcessesScreen extends StatelessWidget {
                           mainAxisAlignment:
                           MainAxisAlignment.spaceBetween,
                           children: [
-                            Gap(AppSizes().getWidthPercentage(11.5)),
+                            Gap(AppSizes().getWidthPercentage(7)),
                             Expanded(
                               child: CustomTextWidget(
                                 text: "ID",
@@ -128,7 +132,7 @@ class ProcessesScreen extends StatelessWidget {
                             Expanded(
                               child: CustomTextWidget(
                                 textOverflow: TextOverflow.ellipsis,
-                                text: "PROCESS NAME",
+                                text: "PICTURE",
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12,
                                 textColor: AppColors.brown,
@@ -137,7 +141,16 @@ class ProcessesScreen extends StatelessWidget {
                             Expanded(
                               child: CustomTextWidget(
                                 textOverflow: TextOverflow.ellipsis,
-                                text: "NO OF MACHINES",
+                                text: "EMPLOYEE NAME",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12,
+                                textColor: AppColors.brown,
+                              ),
+                            ),
+                            Expanded(
+                              child: CustomTextWidget(
+                                textOverflow: TextOverflow.ellipsis,
+                                text: "             POSITION",
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12,
                                 textColor: AppColors.brown,
@@ -167,14 +180,14 @@ class ProcessesScreen extends StatelessWidget {
                     ),
                   ),
                         ListView.separated(
-                          itemCount: processesController.boolList.length,
+                          itemCount: employeesDetailsController.boolList.length,
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             return Container(
                               width: AppSizes().getWidthPercentage(100),
                               padding: AppSizes().getCustomPadding(
-                                  top: 2.5, bottom: 2.5, right: 5, left: 1),
+                                  top: 2.5, bottom: 2.5, right: 3, left: 1),
                               child: ScrollConfiguration(
                                 behavior: ScrollBehavior().copyWith(
                                     overscroll: false, scrollbars: false),
@@ -185,10 +198,11 @@ class ProcessesScreen extends StatelessWidget {
                                     children: [
                                       Obx(
                                         () => Checkbox(
-                                          value: processesController
+                                          value: employeesDetailsController
                                               .boolList[index].value,
                                           onChanged: (value) {
-                                            processesController.toggleCheckbox(index, value);
+                                            employeesDetailsController
+                                                .toggleCheckbox(index, value);
                                           },
                                           activeColor: AppColors.lightPrimary,
                                           checkColor: AppColors.tertiary,
@@ -201,9 +215,21 @@ class ProcessesScreen extends StatelessWidget {
                                         fontSize: 12,
                                         textColor: AppColors.brown,
                                       ),
+                                      CircleAvatar(
+                                        radius: 20,
+                                        backgroundImage:
+                                            AssetImage(AppImages.profileImage),
+                                      ),
                                       CustomTextWidget(
                                         textOverflow: TextOverflow.ellipsis,
-                                        text: "Dummy name",
+                                        text: "John Smith",
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 12,
+                                        textColor: AppColors.brown,
+                                      ),
+                                      CustomTextWidget(
+                                        textOverflow: TextOverflow.ellipsis,
+                                        text: "Operator    ",
                                         fontWeight: FontWeight.w500,
                                         fontSize: 12,
                                         textColor: AppColors.brown,
@@ -217,7 +243,7 @@ class ProcessesScreen extends StatelessWidget {
                                       ),
                                       CustomTextWidget(
                                         textOverflow: TextOverflow.ellipsis,
-                                        text: "08",
+                                        text: "07",
                                         fontWeight: FontWeight.w500,
                                         fontSize: 12,
                                         textColor: AppColors.brown,
@@ -227,7 +253,10 @@ class ProcessesScreen extends StatelessWidget {
                                 ),
                               ),
                             );
-                          }, separatorBuilder: (BuildContext context, int index) { return CustomDivider(); },
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return CustomDivider();
+                          },
                         ),
                       ],
                     ),

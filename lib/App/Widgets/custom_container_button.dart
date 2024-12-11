@@ -12,7 +12,7 @@ class CustomContainerButton extends StatelessWidget {
     this.containerColor = AppColors.halfWhite2,
     this.leftIcon = Icons.calendar_month_outlined,
     this.rightIcon = Icons.keyboard_arrow_down,
-    required this.isLarge,
+    required this.isLarge
   });
 
   final bool hasRightIcon;

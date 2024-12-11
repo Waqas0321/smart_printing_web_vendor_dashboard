@@ -1,25 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/emplyees_details_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Processes/processes_controller.dart';
 import 'package:get/get.dart';
-import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
-import 'package:smart_printing_web/App/Utils/Const/app_images.dart';
-import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
 import 'package:smart_printing_web/App/Widgets/custom_divider.dart';
-import 'package:smart_printing_web/App/Widgets/custom_outline_button.dart';
-import 'package:smart_printing_web/App/Widgets/custom_text_widget.dart';
-import '../../../Utils/Const/appColors.dart';
-import '../../../Widgets/custom_container_button.dart';
-import '../../../Widgets/custom_row_container.dart';
+import '../../../../Utils/Const/appColors.dart';
+import '../../../../Utils/Const/app_sizes.dart';
+import '../../../../Widgets/custom_container_button.dart';
+import '../../../../Widgets/custom_outline_button.dart';
+import '../../../../Widgets/custom_text_widget.dart';
 
-class EmployeesDetailsScreen extends StatelessWidget {
-  const EmployeesDetailsScreen({super.key});
+class ProcessesScreen extends StatelessWidget {
+  const ProcessesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    EmployeesDetailsController employeesDetailsController =
-        Get.put(EmployeesDetailsController());
+    ProcessesController processesController = Get.put(ProcessesController());
     return LayoutBuilder(
       builder: (context, constraints) {
         final bool isLarge = AppSizes().isDesktop();
@@ -35,7 +31,7 @@ class EmployeesDetailsScreen extends StatelessWidget {
                   Row(
                     children: [
                       CustomTextWidget(
-                        text: "Employee Details",
+                        text: "Processes Details",
                         fontSize: 22,
                         textColor: AppColors.black,
                         fontWeight: FontWeight.w600,
@@ -54,8 +50,10 @@ class EmployeesDetailsScreen extends StatelessWidget {
                         containerColor: AppColors.lightPrimary,
                         isLarge: isLarge,
                         hasRightIcon: false,
-                        text: "Add Employee",
-                        onPress: () {},
+                        text: "Process",
+                        onPress: () {
+                          processesController.selectedIndexProcesses.value = 1;
+                        },
                       )
                     ],
                   ),
@@ -105,16 +103,80 @@ class EmployeesDetailsScreen extends StatelessWidget {
                         ]),
                     child: Column(
                       children: [
-                        CustomRowContainer(),
+                        Container(
+                        width: AppSizes().getWidthPercentage(100),
+                    padding: AppSizes().getCustomPadding(
+                        top: 2.5, bottom: 2.5, right: 1, left: 1),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(9),
+                        color: AppColors.halfWhite2),
+                    child: ScrollConfiguration(
+                      behavior: ScrollBehavior()
+                          .copyWith(overscroll: false, scrollbars: false),
+                      child: SingleChildScrollView(
+                        child: Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
+                          children: [
+                            Gap(AppSizes().getWidthPercentage(7)),
+                            Expanded(
+                              child: CustomTextWidget(
+                                text: "ID",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12,
+                                textColor: AppColors.brown,
+                              ),
+                            ),
+                            Expanded(
+                              child: CustomTextWidget(
+                                textOverflow: TextOverflow.ellipsis,
+                                text: "PROCESS NAME",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12,
+                                textColor: AppColors.brown,
+                              ),
+                            ),
+                            Expanded(
+                              child: CustomTextWidget(
+                                textOverflow: TextOverflow.ellipsis,
+                                text: "NO OF MACHINES",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12,
+                                textColor: AppColors.brown,
+                              ),
+                            ),
+                            Expanded(
+                              child: CustomTextWidget(
+                                textOverflow: TextOverflow.ellipsis,
+                                text: "WORKFLOW SCORE",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12,
+                                textColor: AppColors.brown,
+                              ),
+                            ),
+                            Expanded(
+                              child: CustomTextWidget(
+                                textOverflow: TextOverflow.ellipsis,
+                                text: "PERFORMANCE SCORE",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12,
+                                textColor: AppColors.brown,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                         ListView.separated(
-                          itemCount: employeesDetailsController.boolList.length,
+                          itemCount: processesController.boolList.length,
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             return Container(
                               width: AppSizes().getWidthPercentage(100),
                               padding: AppSizes().getCustomPadding(
-                                  top: 2.5, bottom: 2.5, right: 3, left: 1),
+                                  top: 2.5, bottom: 2.5, right: 5, left: 1),
                               child: ScrollConfiguration(
                                 behavior: ScrollBehavior().copyWith(
                                     overscroll: false, scrollbars: false),
@@ -125,11 +187,10 @@ class EmployeesDetailsScreen extends StatelessWidget {
                                     children: [
                                       Obx(
                                         () => Checkbox(
-                                          value: employeesDetailsController
+                                          value: processesController
                                               .boolList[index].value,
                                           onChanged: (value) {
-                                            employeesDetailsController
-                                                .toggleCheckbox(index, value);
+                                            processesController.toggleCheckbox(index, value);
                                           },
                                           activeColor: AppColors.lightPrimary,
                                           checkColor: AppColors.tertiary,
@@ -142,21 +203,16 @@ class EmployeesDetailsScreen extends StatelessWidget {
                                         fontSize: 12,
                                         textColor: AppColors.brown,
                                       ),
-                                      CircleAvatar(
-                                        radius: 20,
-                                        backgroundImage:
-                                            AssetImage(AppImages.profileImage),
-                                      ),
                                       CustomTextWidget(
                                         textOverflow: TextOverflow.ellipsis,
-                                        text: "John Smith",
+                                        text: "Lamination",
                                         fontWeight: FontWeight.w500,
                                         fontSize: 12,
                                         textColor: AppColors.brown,
                                       ),
                                       CustomTextWidget(
                                         textOverflow: TextOverflow.ellipsis,
-                                        text: "Operator",
+                                        text: "Dummy name",
                                         fontWeight: FontWeight.w500,
                                         fontSize: 12,
                                         textColor: AppColors.brown,
@@ -170,7 +226,7 @@ class EmployeesDetailsScreen extends StatelessWidget {
                                       ),
                                       CustomTextWidget(
                                         textOverflow: TextOverflow.ellipsis,
-                                        text: "07",
+                                        text: "08",
                                         fontWeight: FontWeight.w500,
                                         fontSize: 12,
                                         textColor: AppColors.brown,
@@ -180,10 +236,7 @@ class EmployeesDetailsScreen extends StatelessWidget {
                                 ),
                               ),
                             );
-                          },
-                          separatorBuilder: (BuildContext context, int index) {
-                            return CustomDivider();
-                          },
+                          }, separatorBuilder: (BuildContext context, int index) { return CustomDivider(); },
                         ),
                       ],
                     ),

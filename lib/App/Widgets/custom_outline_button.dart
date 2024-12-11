@@ -40,27 +40,30 @@ class CustomOutlinedButton extends StatelessWidget {
         color: iconColor,
         size: isLarge ? 16 : 20,
       )
-          : Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            color: iconColor,
-            size: isLarge ? 16 : 20,
+          : SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+            child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+            Icon(
+              icon,
+              color: iconColor,
+              size: isLarge ? 16 : 20,
+            ),
+            isLarge ? Gap(8) : SizedBox.shrink(),
+            isLarge
+                ? CustomTextWidget(
+              textOverflow: TextOverflow.ellipsis,
+              text: 'Log Out',
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              textColor: AppColors.brown,
+            )
+                : SizedBox.shrink(),
+                    ],
+                  ),
           ),
-          isLarge ? Gap(8) : SizedBox.shrink(),
-          isLarge
-              ? CustomTextWidget(
-            textOverflow: TextOverflow.ellipsis,
-            text: 'Log Out',
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            textColor: AppColors.brown,
-          )
-              : SizedBox.shrink(),
-        ],
-      ),
     );
   }
 }

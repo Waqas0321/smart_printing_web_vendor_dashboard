@@ -17,6 +17,8 @@ class CustomOverViewContainer extends StatelessWidget {
     this.iconPath = AppIcons.threeUsers,
     this.fourInOneLine = false,
     this.inSetting = false,
+    this.haveIcon = false,
+
   });
 
   final String heading;
@@ -27,6 +29,7 @@ class CustomOverViewContainer extends StatelessWidget {
   final String iconPath;
   final bool fourInOneLine;
   final bool inSetting;
+  final bool haveIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +101,7 @@ class CustomOverViewContainer extends StatelessWidget {
             decoration: BoxDecoration(
                 color: subContainerColor.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(6)),
-            child: CustomTextWidget(
+            child:haveIcon? Icon(Icons.arrow_forward,color: subContainerColor,):CustomTextWidget(
               text: subContainerText,
               fontWeight: FontWeight.w600,
               fontSize: 15,
