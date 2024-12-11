@@ -90,28 +90,24 @@ class LoginScreen extends StatelessWidget {
                             width: isLarge
                                 ? AppSizes().getWidthPercentage(40)
                                 : AppSizes().getWidthPercentage(90),
-                            child: SingleChildScrollView(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: CustomChexBox(
-                                        text: "Remember me",
-                                        loginController: loginController),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CustomChexBox(
+                                    text: "Remember me",
+                                    loginController: loginController),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed(AppRoutesName.forgetPasswordScreen);
+                                  },
+                                  child: CustomTextWidget(
+                                    text: "Forgot Password?",
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    textColor: AppColors.primary,
                                   ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Get.toNamed(AppRoutesName.forgetPasswordScreen);
-                                    },
-                                    child: CustomTextWidget(
-                                      text: "Forgot Password?",
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400,
-                                      textColor: AppColors.primary,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                           Gap(AppSizes().getHeightPercentage(4)),
