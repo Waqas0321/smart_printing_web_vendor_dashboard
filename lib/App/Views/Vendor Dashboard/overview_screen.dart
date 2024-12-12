@@ -82,7 +82,7 @@ class OverviewScreen extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       flex: 2,
-                                      child: CustomCart(
+                                      child: CustomChart(
                                         overviewController: overviewController,
                                         bloodGlucoseData:
                                             overviewController.bloodGlucoseData,
@@ -99,7 +99,7 @@ class OverviewScreen extends StatelessWidget {
                                     Gap(12),
                                     Expanded(
                                       flex: 1,
-                                      child: CustomCart(
+                                      child: CustomChart(
                                         overviewController: overviewController,
                                         hasOneLine: true,
                                         singleLineList: overviewController
@@ -150,7 +150,7 @@ class OverviewScreen extends StatelessWidget {
                               Gap(23),
                               Column(
                                 children: [
-                                  CustomCart(
+                                  CustomChart(
                                     overviewController: overviewController,
                                     bloodGlucoseData:
                                         overviewController.bloodGlucoseData,
@@ -162,7 +162,7 @@ class OverviewScreen extends StatelessWidget {
                                     height: AppSizes().getHeightPercentage(55),
                                   ),
                                   Gap(12),
-                                  CustomCart(
+                                  CustomChart(
                                     hasOneLine: true,
                                     overviewController: overviewController,
                                     singleLineList:
