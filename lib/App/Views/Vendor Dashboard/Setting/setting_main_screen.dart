@@ -4,8 +4,6 @@ import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/Employee
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/Processes/processes_main_screen.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/Product%20Details/product_details_main_screen.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/settings_screen.dart';
-import 'Processes/processes_Screen.dart';
-import 'Product Details/products_details_screen.dart';
 import '../../../Controllers/Vendor Dashboard/Settings/settings_controller.dart';
 import '../../../Utils/Const/app_sizes.dart';
 

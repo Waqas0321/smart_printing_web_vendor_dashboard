@@ -12,13 +12,15 @@ class CustomContainerButton extends StatelessWidget {
     this.containerColor = AppColors.halfWhite2,
     this.leftIcon = Icons.calendar_month_outlined,
     this.rightIcon = Icons.keyboard_arrow_down,
-    required this.isLarge
+    required this.isLarge,
+    this.textColor = AppColors.brown
   });
 
   final bool hasRightIcon;
   final String text;
   final VoidCallback onPress;
   final Color containerColor;
+  final Color textColor;
   final IconData leftIcon;
   final IconData rightIcon;
   final bool isLarge;
@@ -35,21 +37,21 @@ class CustomContainerButton extends StatelessWidget {
           children: [
             Icon(
               leftIcon,
-              color: AppColors.brown,
+              color: textColor,
               size: 20,
             ),
             Gap(4),
           isLarge?  CustomTextWidget(
               text: text,
               fontSize: 12,
-              textColor: AppColors.brown,
+              textColor: textColor,
               fontWeight: FontWeight.w500,
             ):SizedBox.shrink(),
             Gap(2),
             hasRightIcon
                 ? Icon(
                     rightIcon,
-                    color: AppColors.brown,
+                    color: textColor,
                   )
                 : SizedBox.shrink(),
           ],

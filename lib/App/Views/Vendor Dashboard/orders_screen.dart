@@ -83,7 +83,9 @@ class OrdersScreen extends StatelessWidget {
                       CustomContainerButton(
                         isLarge: isLarge,
                         leftIcon: Icons.add_box_outlined,
-                        onPress: () {},
+                        onPress: () {
+                          ordersController.selectedIndex.value = 1;
+                        },
                         text: "Create Order",
                         hasRightIcon: false,
                         containerColor: AppColors.lightPrimary,
@@ -135,342 +137,7 @@ class OrdersScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                Gap(18),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    CustomOutlinedButton(
-                                      onPressed: () {},
-                                      isLarge: isLarge,
-                                      hasJustIcon: true,
-                                      iconColor: AppColors.primary,
-                                      isCircular: true,
-                                      icon: CupertinoIcons.down_arrow,
-                                    ),
-                                    CustomOutlinedButton(
-                                      onPressed: () {},
-                                      isLarge: isLarge,
-                                      hasJustIcon: true,
-                                      iconColor: AppColors.primary,
-                                      isCircular: true,
-                                      icon: Icons.mode_edit_outline_sharp,
-                                    ),
-                                    CustomOutlinedButton(
-                                      onPressed: () {},
-                                      isLarge: isLarge,
-                                      hasJustIcon: true,
-                                      iconColor: AppColors.red,
-                                      isCircular: true,
-                                      icon: Icons.delete_outline,
-                                    )
-                                  ],
-                                ),
-                                Gap(18),
-                                Container(
-                                  width: AppSizes().getWidthPercentage(100),
-                                  padding: AppSizes().getCustomPadding(
-                                      right: 1, left: 1, top: 1, bottom: 0),
-                                  decoration: BoxDecoration(
-                                      color: AppColors.white,
-                                      borderRadius: BorderRadius.circular(8),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: AppColors.brown
-                                                .withOpacity(0.06),
-                                            blurRadius: 5,
-                                            spreadRadius: 3)
-                                      ]),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        width:
-                                            AppSizes().getWidthPercentage(100),
-                                        padding: AppSizes().getCustomPadding(
-                                            top: 2.5,
-                                            bottom: 2.5,
-                                            right: 0,
-                                            left: 0),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(9),
-                                            color: AppColors.halfWhite2),
-                                        child: ScrollConfiguration(
-                                          behavior: ScrollBehavior().copyWith(
-                                              overscroll: false,
-                                              scrollbars: false),
-                                          child: SingleChildScrollView(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Gap(AppSizes()
-                                                    .getWidthPercentage(4)),
-                                                Expanded(
-                                                  child: CustomTextWidget(
-                                                    text: "ID",
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: CustomTextWidget(
-                                                    textOverflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: "PRODUCT NAME",
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: CustomTextWidget(
-                                                    textOverflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: "ORDER VALUE",
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: CustomTextWidget(
-                                                    textOverflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: "QUANTITY",
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: CustomTextWidget(
-                                                    textOverflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: "WORKFLOW SCORE",
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: CustomTextWidget(
-                                                    textOverflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: "STAGE",
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: CustomTextWidget(
-                                                    textOverflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: "TIME LEFT",
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: CustomTextWidget(
-                                                    textOverflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: "    SCORE",
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: CustomTextWidget(
-                                                    textOverflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: "ACTION",
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      ListView.separated(
-                                        itemCount:
-                                            ordersController.boolList.length,
-                                        physics: NeverScrollableScrollPhysics(),
-                                        shrinkWrap: true,
-                                        itemBuilder: (context, index) {
-                                          return Container(
-                                            width: AppSizes()
-                                                .getWidthPercentage(100),
-                                            padding: AppSizes()
-                                                .getCustomPadding(
-                                                    top: 2.5,
-                                                    bottom: 2.5,
-                                                    right: 1,
-                                                    left: 0),
-                                            child: ScrollConfiguration(
-                                              behavior: ScrollBehavior()
-                                                  .copyWith(
-                                                      overscroll: false,
-                                                      scrollbars: false),
-                                              child: SingleChildScrollView(
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Obx(
-                                                      () => Checkbox(
-                                                        value: ordersController
-                                                            .boolList[index]
-                                                            .value,
-                                                        onChanged: (value) {
-                                                          ordersController
-                                                              .toggleCheckbox(
-                                                                  index, value);
-                                                        },
-                                                        activeColor: AppColors
-                                                            .lightPrimary,
-                                                        checkColor:
-                                                            AppColors.tertiary,
-                                                      ),
-                                                    ),
-                                                    CustomTextWidget(
-                                                      textOverflow:
-                                                          TextOverflow.ellipsis,
-                                                      text: "#0001",
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: 12,
-                                                      textColor:
-                                                          AppColors.brown,
-                                                    ),
-                                                    SizedBox(
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          CircleAvatar(
-                                                            radius: 13,
-                                                            backgroundImage:
-                                                                AssetImage(AppImages
-                                                                    .profileImage),
-                                                          ),
-                                                          Gap(4),
-                                                          CustomTextWidget(
-                                                            textOverflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            text: "Dummy",
-                                                            fontWeight:
-                                                                FontWeight.w800,
-                                                            fontSize: 12,
-                                                            textColor:
-                                                                AppColors.black,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    CustomTextWidget(
-                                                      textOverflow:
-                                                          TextOverflow.ellipsis,
-                                                      text: "Dummy",
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: 12,
-                                                      textColor:
-                                                          AppColors.brown,
-                                                    ),
-                                                    CustomTextWidget(
-                                                      textOverflow:
-                                                          TextOverflow.ellipsis,
-                                                      text: "2 Qty",
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: 12,
-                                                      textColor:
-                                                          AppColors.brown,
-                                                    ),
-                                                    CustomTextWidget(
-                                                      textOverflow:
-                                                          TextOverflow.ellipsis,
-                                                      text: "Dummy",
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: 12,
-                                                      textColor:
-                                                          AppColors.brown,
-                                                    ),
-                                                    CustomTextWidget(
-                                                      textOverflow:
-                                                          TextOverflow.ellipsis,
-                                                      text: "Smooth",
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 12,
-                                                      textColor:
-                                                          AppColors.brown,
-                                                    ),
-                                                    CustomTextWidget(
-                                                      textOverflow:
-                                                          TextOverflow.ellipsis,
-                                                      text: "Printing",
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 12,
-                                                      textColor:
-                                                          AppColors.brown,
-                                                    ),
-                                                    CustomTextWidget(
-                                                      textOverflow:
-                                                          TextOverflow.ellipsis,
-                                                      text: "3 Hrs, 20mins",
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 12,
-                                                      textColor:
-                                                          AppColors.brown,
-                                                    ),
-                                                    CustomTextWidget(
-                                                      textOverflow:
-                                                          TextOverflow.ellipsis,
-                                                      text: "_",
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 12,
-                                                      textColor:
-                                                          AppColors.brown,
-                                                    ),
-                                                    CustomTextButton(
-                                                      color: AppColors
-                                                          .lightPrimary,
-                                                      hasBorder: false,
-                                                      textColor:
-                                                          AppColors.brown,
-                                                      text: "Workflow",
-                                                      onPress: () {},
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                        separatorBuilder:
-                                            (BuildContext context, int index) {
-                                          return CustomDivider();
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                )
+
                               ],
                             ),
                           ),
@@ -506,325 +173,645 @@ class OrdersScreen extends StatelessWidget {
                                 subContainerColor: AppColors.red,
                                 subHeading: "Avg Workflow Score",
                               ),
-                              Gap(18),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
+
+                            ],
+                          ),
+                        ),
+                  Gap(18),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      CustomOutlinedButton(
+                        onPressed: () {},
+                        isLarge: isLarge,
+                        hasJustIcon: true,
+                        iconColor: AppColors.primary,
+                        isCircular: true,
+                        icon: CupertinoIcons.down_arrow,
+                      ),
+                      CustomOutlinedButton(
+                        onPressed: () {},
+                        isLarge: isLarge,
+                        hasJustIcon: true,
+                        iconColor: AppColors.primary,
+                        isCircular: true,
+                        icon: Icons.mode_edit_outline_sharp,
+                      ),
+                      CustomOutlinedButton(
+                        onPressed: () {},
+                        isLarge: isLarge,
+                        hasJustIcon: true,
+                        iconColor: AppColors.red,
+                        isCircular: true,
+                        icon: Icons.delete_outline,
+                      )
+                    ],
+                  ),
+                  Gap(18),
+                isLarge?  Container(
+                    width: AppSizes().getWidthPercentage(100),
+                    padding: AppSizes().getCustomPadding(
+                        right: 1, left: 1, top: 1, bottom: 0),
+                    decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(8),
+                        boxShadow: [
+                          BoxShadow(
+                              color: AppColors.brown
+                                  .withOpacity(0.06),
+                              blurRadius: 5,
+                              spreadRadius: 3)
+                        ]),
+                    child: Column(
+                      children: [
+                        Container(
+                          width:
+                          AppSizes().getWidthPercentage(100),
+                          padding: AppSizes().getCustomPadding(
+                              top: 2.5,
+                              bottom: 2.5,
+                              right: 0,
+                              left: 0),
+                          decoration: BoxDecoration(
+                              borderRadius:
+                              BorderRadius.circular(9),
+                              color: AppColors.halfWhite2),
+                          child: ScrollConfiguration(
+                            behavior: ScrollBehavior().copyWith(
+                                overscroll: false,
+                                scrollbars: false),
+                            child: SingleChildScrollView(
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment
+                                    .spaceBetween,
                                 children: [
-                                  CustomOutlinedButton(
-                                    onPressed: () {},
-                                    isLarge: isLarge,
-                                    hasJustIcon: true,
-                                    iconColor: AppColors.primary,
-                                    isCircular: true,
-                                    icon: CupertinoIcons.down_arrow,
+                                  Gap(AppSizes()
+                                      .getWidthPercentage(4)),
+                                  Expanded(
+                                    child: CustomTextWidget(
+                                      text: "ID",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
                                   ),
-                                  CustomOutlinedButton(
-                                    onPressed: () {},
-                                    isLarge: isLarge,
-                                    hasJustIcon: true,
-                                    iconColor: AppColors.primary,
-                                    isCircular: true,
-                                    icon: Icons.mode_edit_outline_sharp,
+                                  Expanded(
+                                    child: CustomTextWidget(
+                                      textOverflow:
+                                      TextOverflow.ellipsis,
+                                      text: "PRODUCT NAME",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
                                   ),
-                                  CustomOutlinedButton(
-                                    onPressed: () {},
-                                    isLarge: isLarge,
-                                    hasJustIcon: true,
-                                    iconColor: AppColors.red,
-                                    isCircular: true,
-                                    icon: Icons.delete_outline,
-                                  )
+                                  Expanded(
+                                    child: CustomTextWidget(
+                                      textOverflow:
+                                      TextOverflow.ellipsis,
+                                      text: "ORDER VALUE",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: CustomTextWidget(
+                                      textOverflow:
+                                      TextOverflow.ellipsis,
+                                      text: "QUANTITY",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: CustomTextWidget(
+                                      textOverflow:
+                                      TextOverflow.ellipsis,
+                                      text: "WORKFLOW SCORE",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: CustomTextWidget(
+                                      textOverflow:
+                                      TextOverflow.ellipsis,
+                                      text: "STAGE",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: CustomTextWidget(
+                                      textOverflow:
+                                      TextOverflow.ellipsis,
+                                      text: "TIME LEFT",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: CustomTextWidget(
+                                      textOverflow:
+                                      TextOverflow.ellipsis,
+                                      text: "    SCORE",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: CustomTextWidget(
+                                      textOverflow:
+                                      TextOverflow.ellipsis,
+                                      text: "ACTION",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                  ),
                                 ],
                               ),
-                              Gap(18),
-                              Container(
-                                width: AppSizes().getWidthPercentage(100),
-                                padding: AppSizes().getCustomPadding(
-                                    right: 1, left: 1, top: 1, bottom: 0),
-                                decoration: BoxDecoration(
-                                    color: AppColors.white,
-                                    borderRadius: BorderRadius.circular(8),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color:
-                                              AppColors.brown.withOpacity(0.06),
-                                          blurRadius: 5,
-                                          spreadRadius: 3)
-                                    ]),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: AppSizes().getWidthPercentage(100),
-                                      padding: AppSizes().getCustomPadding(
-                                          top: 2.5,
-                                          bottom: 2.5,
-                                          right: 0,
-                                          left: 0),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(9),
-                                          color: AppColors.halfWhite2),
-                                      child: ScrollConfiguration(
-                                        behavior: ScrollBehavior().copyWith(
-                                            overscroll: false,
-                                            scrollbars: false),
-                                        child: SingleChildScrollView(
+                            ),
+                          ),
+                        ),
+                        ListView.separated(
+                          itemCount:
+                          ordersController.boolList.length,
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                ordersController.selectedIndex.value = 2;
+                              },
+                              child: Container(
+                                width: AppSizes()
+                                    .getWidthPercentage(100),
+                                padding: AppSizes()
+                                    .getCustomPadding(
+                                    top: 2.5,
+                                    bottom: 2.5,
+                                    right: 1,
+                                    left: 0),
+                                child: ScrollConfiguration(
+                                  behavior: ScrollBehavior()
+                                      .copyWith(
+                                      overscroll: false,
+                                      scrollbars: false),
+                                  child: SingleChildScrollView(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment
+                                          .spaceBetween,
+                                      children: [
+                                        Obx(
+                                              () => Checkbox(
+                                            value: ordersController
+                                                .boolList[index]
+                                                .value,
+                                            onChanged: (value) {
+                                              ordersController
+                                                  .toggleCheckbox(
+                                                  index, value);
+                                            },
+                                            activeColor: AppColors
+                                                .lightPrimary,
+                                            checkColor:
+                                            AppColors.tertiary,
+                                          ),
+                                        ),
+                                        CustomTextWidget(
+                                          textOverflow:
+                                          TextOverflow.ellipsis,
+                                          text: "#0001",
+                                          fontWeight:
+                                          FontWeight.w600,
+                                          fontSize: 12,
+                                          textColor:
+                                          AppColors.brown,
+                                        ),
+                                        SizedBox(
                                           child: Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment
+                                                .spaceBetween,
                                             children: [
-                                              Gap(AppSizes()
-                                                  .getWidthPercentage(4)),
-                                              Expanded(
-                                                child: CustomTextWidget(
-                                                  text: "ID",
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 12,
-                                                  textColor: AppColors.brown,
-                                                ),
+                                              CircleAvatar(
+                                                radius: 13,
+                                                backgroundImage:
+                                                AssetImage(AppImages
+                                                    .profileImage),
                                               ),
-                                              Expanded(
-                                                child: CustomTextWidget(
-                                                  textOverflow:
-                                                      TextOverflow.ellipsis,
-                                                  text: "PRODUCT NAME",
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 12,
-                                                  textColor: AppColors.brown,
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: CustomTextWidget(
-                                                  textOverflow:
-                                                      TextOverflow.ellipsis,
-                                                  text: "ORDER VALUE",
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 12,
-                                                  textColor: AppColors.brown,
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: CustomTextWidget(
-                                                  textOverflow:
-                                                      TextOverflow.ellipsis,
-                                                  text: "QUANTITY",
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 12,
-                                                  textColor: AppColors.brown,
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: CustomTextWidget(
-                                                  textOverflow:
-                                                      TextOverflow.ellipsis,
-                                                  text: "WORKFLOW SCORE",
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 12,
-                                                  textColor: AppColors.brown,
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: CustomTextWidget(
-                                                  textOverflow:
-                                                      TextOverflow.ellipsis,
-                                                  text: "STAGE",
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 12,
-                                                  textColor: AppColors.brown,
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: CustomTextWidget(
-                                                  textOverflow:
-                                                      TextOverflow.ellipsis,
-                                                  text: "TIME LEFT",
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 12,
-                                                  textColor: AppColors.brown,
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: CustomTextWidget(
-                                                  textOverflow:
-                                                      TextOverflow.ellipsis,
-                                                  text: "    SCORE",
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 12,
-                                                  textColor: AppColors.brown,
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: CustomTextWidget(
-                                                  textOverflow:
-                                                      TextOverflow.ellipsis,
-                                                  text: "ACTION",
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 12,
-                                                  textColor: AppColors.brown,
-                                                ),
+                                              Gap(4),
+                                              CustomTextWidget(
+                                                textOverflow:
+                                                TextOverflow
+                                                    .ellipsis,
+                                                text: "Dummy",
+                                                fontWeight:
+                                                FontWeight.w800,
+                                                fontSize: 12,
+                                                textColor:
+                                                AppColors.black,
                                               ),
                                             ],
                                           ),
                                         ),
-                                      ),
+                                        CustomTextWidget(
+                                          textOverflow:
+                                          TextOverflow.ellipsis,
+                                          text: "Dummy    ",
+                                          fontWeight:
+                                          FontWeight.w600,
+                                          fontSize: 12,
+                                          textColor:
+                                          AppColors.brown,
+                                        ),
+                                        CustomTextWidget(
+                                          textOverflow:
+                                          TextOverflow.ellipsis,
+                                          text: "2 Qty",
+                                          fontWeight:
+                                          FontWeight.w600,
+                                          fontSize: 12,
+                                          textColor:
+                                          AppColors.brown,
+                                        ),
+                                        CustomTextWidget(
+                                          textOverflow:
+                                          TextOverflow.ellipsis,
+                                          text: "Smooth",
+                                          fontWeight:
+                                          FontWeight.w500,
+                                          fontSize: 12,
+                                          textColor:
+                                          AppColors.brown,
+                                        ),
+                                        CustomTextWidget(
+                                          textOverflow:
+                                          TextOverflow.ellipsis,
+                                          text: "Printing",
+                                          fontWeight:
+                                          FontWeight.w500,
+                                          fontSize: 12,
+                                          textColor:
+                                          AppColors.brown,
+                                        ),
+                                        CustomTextWidget(
+                                          textOverflow:
+                                          TextOverflow.ellipsis,
+                                          text: "3 Hrs, 20mins",
+                                          fontWeight:
+                                          FontWeight.w500,
+                                          fontSize: 12,
+                                          textColor:
+                                          AppColors.brown,
+                                        ),
+                                        CustomTextWidget(
+                                          textOverflow:
+                                          TextOverflow.ellipsis,
+                                          text: "_",
+                                          fontWeight:
+                                          FontWeight.w500,
+                                          fontSize: 12,
+                                          textColor:
+                                          AppColors.brown,
+                                        ),
+                                        CustomTextButton(
+                                          color: AppColors
+                                              .lightPrimary,
+                                          hasBorder: false,
+                                          textColor:
+                                          AppColors.brown,
+                                          text: "Workflow",
+                                          onPress: () {
+                                            ordersController.selectedIndex.value = 3;
+                                          },
+                                        )
+                                      ],
                                     ),
-                                    ListView.separated(
-                                      itemCount:
-                                          ordersController.boolList.length,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      itemBuilder: (context, index) {
-                                        return Container(
-                                          width: AppSizes()
-                                              .getWidthPercentage(100),
-                                          padding: AppSizes().getCustomPadding(
-                                              top: 2.5,
-                                              bottom: 2.5,
-                                              right: 1,
-                                              left: 0),
-                                          child: ScrollConfiguration(
-                                            behavior: ScrollBehavior().copyWith(
-                                                overscroll: false,
-                                                scrollbars: false),
-                                            child: SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Obx(
-                                                    () => Checkbox(
-                                                      value: ordersController
-                                                          .boolList[index]
-                                                          .value,
-                                                      onChanged: (value) {
-                                                        ordersController
-                                                            .toggleCheckbox(
-                                                                index, value);
-                                                      },
-                                                      activeColor: AppColors
-                                                          .lightPrimary,
-                                                      checkColor:
-                                                          AppColors.tertiary,
-                                                    ),
-                                                  ),
-                                                  CustomTextWidget(
-                                                    textOverflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: "#0001",
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                  SizedBox(
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        CircleAvatar(
-                                                          radius: 13,
-                                                          backgroundImage:
-                                                              AssetImage(AppImages
-                                                                  .profileImage),
-                                                        ),
-                                                        Gap(4),
-                                                        CustomTextWidget(
-                                                          textOverflow:
-                                                              TextOverflow
-                                                                  .ellipsis,
-                                                          text: "Dummy",
-                                                          fontWeight:
-                                                              FontWeight.w800,
-                                                          fontSize: 12,
-                                                          textColor:
-                                                              AppColors.black,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  CustomTextWidget(
-                                                    textOverflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: "Dummy",
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                  CustomTextWidget(
-                                                    textOverflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: "2 Qty",
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                  CustomTextWidget(
-                                                    textOverflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: "Dummy",
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                  CustomTextWidget(
-                                                    textOverflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: "Smooth",
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                  CustomTextWidget(
-                                                    textOverflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: "Printing",
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                  CustomTextWidget(
-                                                    textOverflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: "3 Hrs, 20mins",
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                  CustomTextWidget(
-                                                    textOverflow:
-                                                        TextOverflow.ellipsis,
-                                                    text: "_",
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 12,
-                                                    textColor: AppColors.brown,
-                                                  ),
-                                                  CustomTextButton(
-                                                    color:
-                                                        AppColors.lightPrimary,
-                                                    hasBorder: false,
-                                                    textColor: AppColors.brown,
-                                                    text: "Workflow",
-                                                    onPress: () {},
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      separatorBuilder:
-                                          (BuildContext context, int index) {
-                                        return CustomDivider();
-                                      },
-                                    ),
-                                  ],
+                                  ),
                                 ),
-                              )
-                            ],
+                              ),
+                            );
+                          },
+                          separatorBuilder:
+                              (BuildContext context, int index) {
+                            return CustomDivider();
+                          },
+                        ),
+                      ],
+                    ),
+                  ):Container(
+                  width: AppSizes().getWidthPercentage(100),
+                  padding: AppSizes().getCustomPadding(
+                      right: 1, left: 1, top: 1, bottom: 0),
+                  decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                            color: AppColors.brown
+                                .withOpacity(0.06),
+                            blurRadius: 5,
+                            spreadRadius: 3)
+                      ]),
+                  child: Column(
+                    children: [
+                      Container(
+                        width:
+                        AppSizes().getWidthPercentage(100),
+                        padding: AppSizes().getCustomPadding(
+                            top: 2.5,
+                            bottom: 2.5,
+                            right: 0,
+                            left: 0),
+                        decoration: BoxDecoration(
+                            borderRadius:
+                            BorderRadius.circular(9),
+                            color: AppColors.halfWhite2),
+                        child: ScrollConfiguration(
+                          behavior: ScrollBehavior().copyWith(
+                              overscroll: false,
+                              scrollbars: false),
+                          child: SingleChildScrollView(
+                            child: Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment
+                                  .spaceBetween,
+                              children: [
+                                Gap(AppSizes()
+                                    .getWidthPercentage(4)),
+                                Expanded(
+                                  child: CustomTextWidget(
+                                    text: "ID",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: CustomTextWidget(
+                                    textOverflow:
+                                    TextOverflow.ellipsis,
+                                    text: "PRODUCT NAME",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: CustomTextWidget(
+                                    textOverflow:
+                                    TextOverflow.ellipsis,
+                                    text: "ORDER VALUE",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: CustomTextWidget(
+                                    textOverflow:
+                                    TextOverflow.ellipsis,
+                                    text: "QUANTITY",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: CustomTextWidget(
+                                    textOverflow:
+                                    TextOverflow.ellipsis,
+                                    text: "WORKFLOW SCORE",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: CustomTextWidget(
+                                    textOverflow:
+                                    TextOverflow.ellipsis,
+                                    text: "STAGE",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: CustomTextWidget(
+                                    textOverflow:
+                                    TextOverflow.ellipsis,
+                                    text: "TIME LEFT",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: CustomTextWidget(
+                                    textOverflow:
+                                    TextOverflow.ellipsis,
+                                    text: "    SCORE",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: CustomTextWidget(
+                                    textOverflow:
+                                    TextOverflow.ellipsis,
+                                    text: "ACTION",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        )
+                        ),
+                      ),
+                      ListView.separated(
+                        itemCount:
+                        ordersController.boolList.length,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              ordersController.selectedIndex.value = 2;
+                            },
+                            child: Container(
+                              width: AppSizes()
+                                  .getWidthPercentage(100),
+                              padding: AppSizes()
+                                  .getCustomPadding(
+                                  top: 2.5,
+                                  bottom: 2.5,
+                                  right: 1,
+                                  left: 0),
+                              child: ScrollConfiguration(
+                                behavior: ScrollBehavior()
+                                    .copyWith(
+                                    overscroll: false,
+                                    scrollbars: false),
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Obx(
+                                            () => Checkbox(
+                                          value: ordersController
+                                              .boolList[index]
+                                              .value,
+                                          onChanged: (value) {
+                                            ordersController
+                                                .toggleCheckbox(
+                                                index, value);
+                                          },
+                                          activeColor: AppColors
+                                              .lightPrimary,
+                                          checkColor:
+                                          AppColors.tertiary,
+                                        ),
+                                      ),
+                                      CustomTextWidget(
+                                        textOverflow:
+                                        TextOverflow.ellipsis,
+                                        text: "#0001",
+                                        fontWeight:
+                                        FontWeight.w600,
+                                        fontSize: 12,
+                                        textColor:
+                                        AppColors.brown,
+                                      ),
+                                      SizedBox(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceBetween,
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 13,
+                                              backgroundImage:
+                                              AssetImage(AppImages
+                                                  .profileImage),
+                                            ),
+                                            Gap(4),
+                                            CustomTextWidget(
+                                              textOverflow:
+                                              TextOverflow
+                                                  .ellipsis,
+                                              text: "Dummy",
+                                              fontWeight:
+                                              FontWeight.w800,
+                                              fontSize: 12,
+                                              textColor:
+                                              AppColors.black,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      CustomTextWidget(
+                                        textOverflow:
+                                        TextOverflow.ellipsis,
+                                        text: "Dummy    ",
+                                        fontWeight:
+                                        FontWeight.w600,
+                                        fontSize: 12,
+                                        textColor:
+                                        AppColors.brown,
+                                      ),
+                                      CustomTextWidget(
+                                        textOverflow:
+                                        TextOverflow.ellipsis,
+                                        text: "2 Qty",
+                                        fontWeight:
+                                        FontWeight.w600,
+                                        fontSize: 12,
+                                        textColor:
+                                        AppColors.brown,
+                                      ),
+                                      CustomTextWidget(
+                                        textOverflow:
+                                        TextOverflow.ellipsis,
+                                        text: "Smooth",
+                                        fontWeight:
+                                        FontWeight.w500,
+                                        fontSize: 12,
+                                        textColor:
+                                        AppColors.brown,
+                                      ),
+                                      CustomTextWidget(
+                                        textOverflow:
+                                        TextOverflow.ellipsis,
+                                        text: "Printing",
+                                        fontWeight:
+                                        FontWeight.w500,
+                                        fontSize: 12,
+                                        textColor:
+                                        AppColors.brown,
+                                      ),
+                                      CustomTextWidget(
+                                        textOverflow:
+                                        TextOverflow.ellipsis,
+                                        text: "3 Hrs, 20mins",
+                                        fontWeight:
+                                        FontWeight.w500,
+                                        fontSize: 12,
+                                        textColor:
+                                        AppColors.brown,
+                                      ),
+                                      CustomTextWidget(
+                                        textOverflow:
+                                        TextOverflow.ellipsis,
+                                        text: "_",
+                                        fontWeight:
+                                        FontWeight.w500,
+                                        fontSize: 12,
+                                        textColor:
+                                        AppColors.brown,
+                                      ),
+                                      CustomTextButton(
+                                        color: AppColors
+                                            .lightPrimary,
+                                        hasBorder: false,
+                                        textColor:
+                                        AppColors.brown,
+                                        text: "Workflow",
+                                        onPress: () {
+                                          ordersController.selectedIndex.value = 3;
+                                        },
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        separatorBuilder:
+                            (BuildContext context, int index) {
+                          return CustomDivider();
+                        },
+                      ),
+                    ],
+                  ),
+                )
                 ],
               ),
             ),

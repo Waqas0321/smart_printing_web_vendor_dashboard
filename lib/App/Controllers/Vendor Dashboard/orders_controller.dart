@@ -1,6 +1,10 @@
 import 'package:get/get.dart';
 
 class OrdersController extends GetxController{
+
+  // Navigations
+  RxInt selectedIndex = 0.obs;
+  RxBool otherScreen = false.obs;
   //check box
   List<RxBool> boolList = List.generate(10, (_) => false.obs);
 
@@ -9,6 +13,5 @@ class OrdersController extends GetxController{
       boolList[index].value = value ?? false;
     }
   }
-  RxInt selectedIndexProducts = 0.obs;
 
 }

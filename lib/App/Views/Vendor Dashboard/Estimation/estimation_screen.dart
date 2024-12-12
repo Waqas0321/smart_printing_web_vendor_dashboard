@@ -6,15 +6,15 @@ import 'package:intl/intl.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/estimation_controller.dart';
 import 'package:smart_printing_web/App/Services/calender_open.dart';
 import 'package:smart_printing_web/App/Widgets/custom_text_widget.dart';
-import '../../Utils/Const/appColors.dart';
-import '../../Utils/Const/app_icons.dart';
-import '../../Utils/Const/app_sizes.dart';
-import '../../Widgets/custom_container_button.dart';
-import '../../Widgets/custom_dialgue_box.dart';
-import '../../Widgets/custom_divider.dart';
-import '../../Widgets/custom_outline_button.dart';
-import '../../Widgets/custom_overview_container.dart';
-import '../../Widgets/custom_text_button.dart';
+import '../../../Utils/Const/appColors.dart';
+import '../../../Utils/Const/app_icons.dart';
+import '../../../Utils/Const/app_sizes.dart';
+import '../../../Widgets/custom_container_button.dart';
+import '../../../Widgets/custom_dialgue_box.dart';
+import '../../../Widgets/custom_divider.dart';
+import '../../../Widgets/custom_outline_button.dart';
+import '../../../Widgets/custom_overview_container.dart';
+import '../../../Widgets/custom_text_button.dart';
 
 class EstimationScreen extends StatelessWidget {
   const EstimationScreen({super.key});
@@ -428,7 +428,9 @@ class EstimationScreen extends StatelessWidget {
                                                                   AppColors
                                                                       .brown,
                                                               text: "Reply",
-                                                              onPress: () {},
+                                                              onPress: () {
+                                                                estimationController.selectedIndex.value = 1;
+                                                              },
                                                             ),
                                                           ),
                                                           Gap(2),
@@ -784,7 +786,9 @@ class EstimationScreen extends StatelessWidget {
                                                                   AppColors
                                                                       .brown,
                                                               text: "Reply",
-                                                              onPress: () {},
+                                                              onPress: () {
+                                                                estimationController.selectedIndex.value = 1;
+                                                              },
                                                             ),
                                                           ),
                                                           Gap(2),
