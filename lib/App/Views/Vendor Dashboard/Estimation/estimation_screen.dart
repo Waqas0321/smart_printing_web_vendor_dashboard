@@ -415,7 +415,7 @@ class EstimationScreen extends StatelessWidget {
                                                           AppColors.brown,
                                                     ),
                                                     SizedBox(
-                                                      width: 120,
+                                                      width: 130,
                                                       child: Row(
                                                         children: [
                                                           Expanded(
@@ -427,6 +427,7 @@ class EstimationScreen extends StatelessWidget {
                                                               textColor:
                                                                   AppColors
                                                                       .brown,
+
                                                               text: "Reply",
                                                               onPress: () {
                                                                 estimationController.selectedIndex.value = 1;
