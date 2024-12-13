@@ -60,7 +60,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         color: AppColors.black,
       ),
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(horizontal: 2, vertical: 3),
+        contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 3),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(widget.borderRadius),
           borderSide: BorderSide(
