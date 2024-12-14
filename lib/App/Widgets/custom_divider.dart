@@ -17,13 +17,17 @@ class CustomDivider extends StatelessWidget {
 class CustomVerticalDivider extends StatelessWidget {
   const CustomVerticalDivider({
     super.key, required this.height,
+    this.thickness = 0.8,
+    this.color = AppColors.brown,
   });
   final double height;
+  final double thickness;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
         height: height,
-        child: VerticalDivider(color: AppColors.brown,thickness: 0.8,));
+        child: VerticalDivider(color: color,thickness: thickness,));
   }
 }

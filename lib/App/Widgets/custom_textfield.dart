@@ -18,6 +18,8 @@ class CustomTextField extends StatefulWidget {
     this.hasPrefixIcon = false,
     this.maxLines = 1,
     this.hintFontSize = 18,
+    this.borderColor =AppColors.tertiary,
+    this.contentSize = 18,
   });
 
   final String hintText;
@@ -32,6 +34,8 @@ class CustomTextField extends StatefulWidget {
   final bool hasPrefixIcon;
   final int maxLines;
   final double hintFontSize;
+  final double contentSize;
+  final Color borderColor;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -56,29 +60,29 @@ class _CustomTextFieldState extends State<CustomTextField> {
       obscureText: widget.obsecrureFun ? _isObsecure : !_isObsecure,
       style: GoogleFonts.montserrat(
         fontWeight: FontWeight.w500,
-        fontSize: 18,
+        fontSize: widget.contentSize,
         color: AppColors.black,
       ),
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 3),
+        contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(widget.borderRadius),
           borderSide: BorderSide(
-            color: AppColors.tertiary,
+            color: widget.borderColor,
             width: 0.7,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(widget.borderRadius),
           borderSide: BorderSide(
-            color: AppColors.tertiary,
+            color: widget.borderColor,
             width: 0.7,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(widget.borderRadius),
           borderSide: BorderSide(
-            color: AppColors.tertiary,
+            color: widget.borderColor,
             width: 0.7,
           ),
         ),
@@ -94,7 +98,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 color: AppColors.brown.withOpacity(0.6),
                 size: 25,
               )
-            : SizedBox.shrink(),
+            : null,
         suffixIcon: widget.obsecrureFun
             ? GestureDetector(
                 onTap: () {
@@ -106,11 +110,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   _isObsecure ? CupertinoIcons.eye_slash : CupertinoIcons.eye,
                   color: AppColors.tertiary.withOpacity(0.6),
                 ),
-              )
-            : Icon(
+              ):
+            widget.isSuffixIcon? Icon(
                 widget.icon,
                 color: AppColors.tertiary.withOpacity(0.6),
-              ),
+              ):null,
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {

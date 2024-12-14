@@ -14,7 +14,7 @@ class HistoryMainScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         if (historyController.selectedIndex.value > 0) {
-          historyController.selectedIndex.value = 0;
+          historyController.selectedIndex.value--;
         } else {
           Get.back();
         }

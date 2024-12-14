@@ -54,7 +54,7 @@ class ProductsDetailsScreen extends StatelessWidget {
                         hasRightIcon: false,
                         text: "Add Product",
                         onPress: () {
-                          productDetailsController.selectedIndexProducts.value = 1;
+                         productDetailsController.openProductServiceInfo(context);
                         },
                       )
                     ],

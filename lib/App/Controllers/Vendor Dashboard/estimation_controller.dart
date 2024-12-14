@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class EstimationController extends GetxController{
+class EstimationController extends GetxController {
   TextEditingController nameController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
+
 // Navigations
   RxInt selectedIndex = 0.obs;
   RxBool otherScreen = false.obs;
@@ -16,5 +17,4 @@ class EstimationController extends GetxController{
       boolList[index].value = value ?? false;
     }
   }
-
 }
