@@ -273,134 +273,129 @@ class HistoryScreen extends StatelessWidget {
                                 physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      historyController.selectedIndex.value = 2;
-                                    },
-                                    child: Container(
-                                      width: AppSizes().getWidthPercentage(100),
-                                      padding: AppSizes().getCustomPadding(
-                                          top: 2.5,
-                                          bottom: 2.5,
-                                          right: 1,
-                                          left: 0),
-                                      child: ScrollConfiguration(
-                                        behavior: ScrollBehavior().copyWith(
-                                            overscroll: false,
-                                            scrollbars: false),
-                                        child: SingleChildScrollView(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Obx(
-                                                () => Checkbox(
-                                                  value: historyController
-                                                      .boolList[index].value,
-                                                  onChanged: (value) {
-                                                    historyController
-                                                        .toggleCheckbox(
-                                                            index, value);
-                                                  },
-                                                  activeColor:
-                                                      AppColors.lightPrimary,
-                                                  checkColor:
-                                                      AppColors.tertiary,
-                                                ),
-                                              ),
-                                              CustomTextWidget(
-                                                textOverflow:
-                                                    TextOverflow.ellipsis,
-                                                text: "#0001",
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 12,
-                                                textColor: AppColors.brown,
-                                              ),
-                                              SizedBox(
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    CircleAvatar(
-                                                      radius: 13,
-                                                      backgroundImage:
-                                                          AssetImage(AppImages
-                                                              .profileImage),
-                                                    ),
-                                                    Gap(4),
-                                                    CustomTextWidget(
-                                                      textOverflow:
-                                                          TextOverflow.ellipsis,
-                                                      text: "Dummy",
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                      fontSize: 12,
-                                                      textColor:
-                                                          AppColors.black,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              CustomTextWidget(
-                                                textOverflow:
-                                                    TextOverflow.ellipsis,
-                                                text: "Dummy",
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 12,
-                                                textColor: AppColors.brown,
-                                              ),
-                                              CustomTextWidget(
-                                                textOverflow:
-                                                    TextOverflow.ellipsis,
-                                                text: "     2 Qty",
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 12,
-                                                textColor: AppColors.brown,
-                                              ),
-                                              CustomTextWidget(
-                                                textOverflow:
-                                                    TextOverflow.ellipsis,
-                                                text: "    Dummy",
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 12,
-                                                textColor: AppColors.brown,
-                                              ),
-                                              CustomTextWidget(
-                                                textOverflow:
-                                                    TextOverflow.ellipsis,
-                                                text: "     Smooth",
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 12,
-                                                textColor: AppColors.brown,
-                                              ),
-                                              CustomTextWidget(
-                                                textOverflow:
-                                                    TextOverflow.ellipsis,
-                                                text: "3 Hrs, 20mins",
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 12,
-                                                textColor: AppColors.brown,
-                                              ),
-                                              CustomTextWidget(
-                                                textOverflow:
-                                                    TextOverflow.ellipsis,
-                                                text: "_",
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 12,
-                                                textColor: AppColors.brown,
-                                              ),
-                                              CustomTextButton(
-                                                color: AppColors.lightPrimary,
-                                                hasBorder: false,
-                                                textColor: AppColors.brown,
-                                                text: "Workflow",
-                                                onPress: () {
-                                                  historyController.selectedIndex.value = 1;
+                                  return Container(
+                                    width: AppSizes().getWidthPercentage(100),
+                                    padding: AppSizes().getCustomPadding(
+                                        top: 2.5,
+                                        bottom: 2.5,
+                                        right: 1,
+                                        left: 0),
+                                    child: ScrollConfiguration(
+                                      behavior: ScrollBehavior().copyWith(
+                                          overscroll: false,
+                                          scrollbars: false),
+                                      child: SingleChildScrollView(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Obx(
+                                              () => Checkbox(
+                                                value: historyController
+                                                    .boolList[index].value,
+                                                onChanged: (value) {
+                                                  historyController
+                                                      .toggleCheckbox(
+                                                          index, value);
                                                 },
-                                              )
-                                            ],
-                                          ),
+                                                activeColor:
+                                                    AppColors.lightPrimary,
+                                                checkColor:
+                                                    AppColors.tertiary,
+                                              ),
+                                            ),
+                                            CustomTextWidget(
+                                              textOverflow:
+                                                  TextOverflow.ellipsis,
+                                              text: "#0001",
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12,
+                                              textColor: AppColors.brown,
+                                            ),
+                                            SizedBox(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  CircleAvatar(
+                                                    radius: 13,
+                                                    backgroundImage:
+                                                        AssetImage(AppImages
+                                                            .profileImage),
+                                                  ),
+                                                  Gap(4),
+                                                  CustomTextWidget(
+                                                    textOverflow:
+                                                        TextOverflow.ellipsis,
+                                                    text: "Dummy",
+                                                    fontWeight:
+                                                        FontWeight.w800,
+                                                    fontSize: 12,
+                                                    textColor:
+                                                        AppColors.black,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            CustomTextWidget(
+                                              textOverflow:
+                                                  TextOverflow.ellipsis,
+                                              text: "Dummy",
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12,
+                                              textColor: AppColors.brown,
+                                            ),
+                                            CustomTextWidget(
+                                              textOverflow:
+                                                  TextOverflow.ellipsis,
+                                              text: "     2 Qty",
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12,
+                                              textColor: AppColors.brown,
+                                            ),
+                                            CustomTextWidget(
+                                              textOverflow:
+                                                  TextOverflow.ellipsis,
+                                              text: "    Dummy",
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12,
+                                              textColor: AppColors.brown,
+                                            ),
+                                            CustomTextWidget(
+                                              textOverflow:
+                                                  TextOverflow.ellipsis,
+                                              text: "     Smooth",
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 12,
+                                              textColor: AppColors.brown,
+                                            ),
+                                            CustomTextWidget(
+                                              textOverflow:
+                                                  TextOverflow.ellipsis,
+                                              text: "3 Hrs, 20mins",
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 12,
+                                              textColor: AppColors.brown,
+                                            ),
+                                            CustomTextWidget(
+                                              textOverflow:
+                                                  TextOverflow.ellipsis,
+                                              text: "_",
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 12,
+                                              textColor: AppColors.brown,
+                                            ),
+                                            CustomTextButton(
+                                              color: AppColors.lightPrimary,
+                                              hasBorder: false,
+                                              textColor: AppColors.brown,
+                                              text: "Workflow",
+                                              onPress: () {
+                                                historyController.selectedIndex.value = 1;
+                                              },
+                                            )
+                                          ],
                                         ),
                                       ),
                                     ),

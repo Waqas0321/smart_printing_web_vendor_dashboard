@@ -11,6 +11,7 @@ import '../../../Utils/Const/appColors.dart';
 import '../../../Utils/Const/app_sizes.dart';
 import '../../../Widgets/custom_container_button.dart';
 import '../../../Widgets/custom_text_widget.dart';
+import '../../../Widgets/process_side_widget.dart';
 class ReplyScreen extends StatelessWidget {
   const ReplyScreen({super.key});
 
@@ -269,11 +270,501 @@ class ReplyScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-
-
                       ],
                     ),
-                  )
+                  ),
+                  Gap(18),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          padding: AppSizes().getCustomPadding(),
+                          decoration: BoxDecoration(
+                              color: AppColors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: AppColors.brown.withOpacity(0.06),
+                                    blurRadius: 5,
+                                    spreadRadius: 3)
+                              ]
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomTextWidget(
+                                text: "Production Process",
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
+                                textColor: AppColors.brown,
+                              ),
+                              Gap(18),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: 20,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                              padding: EdgeInsets.all(3),
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: AppColors
+                                                      .lightPrimary),
+                                              child: Center(
+                                                  child: CustomTextWidget(
+                                                    text: "1",
+                                                    fontSize: 12,
+                                                  ))),
+                                          CustomVerticalDivider(
+                                            height: 250,
+                                            color: AppColors.lightPrimary,
+                                            thickness: 3,
+                                          ),
+                                          Container(
+                                              padding: EdgeInsets.all(3),
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: AppColors.white,
+                                                  border: Border.all(
+                                                      width: 0.6,
+                                                      color: AppColors
+                                                          .lightPrimary)),
+                                              child: Center(
+                                                  child: CustomTextWidget(
+                                                    text: "+",
+                                                    fontSize: 12,
+                                                  ))),
+                                        ],
+                                      ),
+                                    ),
+                                    Gap(8),
+                                    Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        CustomTextWidget(
+                                          text: "Lamination",
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          textColor: AppColors.brown,
+                                        ),
+                                        Gap(12),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 200,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment
+                                                    .start,
+                                                children: [
+                                                  CustomTextWidget(
+                                                    text: "Type*",
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                    FontWeight.w500,
+                                                    textColor:
+                                                    AppColors.brown,
+                                                  ),
+                                                  Gap(6),
+                                                  DropdownButtonFormField<
+                                                      String>(
+                                                    value: replyController
+                                                        .selectedType1
+                                                        .value,
+                                                    items: [
+                                                      DropdownMenuItem(
+                                                          value: "Type 1",
+                                                          child: Text(
+                                                              "Type 1")),
+                                                      DropdownMenuItem(
+                                                          value: "Type 2",
+                                                          child: Text(
+                                                              "Type 2")),
+                                                      DropdownMenuItem(
+                                                          value: "Type 3",
+                                                          child: Text(
+                                                              "Type 3")),
+                                                    ],
+                                                    onChanged: (value) {
+                                                      replyController
+                                                          .selectedType1
+                                                          .value = value!;
+                                                    },
+                                                    decoration:
+                                                    InputDecoration(
+                                                      hintText:
+                                                      "Select Type",
+                                                      hintStyle: TextStyle(
+                                                          fontSize: 10),
+                                                      border:
+                                                      OutlineInputBorder(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            4),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Gap(4),
+                                            SizedBox(
+                                              width: 200,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment
+                                                    .start,
+                                                children: [
+                                                  CustomTextWidget(
+                                                    text: "Sides*",
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                    FontWeight.w500,
+                                                    textColor:
+                                                    AppColors.brown,
+                                                  ),
+                                                  Gap(2),
+                                                  DropdownButtonFormField<
+                                                      String>(
+                                                    value: replyController
+                                                        .selectedType2
+                                                        .value,
+                                                    items: [
+                                                      DropdownMenuItem(
+                                                          value: "Type 1",
+                                                          child: Text(
+                                                              "Type 1")),
+                                                      DropdownMenuItem(
+                                                          value: "Type 2",
+                                                          child: Text(
+                                                              "Type 2")),
+                                                      DropdownMenuItem(
+                                                          value: "Type 3",
+                                                          child: Text(
+                                                              "Type 3")),
+                                                    ],
+                                                    onChanged: (value) {
+                                                      replyController
+                                                          .selectedType2
+                                                          .value = value!;
+                                                    },
+                                                    decoration:
+                                                    InputDecoration(
+                                                      hintText:
+                                                      "Select Type",
+                                                      hintStyle: TextStyle(
+                                                          fontSize: 10),
+                                                      border:
+                                                      OutlineInputBorder(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            4),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Gap(12),
+                                        CustomTextWidget(
+                                          text: "Time calculation:",
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          textColor: AppColors.brown,
+                                        ),
+                                        Gap(12),
+                                        SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Row(
+                                            children: [
+                                              CustomTextWidget(
+                                                text: "Time for",
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                textColor: AppColors.brown,
+                                              ),
+                                              Gap(2),
+                                              SizedBox(
+                                                  width: 80,
+                                                  height: 35,
+                                                  child: CustomTextField(
+                                                      borderColor: AppColors
+                                                          .lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 8,
+                                                      hintText: "",
+                                                      controller:
+                                                      replyController
+                                                          .estimationIDController)),
+                                              Gap(4),
+                                              CustomTextWidget(
+                                                text: "Sheets With",
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                textColor: AppColors.brown,
+                                              ),
+                                              Gap(2),
+                                              SizedBox(
+                                                  width: 80,
+                                                  height: 35,
+                                                  child: CustomTextField(
+                                                      borderColor: AppColors
+                                                          .lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 8,
+                                                      hintText: "",
+                                                      controller:
+                                                      replyController
+                                                          .estimationIDController)),
+                                              Gap(4),
+                                              CustomTextWidget(
+                                                text: "cm x",
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                textColor: AppColors.brown,
+                                              ),
+                                              Gap(2),
+                                              SizedBox(
+                                                  width: 80,
+                                                  height: 35,
+                                                  child: CustomTextField(
+                                                      borderColor: AppColors
+                                                          .lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 8,
+                                                      hintText: "",
+                                                      controller:
+                                                      replyController
+                                                          .estimationIDController)),
+                                              Gap(4),
+                                              CustomTextWidget(
+                                                text: "cm =",
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                textColor: AppColors.brown,
+                                              ),
+                                              Gap(2),
+                                              SizedBox(
+                                                  width: 80,
+                                                  height: 35,
+                                                  child: CustomTextField(
+                                                      borderColor: AppColors
+                                                          .lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 8,
+                                                      hintText: "",
+                                                      controller:
+                                                      replyController
+                                                          .estimationIDController)),
+                                            ],
+                                          ),
+                                        ),
+                                        Gap(12),
+                                        SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Row(
+                                            children: [
+                                              CustomTextWidget(
+                                                text: "Minimum Time: ",
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                textColor: AppColors.brown,
+                                              ),
+                                              Gap(2),
+                                              SizedBox(
+                                                  width: 60,
+                                                  height: 35,
+                                                  child: CustomTextField(
+                                                      contentSize: 12,
+                                                      borderColor: AppColors
+                                                          .lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 8,
+                                                      hintText: "00",
+                                                      controller:
+                                                      replyController
+                                                          .estimationIDController)),
+                                              Gap(4),
+                                              CustomTextWidget(
+                                                text: ":",
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                textColor: AppColors.brown,
+                                              ),
+                                              Gap(2),
+                                              SizedBox(
+                                                  width: 60,
+                                                  height: 35,
+                                                  child: CustomTextField(
+                                                      contentSize: 12,
+                                                      borderColor: AppColors
+                                                          .lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 8,
+                                                      hintText: "05",
+                                                      controller:
+                                                      replyController
+                                                          .estimationIDController)),
+                                              Gap(4),
+                                              CustomTextWidget(
+                                                text: ":",
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                textColor: AppColors.brown,
+                                              ),
+                                              Gap(2),
+                                              SizedBox(
+                                                  width: 60,
+                                                  height: 35,
+                                                  child: CustomTextField(
+                                                      contentSize: 12,
+                                                      borderColor: AppColors
+                                                          .lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 8,
+                                                      hintText: "00",
+                                                      controller:
+                                                      replyController
+                                                          .estimationIDController)),
+                                              Gap(4),
+                                              CustomTextWidget(
+                                                text: "Buffer:",
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                textColor: AppColors.brown,
+                                              ),
+                                              Gap(2),
+                                              SizedBox(
+                                                  width: 80,
+                                                  height: 35,
+                                                  child: CustomTextField(
+                                                      contentSize: 12,
+                                                      borderColor: AppColors
+                                                          .lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 8,
+                                                      hintText: "20%",
+                                                      controller:
+                                                      replyController
+                                                          .estimationIDController)),
+                                            ],
+                                          ),
+                                        ),
+                                        Gap(12),
+                                        SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Row(
+                                            children: [
+                                              CustomTextWidget(
+                                                text: "Hold Allowed :",
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                textColor: AppColors.brown,
+                                              ),
+                                              Gap(2),
+                                              SizedBox(
+                                                  width: 60,
+                                                  height: 35,
+                                                  child: CustomTextField(
+                                                      contentSize: 12,
+                                                      borderColor: AppColors
+                                                          .lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 8,
+                                                      hintText: "00",
+                                                      controller:
+                                                      replyController
+                                                          .estimationIDController)),
+                                              Gap(2),
+                                              CustomTextWidget(
+                                                text: ":",
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                textColor: AppColors.brown,
+                                              ),
+                                              Gap(2),
+                                              SizedBox(
+                                                  width: 60,
+                                                  height: 35,
+                                                  child: CustomTextField(
+                                                      contentSize: 12,
+                                                      borderColor: AppColors
+                                                          .lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 8,
+                                                      hintText: "05",
+                                                      controller:
+                                                      replyController
+                                                          .estimationIDController)),
+                                              Gap(2),
+                                              CustomTextWidget(
+                                                text: ":",
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                textColor: AppColors.brown,
+                                              ),
+                                              Gap(2),
+                                              SizedBox(
+                                                  width: 60,
+                                                  height: 35,
+                                                  child: CustomTextField(
+                                                      contentSize: 12,
+                                                      borderColor: AppColors
+                                                          .lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 8,
+                                                      hintText: "00",
+                                                      controller:
+                                                      replyController
+                                                          .estimationIDController)),
+                                            ],
+                                          ),
+                                        ),
+                                        Gap(12),
+                                        CustomTextWidget(
+                                          text: "Add More",
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          textColor: AppColors.brown,
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Gap(8)
+                            ],
+                          ),
+                        ),
+                      ),
+                      Gap(14),
+                      Container(
+                        padding: AppSizes().getCustomPadding(),
+                          decoration: BoxDecoration(
+                            color: AppColors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                          color: AppColors.brown.withOpacity(0.06),
+                          blurRadius: 5,
+                          spreadRadius: 3)
+                            ]
+                          ),
+                          child: ProcessSideScreen())
+                    ],
+                  ),
                 ],
               ),
             ),
