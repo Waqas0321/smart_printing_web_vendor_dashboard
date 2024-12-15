@@ -17,5 +17,6 @@ class AppIcons{
   static const String arrowBack = "${basePath}arrow_back.svg";
   static const String arrowBelow = "${basePath}arrow_below.svg";
   static const String upload = "${basePath}upload.svg";
+  static const String editSquare = "${basePath}Edit Square.svg";
 
 }
