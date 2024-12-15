@@ -52,7 +52,16 @@ class CreateOrderScreen extends StatelessWidget {
                     ],
                   ),
                   Gap(18),
-                  CustomPDFUploadWidget(ordersController: ordersController),
+                  CustomPDFUploadWidget(
+                    onPress: () {
+                      ordersController.pickPDF();
+                    },
+                    onPressRemove: (int index) {  // Pass the dynamic index
+                      ordersController.removePDF(index);
+                    },
+                    selectedFiles: ordersController.selectedFiles,
+                  ),
+
                   Gap(28),
                   Container(
                     padding: AppSizes().getCustomPadding(),
@@ -224,9 +233,10 @@ class CreateOrderScreen extends StatelessWidget {
                                                         Gap(6),
                                                         DropdownButtonFormField<
                                                             String>(
-                                                          value: ordersController
-                                                              .selectedType1
-                                                              .value,
+                                                          value:
+                                                              ordersController
+                                                                  .selectedType1
+                                                                  .value,
                                                           items: [
                                                             DropdownMenuItem(
                                                                 value: "Type 1",
@@ -250,8 +260,10 @@ class CreateOrderScreen extends StatelessWidget {
                                                               InputDecoration(
                                                             hintText:
                                                                 "Select Type",
-                                                            hintStyle: TextStyle(
-                                                                fontSize: 10),
+                                                            hintStyle:
+                                                                TextStyle(
+                                                                    fontSize:
+                                                                        10),
                                                             border:
                                                                 OutlineInputBorder(
                                                               borderRadius:
@@ -283,9 +295,10 @@ class CreateOrderScreen extends StatelessWidget {
                                                         Gap(2),
                                                         DropdownButtonFormField<
                                                             String>(
-                                                          value: ordersController
-                                                              .selectedType2
-                                                              .value,
+                                                          value:
+                                                              ordersController
+                                                                  .selectedType2
+                                                                  .value,
                                                           items: [
                                                             DropdownMenuItem(
                                                                 value: "Type 1",
@@ -309,8 +322,10 @@ class CreateOrderScreen extends StatelessWidget {
                                                               InputDecoration(
                                                             hintText:
                                                                 "Select Type",
-                                                            hintStyle: TextStyle(
-                                                                fontSize: 10),
+                                                            hintStyle:
+                                                                TextStyle(
+                                                                    fontSize:
+                                                                        10),
                                                             border:
                                                                 OutlineInputBorder(
                                                               borderRadius:
@@ -334,14 +349,17 @@ class CreateOrderScreen extends StatelessWidget {
                                               ),
                                               Gap(12),
                                               SingleChildScrollView(
-                                                scrollDirection: Axis.horizontal,
+                                                scrollDirection:
+                                                    Axis.horizontal,
                                                 child: Row(
                                                   children: [
                                                     CustomTextWidget(
                                                       text: "Time for",
                                                       fontSize: 12,
-                                                      fontWeight: FontWeight.w500,
-                                                      textColor: AppColors.brown,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      textColor:
+                                                          AppColors.brown,
                                                     ),
                                                     Gap(2),
                                                     SizedBox(
@@ -360,8 +378,10 @@ class CreateOrderScreen extends StatelessWidget {
                                                     CustomTextWidget(
                                                       text: "Sheets With",
                                                       fontSize: 12,
-                                                      fontWeight: FontWeight.w500,
-                                                      textColor: AppColors.brown,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      textColor:
+                                                          AppColors.brown,
                                                     ),
                                                     Gap(2),
                                                     SizedBox(
@@ -380,8 +400,10 @@ class CreateOrderScreen extends StatelessWidget {
                                                     CustomTextWidget(
                                                       text: "cm x",
                                                       fontSize: 12,
-                                                      fontWeight: FontWeight.w500,
-                                                      textColor: AppColors.brown,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      textColor:
+                                                          AppColors.brown,
                                                     ),
                                                     Gap(2),
                                                     SizedBox(
@@ -400,8 +422,10 @@ class CreateOrderScreen extends StatelessWidget {
                                                     CustomTextWidget(
                                                       text: "cm =",
                                                       fontSize: 12,
-                                                      fontWeight: FontWeight.w500,
-                                                      textColor: AppColors.brown,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      textColor:
+                                                          AppColors.brown,
                                                     ),
                                                     Gap(2),
                                                     SizedBox(
@@ -421,14 +445,17 @@ class CreateOrderScreen extends StatelessWidget {
                                               ),
                                               Gap(12),
                                               SingleChildScrollView(
-                                                scrollDirection: Axis.horizontal,
+                                                scrollDirection:
+                                                    Axis.horizontal,
                                                 child: Row(
                                                   children: [
                                                     CustomTextWidget(
                                                       text: "Minimum Time: ",
                                                       fontSize: 12,
-                                                      fontWeight: FontWeight.w500,
-                                                      textColor: AppColors.brown,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      textColor:
+                                                          AppColors.brown,
                                                     ),
                                                     Gap(2),
                                                     SizedBox(
@@ -448,8 +475,10 @@ class CreateOrderScreen extends StatelessWidget {
                                                     CustomTextWidget(
                                                       text: ":",
                                                       fontSize: 12,
-                                                      fontWeight: FontWeight.w500,
-                                                      textColor: AppColors.brown,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      textColor:
+                                                          AppColors.brown,
                                                     ),
                                                     Gap(2),
                                                     SizedBox(
@@ -469,8 +498,10 @@ class CreateOrderScreen extends StatelessWidget {
                                                     CustomTextWidget(
                                                       text: ":",
                                                       fontSize: 12,
-                                                      fontWeight: FontWeight.w500,
-                                                      textColor: AppColors.brown,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      textColor:
+                                                          AppColors.brown,
                                                     ),
                                                     Gap(2),
                                                     SizedBox(
@@ -490,8 +521,10 @@ class CreateOrderScreen extends StatelessWidget {
                                                     CustomTextWidget(
                                                       text: "Buffer:",
                                                       fontSize: 12,
-                                                      fontWeight: FontWeight.w500,
-                                                      textColor: AppColors.brown,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      textColor:
+                                                          AppColors.brown,
                                                     ),
                                                     Gap(2),
                                                     SizedBox(
@@ -512,14 +545,17 @@ class CreateOrderScreen extends StatelessWidget {
                                               ),
                                               Gap(12),
                                               SingleChildScrollView(
-                                                scrollDirection: Axis.horizontal,
+                                                scrollDirection:
+                                                    Axis.horizontal,
                                                 child: Row(
                                                   children: [
                                                     CustomTextWidget(
                                                       text: "Hold Allowed :",
                                                       fontSize: 12,
-                                                      fontWeight: FontWeight.w500,
-                                                      textColor: AppColors.brown,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      textColor:
+                                                          AppColors.brown,
                                                     ),
                                                     Gap(2),
                                                     SizedBox(
@@ -539,8 +575,10 @@ class CreateOrderScreen extends StatelessWidget {
                                                     CustomTextWidget(
                                                       text: ":",
                                                       fontSize: 12,
-                                                      fontWeight: FontWeight.w500,
-                                                      textColor: AppColors.brown,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      textColor:
+                                                          AppColors.brown,
                                                     ),
                                                     Gap(2),
                                                     SizedBox(
@@ -560,8 +598,10 @@ class CreateOrderScreen extends StatelessWidget {
                                                     CustomTextWidget(
                                                       text: ":",
                                                       fontSize: 12,
-                                                      fontWeight: FontWeight.w500,
-                                                      textColor: AppColors.brown,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      textColor:
+                                                          AppColors.brown,
                                                     ),
                                                     Gap(2),
                                                     SizedBox(
@@ -687,26 +727,23 @@ class CreateOrderScreen extends StatelessWidget {
                             controller:
                                 ordersController.estimationIDController),
                         Gap(28),
-                        Row(
-                          children:[
-                            CustomTextButton(
-                              color: AppColors.lightPrimary,
-                              text: "Create Order",
-                              hasBorder: false,
-                              textColor: AppColors.brown,
-                              onPress: () {},
-                            ),
-                            Gap(12),
-                            CustomTextButton(
-                              color: AppColors.red,
-                              text: "cancel",
-                              hasBorder: false,
-                              textColor: AppColors.white,
-                              onPress: () {},
-                            )
-                          ]
-                        )
-
+                        Row(children: [
+                          CustomTextButton(
+                            color: AppColors.lightPrimary,
+                            text: "Create Order",
+                            hasBorder: false,
+                            textColor: AppColors.brown,
+                            onPress: () {},
+                          ),
+                          Gap(12),
+                          CustomTextButton(
+                            color: AppColors.red,
+                            text: "cancel",
+                            hasBorder: false,
+                            textColor: AppColors.white,
+                            onPress: () {},
+                          )
+                        ])
                       ],
                     ),
                   )

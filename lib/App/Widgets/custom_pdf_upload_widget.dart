@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'dart:html' as html;
-import '../Controllers/Vendor Dashboard/orders_controller.dart';
 import '../Utils/Const/appColors.dart';
 import '../Utils/Const/app_icons.dart';
 import '../Utils/Const/app_images.dart';
@@ -14,11 +13,13 @@ import 'custom_text_widget.dart';
 
 class CustomPDFUploadWidget extends StatelessWidget {
   const CustomPDFUploadWidget({
-    super.key,
-    required this.ordersController,
+    super.key, required this.onPress, required this.onPressRemove, required this.selectedFiles,
   });
+  final VoidCallback onPress;
+  final Function(int) onPressRemove;
+  final List selectedFiles;
 
-  final OrdersController ordersController;
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +55,7 @@ class CustomPDFUploadWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
-                          onTap: () {
-                            ordersController.pickPDF();
-                          },
+                          onTap: onPress,
                           child:
                           SvgPicture.asset(AppIcons.upload)),
                       Gap(12),
@@ -65,11 +64,9 @@ class CustomPDFUploadWidget extends StatelessWidget {
                           height: 50,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: ordersController
-                                .selectedFiles.length,
+                            itemCount: selectedFiles.length,
                             itemBuilder: (context, index) {
-                              final file = ordersController
-                                  .selectedFiles[index];
+                              final file = selectedFiles[index];
                               String fileName;
                               if (html.window.navigator.userAgent
                                   .contains('WebKit')) {
@@ -137,9 +134,9 @@ class CustomPDFUploadWidget extends StatelessWidget {
                                       top: 0,
                                       right: 0,
                                       child: GestureDetector(
-                                        onTap: () =>
-                                            ordersController
-                                                .removePDF(index),
+                                        onTap: (){
+                                          onPressRemove(index);
+                                        },
                                         child: Container(
                                           padding:
                                           EdgeInsets.all(3),

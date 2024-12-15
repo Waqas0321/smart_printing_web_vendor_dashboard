@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Employee%20Details/emplyees_details_controller.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/Employee%20Details/add_employee_screen.dart';
+import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/Employee%20Details/add_emplyee_main.dart';
 import '../../../../Utils/Const/app_sizes.dart';
 import 'employees_details_screen.dart';
 
@@ -28,7 +29,7 @@ class EmployeeDetailsMainScreen extends StatelessWidget {
               index: employeeDetailsController.selectedIndexEmployee.value,
               children: [
                 EmployeesDetailsScreen(),
-                AddEmployeeScreen(),
+                AddEmployeeMainScreen(),
               ],
             ),
           );
