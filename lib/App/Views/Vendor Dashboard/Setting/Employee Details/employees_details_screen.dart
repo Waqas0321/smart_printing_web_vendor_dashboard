@@ -8,8 +8,10 @@ import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
 import 'package:smart_printing_web/App/Widgets/custom_divider.dart';
 import 'package:smart_printing_web/App/Widgets/custom_outline_button.dart';
 import 'package:smart_printing_web/App/Widgets/custom_text_widget.dart';
+import '../../../../Controllers/Vendor Dashboard/Settings/settings_controller.dart';
 import '../../../../Utils/Const/appColors.dart';
 import '../../../../Widgets/custom_container_button.dart';
+import '../../../../Widgets/custom_pagination_class.dart';
 
 class EmployeesDetailsScreen extends StatelessWidget {
   const EmployeesDetailsScreen({super.key});
@@ -18,6 +20,7 @@ class EmployeesDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     EmployeesDetailsController employeesDetailsController =
         Get.put(EmployeesDetailsController());
+    final settingController = Get.put(SettingsController());
     return LayoutBuilder(
       builder: (context, constraints) {
         final bool isLarge = AppSizes().isDesktop();
@@ -32,6 +35,13 @@ class EmployeesDetailsScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
+                      InkWell(
+                          onTap: () {
+                            settingController.selectedIndex.value = 0;
+
+                          },
+                          child: Icon(Icons.arrow_back_ios_outlined)),
+                      Gap(12),
                       CustomTextWidget(
                         text: "Employee Details",
                         fontSize: 22,
@@ -71,6 +81,7 @@ class EmployeesDetailsScreen extends StatelessWidget {
                         isCircular: true,
                         icon: CupertinoIcons.down_arrow,
                       ),
+                      Gap(6),
                       CustomOutlinedButton(
                         onPressed: () {},
                         isLarge: isLarge,
@@ -79,6 +90,7 @@ class EmployeesDetailsScreen extends StatelessWidget {
                         isCircular: true,
                         icon: Icons.mode_edit_outline_sharp,
                       ),
+                      Gap(6),
                       CustomOutlinedButton(
                         onPressed: () {},
                         isLarge: isLarge,
@@ -106,158 +118,145 @@ class EmployeesDetailsScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                        width: AppSizes().getWidthPercentage(100),
-                    padding: AppSizes().getCustomPadding(
-                        top: 2.5, bottom: 2.5, right: 1, left: 1),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(9),
-                        color: AppColors.halfWhite2),
-                    child: ScrollConfiguration(
-                      behavior: ScrollBehavior()
-                          .copyWith(overscroll: false, scrollbars: false),
-                      child: SingleChildScrollView(
-                        child: Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
-                          children: [
-                            Gap(AppSizes().getWidthPercentage(7)),
-                            Expanded(
-                              child: CustomTextWidget(
-                                text: "ID",
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12,
-                                textColor: AppColors.brown,
+                          width: AppSizes().getWidthPercentage(100),
+                          padding: AppSizes().getCustomPadding(top: 2, bottom: 2, right: 1, left: 1),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(9),
+                            color: AppColors.halfWhite2,
+                          ),
+                          child: Table(
+                            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                            columnWidths: const <int, TableColumnWidth>{
+                              0: FixedColumnWidth(18),  // Checkbox
+                              1: FlexColumnWidth(1),   // ID
+                              2: FixedColumnWidth(60), // Picture
+                              3: FlexColumnWidth(2),   // Employee Name
+                              4: FlexColumnWidth(1.5), // Position
+                              5: FlexColumnWidth(1.5), // Workflow Score
+                              6: FlexColumnWidth(1.5), // Performance Score
+                            },
+                            children: [
+                              TableRow(
+                                decoration: BoxDecoration(color: AppColors.halfWhite2),
+                                children: [
+                                  SizedBox(), // Empty cell for checkbox header
+                                  CustomTextWidget(
+                                    text: "ID",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
+                                  ),
+                                  CustomTextWidget(
+                                    text: "PICTURE",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
+                                  ),
+                                  CustomTextWidget(
+                                    text: "EMPLOYEE NAME",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
+                                  ),
+                                  CustomTextWidget(
+                                    text: "POSITION",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
+                                  ),
+                                  CustomTextWidget(
+                                    text: "WORKFLOW SCORE",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
+                                  ),
+                                  CustomTextWidget(
+                                    text: "PERFORMANCE SCORE",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
+                                  ),
+                                ],
                               ),
-                            ),
-                            Expanded(
-                              child: CustomTextWidget(
-                                textOverflow: TextOverflow.ellipsis,
-                                text: "PICTURE",
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12,
-                                textColor: AppColors.brown,
-                              ),
-                            ),
-                            Expanded(
-                              child: CustomTextWidget(
-                                textOverflow: TextOverflow.ellipsis,
-                                text: "EMPLOYEE NAME",
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12,
-                                textColor: AppColors.brown,
-                              ),
-                            ),
-                            Expanded(
-                              child: CustomTextWidget(
-                                textOverflow: TextOverflow.ellipsis,
-                                text: "             POSITION",
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12,
-                                textColor: AppColors.brown,
-                              ),
-                            ),
-                            Expanded(
-                              child: CustomTextWidget(
-                                textOverflow: TextOverflow.ellipsis,
-                                text: "WORKFLOW SCORE",
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12,
-                                textColor: AppColors.brown,
-                              ),
-                            ),
-                            Expanded(
-                              child: CustomTextWidget(
-                                textOverflow: TextOverflow.ellipsis,
-                                text: "PERFORMANCE SCORE",
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12,
-                                textColor: AppColors.brown,
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
+                        Gap(12),
                         ListView.separated(
                           itemCount: employeesDetailsController.boolList.length,
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
-                            return Container(
-                              width: AppSizes().getWidthPercentage(100),
-                              padding: AppSizes().getCustomPadding(
-                                  top: 2.5, bottom: 2.5, right: 3, left: 1),
-                              child: ScrollConfiguration(
-                                behavior: ScrollBehavior().copyWith(
-                                    overscroll: false, scrollbars: false),
-                                child: SingleChildScrollView(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Obx(
-                                        () => Checkbox(
-                                          value: employeesDetailsController
-                                              .boolList[index].value,
-                                          onChanged: (value) {
-                                            employeesDetailsController
-                                                .toggleCheckbox(index, value);
-                                          },
-                                          activeColor: AppColors.lightPrimary,
-                                          checkColor: AppColors.tertiary,
-                                        ),
-                                      ),
-                                      CustomTextWidget(
-                                        textOverflow: TextOverflow.ellipsis,
-                                        text: "#01",
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
-                                        textColor: AppColors.brown,
-                                      ),
-                                      CircleAvatar(
-                                        radius: 20,
-                                        backgroundImage:
-                                            AssetImage(AppImages.profileImage),
-                                      ),
-                                      CustomTextWidget(
-                                        textOverflow: TextOverflow.ellipsis,
-                                        text: "John Smith",
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                        textColor: AppColors.brown,
-                                      ),
-                                      CustomTextWidget(
-                                        textOverflow: TextOverflow.ellipsis,
-                                        text: "Operator    ",
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                        textColor: AppColors.brown,
-                                      ),
-                                      CustomTextWidget(
-                                        textOverflow: TextOverflow.ellipsis,
-                                        text: "Smooth",
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                        textColor: AppColors.brown,
-                                      ),
-                                      CustomTextWidget(
-                                        textOverflow: TextOverflow.ellipsis,
-                                        text: "07",
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                        textColor: AppColors.brown,
-                                      ),
-                                    ],
-                                  ),
+                            return Table(
+                              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                              columnWidths: const <int, TableColumnWidth>{
+                                0: FixedColumnWidth(25),  // Checkbox
+                                1: FlexColumnWidth(1),   // ID
+                                2: FixedColumnWidth(50), // Picture
+                                3: FlexColumnWidth(2),   // Employee Name
+                                4: FlexColumnWidth(1.5), // Position
+                                5: FlexColumnWidth(1.5), // Workflow Score
+                                6: FlexColumnWidth(1.5), // Performance Score
+                              },
+                              children: [
+                                TableRow(
+                                  decoration: BoxDecoration(color: AppColors.white),
+                                  children: [
+                                    Obx(() => Checkbox(
+                                      value: employeesDetailsController.boolList[index].value,
+                                      onChanged: (value) {
+                                        employeesDetailsController.toggleCheckbox(index, value);
+                                      },
+                                      activeColor: AppColors.lightPrimary,
+                                      checkColor: AppColors.tertiary,
+                                    )),
+                                    CustomTextWidget(
+                                      text: "#01",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                    CircleAvatar(
+                                      radius: 20,
+                                      backgroundImage: AssetImage(AppImages.profileImage),
+                                    ),
+                                    CustomTextWidget(
+                                      text: "John Smith",
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                    CustomTextWidget(
+                                      text: "Operator",
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                    CustomTextWidget(
+                                      text: "Smooth",
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                    CustomTextWidget(
+                                      text: "07",
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                  ],
                                 ),
-                              ),
+                              ],
                             );
                           },
                           separatorBuilder: (BuildContext context, int index) {
                             return CustomDivider();
                           },
                         ),
+                        Gap(18),
+                        CustomPaginationClass(),
+                        Gap(18)
+
                       ],
                     ),
                   )

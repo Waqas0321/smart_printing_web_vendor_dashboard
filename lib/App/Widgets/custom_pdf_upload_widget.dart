@@ -24,7 +24,7 @@ class CustomPDFUploadWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: AppSizes().getCustomPadding(),
+      padding: AppSizes().getCustomPadding(left: 1,right: 1),
       decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(16),
@@ -37,7 +37,7 @@ class CustomPDFUploadWidget extends StatelessWidget {
       child: Column(
         children: [
           DottedBorder(
-            color: AppColors.brown,
+            color: AppColors.brown.withOpacity(0.3),
             strokeWidth: 1,
             dashPattern: [10, 4],
             borderType: BorderType.RRect,

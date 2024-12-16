@@ -6,7 +6,8 @@ class AppImages{
   static const String profileImage = "${basePath}profile image.png";
   static const String cardImage = "${basePath}card-image.png";
   static const String uploadPlaceholder = "${basePath}upload_placeholder.png";
-  static const String stepsOne = "${basePath}Steps.svg";
-  static const String stepsLine = "${basePath}stepsline.svg";
+  static const String stepsOne = "${basePath}stepOne.svg";
+  static const String stepsLine3 = "${basePath}stepsThree.svg";
+  static const String stepsLine2 = "${basePath}stepsTwo.svg";
 
 }

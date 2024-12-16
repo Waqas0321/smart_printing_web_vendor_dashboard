@@ -26,66 +26,65 @@ class SettingScreen extends StatelessWidget {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          ScrollConfiguration(
-                            behavior: ScrollBehavior()
-                                .copyWith(scrollbars: false, overscroll: false),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      settingsController.selectedIndex.value =
-                                          1;
-                                    },
-                                    child: CustomOverViewContainer(
-                                      inSetting: true,
-                                      iconPath: AppIcons.threeUsers,
-                                      isLarge: isLarge,
-                                      haveIcon: true,
-                                      heading: "Employees",
-                                      subContainerText: "+1.5%",
-                                      subContainerColor: AppColors.blue,
-                                      subHeading: "Employee Detail",
-                                    ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    settingsController.selectedIndex.value =
+                                        1;
+                                  },
+                                  child: CustomOverViewContainer(
+                                    inSetting: true,
+                                    iconPath: AppIcons.threeUsers,
+                                    isLarge: isLarge,
+                                    haveIcon: true,
+                                    heading: "Employees",
+                                    subContainerText: "+1.5%",
+                                    subContainerColor: AppColors.blue,
+                                    subHeading: "Employee Detail",
                                   ),
-                                  Gap(AppSizes().getWidthPercentage(1)),
-                                  GestureDetector(
-                                    onTap: () {
-                                      settingsController.selectedIndex.value =
-                                          2;
-                                    },
-                                    child: CustomOverViewContainer(
-                                      inSetting: true,
-                                      iconPath: AppIcons.document,
-                                      isLarge: isLarge,
-                                      heading: "Products",
-                                      haveIcon: true,
-                                      subContainerText: "+10.5%",
-                                      subContainerColor: AppColors.orange,
-                                      subHeading: "Product Detail",
-                                    ),
-                                  ),
-                                  Gap(AppSizes().getWidthPercentage(1)),
-                                  GestureDetector(
-                                    onTap: () {
-                                      settingsController.selectedIndex.value =
-                                          3;
-                                    },
-                                    child: CustomOverViewContainer(
-                                      inSetting: true,
-                                      iconPath: AppIcons.process,
-                                      isLarge: isLarge,
-                                      heading: "Processes",
-                                      haveIcon: true,
-                                      subContainerText: "+3.9%",
-                                      subContainerColor: AppColors.red,
-                                      subHeading: "Process Detail",
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
-                            ),
+                              Gap(AppSizes().getWidthPercentage(1)),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    settingsController.selectedIndex.value =
+                                        2;
+                                  },
+                                  child: CustomOverViewContainer(
+                                    inSetting: true,
+                                    iconPath: AppIcons.document,
+                                    isLarge: isLarge,
+                                    heading: "Products",
+                                    haveIcon: true,
+                                    subContainerText: "+10.5%",
+                                    subContainerColor: AppColors.orange,
+                                    subHeading: "Product Detail",
+                                  ),
+                                ),
+                              ),
+                              Gap(AppSizes().getWidthPercentage(1)),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    settingsController.selectedIndex.value =
+                                        3;
+                                  },
+                                  child: CustomOverViewContainer(
+                                    inSetting: true,
+                                    iconPath: AppIcons.process,
+                                    isLarge: isLarge,
+                                    heading: "Processes",
+                                    haveIcon: true,
+                                    subContainerText: "+3.9%",
+                                    subContainerColor: AppColors.red,
+                                    subHeading: "Process Detail",
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

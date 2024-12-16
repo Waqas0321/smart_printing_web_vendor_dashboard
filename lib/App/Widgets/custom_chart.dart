@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +65,7 @@ class CustomChart extends StatelessWidget {
                         ),
                         Gap(8),
                         Obx(
-                              () => Container(
+                          () => Container(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 0),
                             decoration: BoxDecoration(
@@ -72,12 +74,12 @@ class CustomChart extends StatelessWidget {
                                 width: 1, // Border width
                               ),
                               borderRadius:
-                              BorderRadius.circular(8), // Rounded corners
+                                  BorderRadius.circular(8), // Rounded corners
                             ),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
                                 value: overviewController!
-                                    .selectedMonth.value.isEmpty
+                                        .selectedMonth.value.isEmpty
                                     ? null
                                     : overviewController!.selectedMonth.value,
                                 hint: CustomTextWidget(
@@ -102,16 +104,16 @@ class CustomChart extends StatelessWidget {
                                 items: overviewController?.months
                                     .map<DropdownMenuItem<String>>(
                                         (String month) {
-                                      return DropdownMenuItem<String>(
-                                        value: month,
-                                        child: CustomTextWidget(
-                                          text: month,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w500,
-                                          textColor: AppColors.brown,
-                                        ),
-                                      );
-                                    }).toList(),
+                                  return DropdownMenuItem<String>(
+                                    value: month,
+                                    child: CustomTextWidget(
+                                      text: month,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      textColor: AppColors.brown,
+                                    ),
+                                  );
+                                }).toList(),
                               ),
                             ),
                           ),
@@ -126,7 +128,13 @@ class CustomChart extends StatelessWidget {
                               CupertinoIcons.ellipsis_vertical,
                               color: AppColors.brown,
                             )),
-                        Gap(2)
+                        Gap(12),
+                        CustomTextWidget(
+                          text: '800',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                          textColor: AppColors.black,
+                        ),
                       ],
                     ),
                   ],
@@ -354,12 +362,27 @@ class CustomChart extends StatelessWidget {
                       ),
                     ),
                     leftTitles: AxisTitles(
-                      sideTitles: SideTitles(
-                        showTitles: false, // Show left axis titles
-                        interval: 1, // Interval for Y-axis
-                        reservedSize: 50,
-                      ),
+                      sideTitles:hasOneLine? SideTitles(
+                        showTitles: true,
+                        interval: 25,
+                        reservedSize: 40,
+                        getTitlesWidget: (value, meta) {
+                          return Transform.rotate(
+                            angle: 0,
+                            child: Center(
+                              child: CustomTextWidget(
+                                text: "${value.toInt()+100*2}",
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                                textColor: AppColors.brown,
+                              ),
+                            ),
+                          );
+                        },
+                      ):SideTitles(showTitles: false),
                     ),
+
+
                     rightTitles: const AxisTitles(
                       sideTitles: SideTitles(showTitles: false), // Hide right axis
                     ),
@@ -385,10 +408,8 @@ class CustomChart extends StatelessWidget {
                       strokeWidth: 1,
                     ),
                   ),
-                  minY: 0,
-                  // Set minimum Y-axis value
-                  maxY: 100,
-                  // Set maximum Y-axis value
+                  minY: 0, // Set minimum Y-axis value
+                  maxY: 100, // Set maximum Y-axis value
                   lineBarsData: hasOneLine
                       ? [
                     LineChartBarData(
@@ -480,8 +501,7 @@ class CustomChart extends StatelessWidget {
                     },
                     touchSpotThreshold: 20,
                   ),
-                ),
-
+                )
             ),
           ),
         ],

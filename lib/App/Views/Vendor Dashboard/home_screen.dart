@@ -92,8 +92,8 @@ class HomeScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 12),
                             child: CustomTextWidget(
                               textOverflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.left,
-                              text: "Preferences",
+                              textAlign: TextAlign.start,
+                              text: "Preferences       ",
                               fontWeight: FontWeight.w600,
                               fontSize: 17,
                               textColor: AppColors.white,
@@ -135,6 +135,7 @@ class HomeScreen extends StatelessWidget {
                             width: AppSizes().getWidthPercentage(8.3),
                           ),
                           CustomOutlinedButton(
+                            haveHoverEffect: true,
                             isLarge: isLarge,
                             onPressed: () {
                               Get.toNamed(AppRoutesName.loginScreen);

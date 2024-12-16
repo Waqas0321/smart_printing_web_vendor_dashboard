@@ -5,6 +5,9 @@ import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/overview_c
 import 'package:smart_printing_web/App/Utils/Const/appColors.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
+import 'package:smart_printing_web/App/Widgets/custom_outline_button.dart';
+import 'package:smart_printing_web/App/Widgets/custom_pagination_class.dart';
+import 'package:smart_printing_web/App/Widgets/custom_text_button.dart';
 import 'package:smart_printing_web/App/Widgets/custom_textfield.dart';
 import '../../Widgets/custom_chart.dart';
 import '../../Widgets/custom_divider.dart';
@@ -38,43 +41,42 @@ class OverviewScreen extends StatelessWidget {
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
-                                ScrollConfiguration(
-                                  behavior: ScrollBehavior().copyWith(
-                                      scrollbars: false, overscroll: false),
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: [
-                                        CustomOverViewContainer(
-                                          iconPath: AppIcons.threeUsers,
-                                          isLarge: isLarge,
-                                          heading: "4,230",
-                                          subContainerText: "+1.5%",
-                                          subContainerColor: AppColors.blue,
-                                          subHeading: "Total Orders",
-                                        ),
-                                        Gap(AppSizes().getWidthPercentage(1)),
-                                        CustomOverViewContainer(
-                                          iconPath: AppIcons.document,
-                                          isLarge: isLarge,
-                                          heading: "40,230",
-                                          subContainerText: "+10.5%",
-                                          subContainerColor: AppColors.orange,
-                                          subHeading: "Total Earnings",
-                                        ),
-                                        Gap(AppSizes().getWidthPercentage(1)),
-                                        CustomOverViewContainer(
-                                          isLarge: isLarge,
-                                          iconPath: AppIcons.wallet,
-                                          heading: "Struggled",
-                                          subContainerText: "+3.9%",
-                                          subContainerColor: AppColors.red,
-                                          subHeading:
-                                              "Avg Performance Score : 8",
-                                        ),
-                                      ],
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: CustomOverViewContainer(
+                                        iconPath: AppIcons.threeUsers,
+                                        isLarge: isLarge,
+                                        heading: "4,230",
+                                        subContainerText: "+1.5%",
+                                        subContainerColor: AppColors.blue,
+                                        subHeading: "Total Orders",
+                                      ),
                                     ),
-                                  ),
+                                    Gap(AppSizes().getWidthPercentage(1)),
+                                    Expanded(
+                                      child: CustomOverViewContainer(
+                                        iconPath: AppIcons.document,
+                                        isLarge: isLarge,
+                                        heading: "40,230",
+                                        subContainerText: "+10.5%",
+                                        subContainerColor: AppColors.orange,
+                                        subHeading: "Total Earnings",
+                                      ),
+                                    ),
+                                    Gap(AppSizes().getWidthPercentage(1)),
+                                    Expanded(
+                                      child: CustomOverViewContainer(
+                                        isLarge: isLarge,
+                                        iconPath: AppIcons.wallet,
+                                        heading: "Struggled",
+                                        subContainerText: "+3.9%",
+                                        subContainerColor: AppColors.red,
+                                        subHeading: "Avg Performance Score : 8",
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 Gap(23),
                                 Row(
@@ -217,140 +219,145 @@ class OverviewScreen extends StatelessWidget {
                           padding: AppSizes().getCustomPadding(
                               top: 2.5, bottom: 2.5, right: 1, left: 1),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(9),
-                              color: AppColors.halfWhite2),
-                          child: ScrollConfiguration(
-                            behavior: ScrollBehavior()
-                                .copyWith(overscroll: false, scrollbars: false),
-                            child: SingleChildScrollView(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                            borderRadius: BorderRadius.circular(9),
+                            color: AppColors.halfWhite2,
+                          ),
+                          child: Table(
+                            defaultVerticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            columnWidths: const <int, TableColumnWidth>{
+                              0: FixedColumnWidth(4), // Checkbox column
+                              1: FlexColumnWidth(1),
+                              2: FlexColumnWidth(2),
+                              3: FlexColumnWidth(2),
+                              4: FlexColumnWidth(2),
+                              5: FlexColumnWidth(2),
+                            },
+                            children: [
+                              TableRow(
+                                decoration: BoxDecoration(
+                                  color: AppColors.halfWhite2,
+                                ),
                                 children: [
-                                  Gap(AppSizes().getWidthPercentage(7)),
-                                  Expanded(
-                                    child: CustomTextWidget(
-                                      text: "ID",
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12,
-                                      textColor: AppColors.brown,
-                                    ),
+                                  SizedBox(), // Empty placeholder for checkbox
+                                  CustomTextWidget(
+                                    text: "ID",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
                                   ),
-                                  Expanded(
-                                    child: CustomTextWidget(
-                                      textOverflow: TextOverflow.ellipsis,
-                                      text: "PRODUCT NAME",
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12,
-                                      textColor: AppColors.brown,
-                                    ),
+                                  CustomTextWidget(
+                                    textOverflow: TextOverflow.ellipsis,
+                                    text: "PRODUCT NAME",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
                                   ),
-                                  Expanded(
-                                    child: CustomTextWidget(
-                                      textOverflow: TextOverflow.ellipsis,
-                                      text: "TOTAL EARNING",
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12,
-                                      textColor: AppColors.brown,
-                                    ),
+                                  CustomTextWidget(
+                                    textOverflow: TextOverflow.ellipsis,
+                                    text: "TOTAL EARNING",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
                                   ),
-                                  Expanded(
-                                    child: CustomTextWidget(
-                                      textOverflow: TextOverflow.ellipsis,
-                                      text: "AVG PERFORMANEC SCORE",
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12,
-                                      textColor: AppColors.brown,
-                                    ),
+                                  CustomTextWidget(
+                                    textOverflow: TextOverflow.ellipsis,
+                                    text: "AVG PERFORMANCE SCORE",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
                                   ),
-                                  Expanded(
-                                    child: CustomTextWidget(
-                                      textOverflow: TextOverflow.ellipsis,
-                                      text: "AVG WORKFLOW STATUS",
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12,
-                                      textColor: AppColors.brown,
-                                    ),
+                                  CustomTextWidget(
+                                    textOverflow: TextOverflow.ellipsis,
+                                    text: "AVG WORKFLOW STATUS",
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    textColor: AppColors.brown,
                                   ),
                                 ],
                               ),
-                            ),
+                            ],
                           ),
                         ),
+                        Gap(12),
                         ListView.separated(
                           itemCount: overviewController.boolList.length,
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
-                            return Container(
-                              width: AppSizes().getWidthPercentage(100),
-                              padding: AppSizes().getCustomPadding(
-                                  top: 2.5, bottom: 2.5, right: 5, left: 1),
-                              child: ScrollConfiguration(
-                                behavior: ScrollBehavior().copyWith(
-                                    overscroll: false, scrollbars: false),
-                                child: SingleChildScrollView(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Obx(
-                                        () => Checkbox(
-                                          value: overviewController
-                                              .boolList[index].value,
-                                          onChanged: (value) {
-                                            overviewController.toggleCheckbox(
-                                                index, value);
-                                          },
-                                          activeColor: AppColors.lightPrimary,
-                                          checkColor: AppColors.tertiary,
-                                        ),
+                            return Table(
+                              defaultVerticalAlignment:
+                                  TableCellVerticalAlignment.middle,
+                              columnWidths: const <int, TableColumnWidth>{
+                                0: FixedColumnWidth(10), // Checkbox column
+                                1: FlexColumnWidth(1),
+                                2: FlexColumnWidth(2),
+                                3: FlexColumnWidth(2),
+                                4: FlexColumnWidth(2),
+                                5: FlexColumnWidth(2),
+                              },
+                              children: [
+                                TableRow(
+                                  children: [
+                                    Obx(
+                                      () => Checkbox(
+                                        value: overviewController
+                                            .boolList[index].value,
+                                        onChanged: (value) {
+                                          overviewController.toggleCheckbox(
+                                              index, value);
+                                        },
+                                        activeColor: AppColors.lightPrimary,
+                                        checkColor: AppColors.tertiary,
                                       ),
-                                      CustomTextWidget(
-                                        textOverflow: TextOverflow.ellipsis,
-                                        text: "#01",
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
-                                        textColor: AppColors.brown,
-                                      ),
-                                      CustomTextWidget(
-                                        textOverflow: TextOverflow.ellipsis,
-                                        text: "Lamination",
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                        textColor: AppColors.brown,
-                                      ),
-                                      CustomTextWidget(
-                                        textOverflow: TextOverflow.ellipsis,
-                                        text: "Dummy name",
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                        textColor: AppColors.brown,
-                                      ),
-                                      CustomTextWidget(
-                                        textOverflow: TextOverflow.ellipsis,
-                                        text: "Smooth",
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                        textColor: AppColors.brown,
-                                      ),
-                                      CustomTextWidget(
-                                        textOverflow: TextOverflow.ellipsis,
-                                        text: "08",
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                        textColor: AppColors.brown,
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                    CustomTextWidget(
+                                      textOverflow: TextOverflow.ellipsis,
+                                      text: "#01",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                    CustomTextWidget(
+                                      textOverflow: TextOverflow.ellipsis,
+                                      text: "Lamination",
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                    CustomTextWidget(
+                                      textOverflow: TextOverflow.ellipsis,
+                                      text: "Dummy name",
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                    CustomTextWidget(
+                                      textOverflow: TextOverflow.ellipsis,
+                                      text: "Smooth",
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                    CustomTextWidget(
+                                      textOverflow: TextOverflow.ellipsis,
+                                      text: "08",
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12,
+                                      textColor: AppColors.brown,
+                                    ),
+                                  ],
                                 ),
-                              ),
+                              ],
                             );
                           },
                           separatorBuilder: (BuildContext context, int index) {
                             return CustomDivider();
                           },
                         ),
+                        Gap(18),
+                        CustomPaginationClass(),
+                        Gap(18)
                       ],
                     ),
                   )
@@ -363,3 +370,5 @@ class OverviewScreen extends StatelessWidget {
     );
   }
 }
+
+

@@ -79,9 +79,11 @@ class CustomOverViewContainer extends StatelessWidget {
                   ),
                 ],
               ),
-              Gap(isLarge
-                  ? AppSizes().getWidthPercentage(fourInOneLine ? 0 : inSetting?4: 6)
-                  : AppSizes().getWidthPercentage(25)),
+              Expanded(
+                child: Gap(isLarge
+                    ? AppSizes().getWidthPercentage(fourInOneLine ? 0 : inSetting?4: 6)
+                    : AppSizes().getWidthPercentage(25)),
+              ),
               Container(
                 margin: EdgeInsets.only(left: 8),
                 padding: EdgeInsets.all(9),

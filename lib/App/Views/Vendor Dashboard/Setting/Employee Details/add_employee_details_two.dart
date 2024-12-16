@@ -55,7 +55,7 @@ class AddEmployeeDetailsTwo extends StatelessWidget {
                     ],
                   ),
                   Gap(12),
-                  SvgPicture.asset(AppImages.stepsOne),
+                  SvgPicture.asset(AppImages.stepsLine2),
                   Gap(32),
                   Container(
                     width: AppSizes().getWidthPercentage(100),

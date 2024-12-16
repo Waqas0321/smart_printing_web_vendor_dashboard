@@ -7,7 +7,7 @@ import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/help_center_scre
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/setting_main_screen.dart';
 import '../../Views/Vendor Dashboard/Estimation/estimation_screen.dart';
 import '../../Views/Vendor Dashboard/History/history_screen.dart';
-import '../../Views/Vendor Dashboard/orders_screen.dart';
+import '../../Views/Vendor Dashboard/Orders/orders_screen.dart';
 import '../../Views/Vendor Dashboard/overview_screen.dart';
 
 class HomeController extends GetxController{

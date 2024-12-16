@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Services/image_picker_services.dart';
+import 'package:smart_printing_web/App/Widgets/custom_text_button.dart';
 import 'package:smart_printing_web/App/Widgets/custom_textfield.dart';
 import '../Utils/Const/appColors.dart';
 import '../Utils/Const/app_icons.dart';
@@ -209,10 +210,11 @@ class CustomDialgueBox extends StatelessWidget {
                         ),
                   !isThird
                       ? SizedBox.shrink()
-                      : CustomElevatedButton(
-                          textSize: 18,
-                          height: 36,
-                          text: "Post Order",
+                      : CustomTextButton(
+                    color: AppColors.lightPrimary,
+                          textColor: AppColors.brown,
+                          hasBorder: false,
+                          text: "  Post Order  ",
                           onPress: onPress,
                         ),
                   isSecond

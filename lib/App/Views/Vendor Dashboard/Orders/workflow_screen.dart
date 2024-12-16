@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/history_controller.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/orders_controller.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
@@ -55,6 +56,7 @@ class OverflowScreen extends StatelessWidget {
                     ),
                     Gap(18),
                     Container(
+                      height: AppSizes().getHeightPercentage(80),
                       decoration: BoxDecoration(
                           color: AppColors.white,
                           borderRadius: BorderRadius.circular(14),
@@ -159,7 +161,9 @@ class OverflowScreen extends StatelessWidget {
                                 padding: EdgeInsets.only(left: AppSizes().getWidthPercentage(50)),
                                 child: Row(
                                   children: [
-                                    CustomFlowText(text: "Passed",),
+                                    CustomFlowText(
+                                      withBackgroundColor: true,
+                                      text: "Passed",),
                                   ],
                                 ),
                               ),
@@ -191,7 +195,9 @@ class OverflowScreen extends StatelessWidget {
                                 padding: EdgeInsets.only(left: AppSizes().getWidthPercentage(20)),
                                 child: Row(
                                   children: [
-                                    CustomFlowText(text: "Ready for Delivery",),
+                                    CustomFlowText(
+                                      borderColor: AppColors.lightPrimary,
+                                      text: "Ready for Delivery",),
                                   ],
                                 ),
                               ),
@@ -213,23 +219,52 @@ class OverflowScreen extends StatelessWidget {
 
 class CustomFlowText extends StatelessWidget {
   const CustomFlowText({
-    super.key, required this.text,
+    super.key,
+    required this.text,
+    this.withBackgroundColor = false,
+    this.borderColor = AppColors.black,
   });
+
   final String text;
+  final bool withBackgroundColor;
+  final Color borderColor;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: AppSizes().getCustomPadding(top: 1, bottom: 1),
-      decoration: BoxDecoration(
-          border: Border(
-            left: BorderSide(width: 2, color: AppColors.black),
-            right: BorderSide(width: 2, color: AppColors.black),
-            top: BorderSide(width: 4, color: AppColors.black),
-            bottom: BorderSide(width: 4, color: AppColors.black),
+    return MouseRegion(
+      cursor: SystemMouseCursors.click, // Change cursor on hover
+      child: Tooltip(
+        message: "$text\nMore Information", // Adding a newline for two lines of text
+        textStyle: GoogleFonts.montserrat(
+          color: AppColors.brown,
+          fontWeight: FontWeight.w500,
+        ),
+        decoration: BoxDecoration(
+          color: AppColors.halfWhite2,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        preferBelow: false, // Display tooltip above the widget
+        child: Container(
+          padding: AppSizes().getCustomPadding(top: 1, bottom: 1),
+          decoration: BoxDecoration(
+            color: withBackgroundColor? AppColors.lightPrimary:null,
+            border: withBackgroundColor?null: Border(
+              left: BorderSide(width: 2, color: borderColor),
+              right: BorderSide(width: 2, color: borderColor),
+              top: BorderSide(width: 4, color: borderColor),
+              bottom: BorderSide(width: 4, color: borderColor),
+            ),
+            borderRadius: BorderRadius.circular(8),
           ),
-          borderRadius: BorderRadius.circular(8)),
-      child: CustomTextWidget(text: text,fontWeight: FontWeight.w500,),
+          child: CustomTextWidget(
+            text: text,
+            textColor:withBackgroundColor?AppColors.brown: AppColors.black,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
     );
   }
 }
+
+

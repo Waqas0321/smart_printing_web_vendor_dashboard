@@ -57,7 +57,7 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                     ],
                   ),
                   Gap(12),
-                  SvgPicture.asset(AppImages.stepsOne),
+                  SvgPicture.asset(AppImages.stepsLine3),
                   Gap(32),
                   Container(
                     width: AppSizes().getWidthPercentage(100),
