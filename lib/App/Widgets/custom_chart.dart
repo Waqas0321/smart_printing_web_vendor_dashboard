@@ -63,7 +63,7 @@ class CustomChart extends StatelessWidget {
                         ),
                         Gap(8),
                         Obx(
-                          () => Container(
+                              () => Container(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 0),
                             decoration: BoxDecoration(
@@ -72,12 +72,12 @@ class CustomChart extends StatelessWidget {
                                 width: 1, // Border width
                               ),
                               borderRadius:
-                                  BorderRadius.circular(8), // Rounded corners
+                              BorderRadius.circular(8), // Rounded corners
                             ),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
                                 value: overviewController!
-                                        .selectedMonth.value.isEmpty
+                                    .selectedMonth.value.isEmpty
                                     ? null
                                     : overviewController!.selectedMonth.value,
                                 hint: CustomTextWidget(
@@ -102,28 +102,33 @@ class CustomChart extends StatelessWidget {
                                 items: overviewController?.months
                                     .map<DropdownMenuItem<String>>(
                                         (String month) {
-                                  return DropdownMenuItem<String>(
-                                    value: month,
-                                    child: CustomTextWidget(
-                                      text: month,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                      textColor: AppColors.brown,
-                                    ),
-                                  );
-                                }).toList(),
+                                      return DropdownMenuItem<String>(
+                                        value: month,
+                                        child: CustomTextWidget(
+                                          text: month,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          textColor: AppColors.brown,
+                                        ),
+                                      );
+                                    }).toList(),
                               ),
                             ),
                           ),
                         ),
                       ],
                     ),
-                    GestureDetector(
-                        onTap: () {},
-                        child: Icon(
-                          CupertinoIcons.ellipsis_vertical,
-                          color: AppColors.brown,
-                        )),
+                    Column(
+                      children: [
+                        GestureDetector(
+                            onTap: () {},
+                            child: Icon(
+                              CupertinoIcons.ellipsis_vertical,
+                              color: AppColors.brown,
+                            )),
+                        Gap(2)
+                      ],
+                    ),
                   ],
                 )
               : SingleChildScrollView(
@@ -285,176 +290,198 @@ class CustomChart extends StatelessWidget {
                 ),
           Expanded(
             child: LineChart(
-              LineChartData(
-                titlesData: FlTitlesData(
-                  bottomTitles: AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: true, // Show bottom titles
-                      reservedSize: 30,
-                      interval: 1,
-
-                      getTitlesWidget: (value, meta) {
-                        switch (value.toInt()) {
-                          case 1:
-                            return Center(
-                                child: CustomTextWidget(
-                              text: hasOneLine ? "Sep 13" : 'JAN',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              textColor: AppColors.brown,
-                            ));
-                          case 2:
-                            return Center(
-                                child: CustomTextWidget(
-                              text: hasOneLine ? "Sep 14" : 'FEB',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              textColor: AppColors.brown,
-                            ));
-                          case 3:
-                            return Center(
-                                child: CustomTextWidget(
-                              text: hasOneLine ? "Sep 15" : 'MAR',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              textColor: AppColors.brown,
-                            ));
-                          case 4:
-                            return Center(
-                                child: CustomTextWidget(
-                              text: hasOneLine ? "Sep 16" : 'APR',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              textColor: AppColors.brown,
-                            ));
-                          case 5:
-                            return Center(
-                                child: CustomTextWidget(
-                              text: hasOneLine ? "Sep 17" : 'MAY',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              textColor: AppColors.brown,
-                            ));
-                          case 6:
-                            return Center(
-                                child: CustomTextWidget(
-                              text: hasOneLine ? "Sep 18" : 'JUN',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              textColor: AppColors.brown,
-                            ));
-                          default:
-                            return const SizedBox.shrink();
-                        }
+                LineChartData(
+                  titlesData: FlTitlesData(
+                    bottomTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true, // Show bottom titles
+                        reservedSize: 30,
+                        interval: 1,
+                        getTitlesWidget: (value, meta) {
+                          switch (value.toInt()) {
+                            case 1:
+                              return Center(
+                                  child: CustomTextWidget(
+                                    text: hasOneLine ? "Sep 13" : 'JAN',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    textColor: AppColors.brown,
+                                  ));
+                            case 2:
+                              return Center(
+                                  child: CustomTextWidget(
+                                    text: hasOneLine ? "Sep 14" : 'FEB',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    textColor: AppColors.brown,
+                                  ));
+                            case 3:
+                              return Center(
+                                  child: CustomTextWidget(
+                                    text: hasOneLine ? "Sep 15" : 'MAR',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    textColor: AppColors.brown,
+                                  ));
+                            case 4:
+                              return Center(
+                                  child: CustomTextWidget(
+                                    text: hasOneLine ? "Sep 16" : 'APR',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    textColor: AppColors.brown,
+                                  ));
+                            case 5:
+                              return Center(
+                                  child: CustomTextWidget(
+                                    text: hasOneLine ? "Sep 17" : 'MAY',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    textColor: AppColors.brown,
+                                  ));
+                            case 6:
+                              return Center(
+                                  child: CustomTextWidget(
+                                    text: hasOneLine ? "Sep 18" : 'JUN',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    textColor: AppColors.brown,
+                                  ));
+                            default:
+                              return const SizedBox.shrink();
+                          }
+                        },
+                      ),
+                    ),
+                    leftTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: false, // Show left axis titles
+                        interval: 1, // Interval for Y-axis
+                        reservedSize: 50,
+                      ),
+                    ),
+                    rightTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false), // Hide right axis
+                    ),
+                    topTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false), // Hide top axis
+                    ),
+                  ),
+                  borderData: FlBorderData(
+                    show: false,
+                    border: Border.all(
+                      color: AppColors.black.withOpacity(0.3),
+                      width: 1,
+                    ),
+                  ),
+                  gridData: FlGridData(
+                    show: true,
+                    drawVerticalLine: false,
+                    drawHorizontalLine: true,
+                    verticalInterval: 1,
+                    horizontalInterval: 20,
+                    getDrawingHorizontalLine: (value) => FlLine(
+                      color: AppColors.brown.withOpacity(0.2),
+                      strokeWidth: 1,
+                    ),
+                  ),
+                  minY: 0,
+                  // Set minimum Y-axis value
+                  maxY: 100,
+                  // Set maximum Y-axis value
+                  lineBarsData: hasOneLine
+                      ? [
+                    LineChartBarData(
+                      isCurved: true,
+                      spots: singleLineList!
+                          .asMap()
+                          .entries
+                          .map((e) => FlSpot(e.key.toDouble() + 1, e.value))
+                          .toList(),
+                      color: AppColors.blue,
+                      barWidth: 2,
+                      dotData: FlDotData(show: false),
+                      belowBarData: BarAreaData(
+                        show: true,
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            AppColors.blue.withOpacity(0.5),
+                            Colors.transparent,
+                          ],
+                          stops: [0, 0.5],
+                        ),
+                      ),
+                    ),
+                  ]
+                      : [
+                    LineChartBarData(
+                      lineChartStepData: LineChartStepData(stepDirection: Checkbox.width),
+                      isCurved: true,
+                      spots: temperatureData!
+                          .asMap()
+                          .entries
+                          .map((e) => FlSpot(e.key.toDouble() + 1, e.value))
+                          .toList(),
+                      color: AppColors.red,
+                      barWidth: 2,
+                      dotData: FlDotData(show: false),
+                    ),
+                    LineChartBarData(
+                      isCurved: true,
+                      spots: bloodPressureData!
+                          .asMap()
+                          .entries
+                          .map((e) => FlSpot(e.key.toDouble() + 1, e.value))
+                          .toList(),
+                      color: AppColors.blue,
+                      barWidth: 2,
+                      dotData: FlDotData(show: false),
+                    ),
+                    LineChartBarData(
+                      isCurved: true,
+                      spots: bloodGlucoseData!
+                          .asMap()
+                          .entries
+                          .map((e) => FlSpot(e.key.toDouble() + 1, e.value))
+                          .toList(),
+                      color: AppColors.orange,
+                      barWidth: 2,
+                      dotData: FlDotData(show: false),
+                    ),
+                  ],
+                  lineTouchData: LineTouchData(
+                    touchTooltipData: LineTouchTooltipData(
+                      getTooltipItems: (touchedSpots) {
+                        return touchedSpots.map((spot) {
+                          return LineTooltipItem(
+                            '${spot.y}',
+                            GoogleFonts.montserrat(
+                              color: AppColors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          );
+                        }).toList();
                       },
                     ),
-                  ),
-                  leftTitles: AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: false, // Show left axis titles
-                      interval: 1, // Interval for Y-axis
-                      reservedSize: 50,
-                    ),
-                  ),
-                  rightTitles: const AxisTitles(
-                    sideTitles:
-                        SideTitles(showTitles: false), // Hide right axis
-                  ),
-                  topTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false), // Hide top axis
-                  ),
-                ),
-                borderData: FlBorderData(
-                  show: false,
-                  border: Border.all(
-                    color: AppColors.black.withOpacity(0.3),
-                    width: 1,
-                  ),
-                ),
-                gridData: FlGridData(
-                  show: true,
-                  drawVerticalLine: false,
-                  drawHorizontalLine: true,
-                  verticalInterval: 1,
-                  horizontalInterval: 20,
-                  getDrawingHorizontalLine: (value) => FlLine(
-                    color: AppColors.brown.withOpacity(0.2),
-                    strokeWidth: 1,
-                  ),
-                ),
-                minY: 0,
-                // Set minimum Y-axis value
-                maxY: 100,
-                // Set maximum Y-axis value
-                lineBarsData: hasOneLine
-                    ? [
-                        LineChartBarData(
-                          isCurved: true,
-                          spots: singleLineList!
-                              .asMap()
-                              .entries
-                              .map((e) => FlSpot(e.key.toDouble() + 1, e.value))
-                              .toList(),
-                          color: AppColors.blue,
-                          barWidth: 2,
-                          dotData: FlDotData(show: false),
-                          belowBarData: BarAreaData(
-                            show: true,
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                AppColors.blue.withOpacity(0.5),
-                                // Start gradient color
-                                Colors.transparent,
-                                // End gradient color
-                              ],
-                              stops: [
-                                0,
-                                0.5
-                              ], // Defines where the gradient starts and ends
-                            ),
+                    handleBuiltInTouches: true,
+                    getTouchedSpotIndicator: (barData, indicators) {
+                      return indicators.map((indicator) {
+                        return TouchedSpotIndicatorData(
+                          FlLine(
+                            color: Colors.grey,
+                            strokeWidth: 1,
+                            dashArray: [6, 3],
                           ),
-                        ),
-                      ]
-                    : [
-                        LineChartBarData(
-                          lineChartStepData:
-                              LineChartStepData(stepDirection: Checkbox.width),
-                          isCurved: true,
-                          spots: temperatureData!
-                              .asMap()
-                              .entries
-                              .map((e) => FlSpot(e.key.toDouble() + 1, e.value))
-                              .toList(),
-                          color: AppColors.red,
-                          barWidth: 2,
-                          dotData: FlDotData(show: false),
-                        ),
-                        LineChartBarData(
-                          isCurved: true,
-                          spots: bloodPressureData!
-                              .asMap()
-                              .entries
-                              .map((e) => FlSpot(e.key.toDouble() + 1, e.value))
-                              .toList(),
-                          color: AppColors.blue,
-                          barWidth: 2,
-                          dotData: FlDotData(show: false),
-                        ),
-                        LineChartBarData(
-                          isCurved: true,
-                          spots: bloodGlucoseData!
-                              .asMap()
-                              .entries
-                              .map((e) => FlSpot(e.key.toDouble() + 1, e.value))
-                              .toList(),
-                          color: AppColors.orange,
-                          barWidth: 2,
-                          dotData: FlDotData(show: false),
-                        ),
-                      ],
-              ),
+                          FlDotData(show: false),
+                        );
+                      }).toList();
+                    },
+                    touchSpotThreshold: 20,
+                  ),
+                ),
+
             ),
           ),
         ],

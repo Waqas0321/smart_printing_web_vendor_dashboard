@@ -12,7 +12,7 @@ class ProcessSideScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: AppSizes().getWidthPercentage(20),
+      width: AppSizes().getWidthPercentage(25),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -48,7 +48,7 @@ class ProcessSideScreen extends StatelessWidget {
                           text: "01",
                           fontSize: 9,
                         )),
-                    Gap(50),
+                    Gap(90),
                     Container(
                         padding: EdgeInsets.all(4),
                         decoration: BoxDecoration(
@@ -72,7 +72,7 @@ class ProcessSideScreen extends StatelessWidget {
                       color: AppColors.lightPrimary,
                     ),
                     CustomVerticalDivider(
-                      height: 50,
+                      height: 90,
                       thickness: 3,
                       color: AppColors.lightPrimary,
                     ),
@@ -82,7 +82,7 @@ class ProcessSideScreen extends StatelessWidget {
                       color: AppColors.lightPrimary,
                     ),
                     CustomVerticalDivider(
-                      height: 100,
+                      height: 150,
                       thickness: 3,
                       color: AppColors.lightPrimary,
                     ),

@@ -357,6 +357,7 @@ class ReplyScreen extends StatelessWidget {
                                         ),
                                         Gap(12),
                                         Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             SizedBox(
                                               width: 200,
@@ -373,7 +374,7 @@ class ReplyScreen extends StatelessWidget {
                                                     textColor:
                                                     AppColors.brown,
                                                   ),
-                                                  Gap(6),
+                                                  Gap(5),
                                                   DropdownButtonFormField<
                                                       String>(
                                                     value: replyController
@@ -432,7 +433,7 @@ class ReplyScreen extends StatelessWidget {
                                                     textColor:
                                                     AppColors.brown,
                                                   ),
-                                                  Gap(2),
+                                                  Gap(5),
                                                   DropdownButtonFormField<
                                                       String>(
                                                     value: replyController

@@ -180,6 +180,7 @@ class EstimationScreen extends StatelessWidget {
                                       isCircular: true,
                                       icon: CupertinoIcons.down_arrow,
                                     ),
+                                    Gap(8),
                                     CustomOutlinedButton(
                                       onPressed: () {},
                                       isLarge: isLarge,
@@ -188,6 +189,7 @@ class EstimationScreen extends StatelessWidget {
                                       isCircular: true,
                                       icon: Icons.mode_edit_outline_sharp,
                                     ),
+                                    Gap(8),
                                     CustomOutlinedButton(
                                       onPressed: () {},
                                       isLarge: isLarge,

@@ -230,7 +230,7 @@ class CreateOrderScreen extends StatelessWidget {
                                                           textColor:
                                                               AppColors.brown,
                                                         ),
-                                                        Gap(6),
+                                                        Gap(5),
                                                         DropdownButtonFormField<
                                                             String>(
                                                           value:
@@ -292,7 +292,7 @@ class CreateOrderScreen extends StatelessWidget {
                                                           textColor:
                                                               AppColors.brown,
                                                         ),
-                                                        Gap(2),
+                                                        Gap(5),
                                                         DropdownButtonFormField<
                                                             String>(
                                                           value:
