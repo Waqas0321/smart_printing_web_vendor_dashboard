@@ -39,22 +39,21 @@ class OrderDetailsScreen extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                       Spacer(),
-                      CustomContainerButton(
-                        isLarge: isLarge,
-                        containerColor: AppColors.white,
+                      CustomTextButton(
+                        text: "  23 : 59: 00  ",
+                        fontSize: 14,
+                        hasBorder: false,
                         textColor: AppColors.brown,
-                        leftIcon: Icons.watch_later_outlined,
-                        text: "23 : 59: 00",
-                        hasRightIcon: false,
-                        onPress: () {},
+                        color: AppColors.white,
+                        onPress: () {
+                        },
                       ),
                       Gap(8),
-                      CustomContainerButton(
-                        isLarge: isLarge,
-                        leftIcon: Icons.flash_on_sharp,
-                        text: "Workflow",
-                        containerColor: AppColors.lightPrimary,
-                        hasRightIcon: false,
+                      CustomTextButton(
+                        text: " Workflow ",
+                        hasBorder: false,
+                        textColor: AppColors.brown,
+                        color: AppColors.lightPrimary,
                         onPress: () {
                           ordersController.selectedIndex.value = 3;
                         },
@@ -62,7 +61,7 @@ class OrderDetailsScreen extends StatelessWidget {
                       Gap(8),
                       CustomContainerButton(
                         isLarge: isLarge,
-                        leftIcon: Icons.arrow_back_ios_outlined,
+                        leftIcon: AppIcons.backIcon,
                         text: "Back",
                         textColor: AppColors.brown,
                         hasRightIcon: false,
@@ -96,6 +95,7 @@ class OrderDetailsScreen extends StatelessWidget {
                               child: Padding(
                                 padding: AppSizes().getCustomPadding(),
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
                                       mainAxisAlignment:
@@ -326,11 +326,11 @@ class OrderDetailsScreen extends StatelessWidget {
                                     SingleChildScrollView(
                                       child: Row(
                                         children: [
-                                          Icon(
-                                            Icons.file_download_outlined,
+                                          SvgPicture.asset(
+                                            AppIcons.downloadIcon,
                                             color: AppColors.brown,
                                           ),
-                                          Gap(4),
+                                          Gap(8),
                                           CustomTextWidget(
                                             text: "Download the file",
                                             fontSize: 12,
@@ -339,7 +339,7 @@ class OrderDetailsScreen extends StatelessWidget {
                                           ),
                                           Spacer(),
                                           SvgPicture.asset(
-                                            AppIcons.document,
+                                            AppIcons.pdfIconIcon,
                                             color: AppColors.blue,
                                           ),
                                         ],

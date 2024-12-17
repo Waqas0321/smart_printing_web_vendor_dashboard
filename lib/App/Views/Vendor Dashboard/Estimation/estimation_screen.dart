@@ -55,6 +55,9 @@ class EstimationScreen extends StatelessWidget {
                                 selectDateController.selectedDate.value;
                             return CustomContainerButton(
                               isLarge: isLarge,
+                              leftIcon: AppIcons.calendarIcon,
+                              hasRightIcon: true,
+                              rightIcon: AppIcons.belowIcon,
                               text: DateFormat('yyyy-MM-dd').format(date),
                               onPress: () {
                                 selectDateController
@@ -68,14 +71,14 @@ class EstimationScreen extends StatelessWidget {
                       CustomContainerButton(
                         isLarge: isLarge,
                         onPress: () {},
-                        leftIcon: Icons.report_outlined,
+                        leftIcon: AppIcons.reportIcon,
                         hasRightIcon: false,
                         text: "Report",
                       ),
                       Gap(6),
                       CustomContainerButton(
                         isLarge: isLarge,
-                        leftIcon: Icons.login_rounded,
+                        leftIcon: AppIcons.downloadIcon,
                         text: "Export",
                         onPress: () {},
                         hasRightIcon: false,
@@ -83,7 +86,7 @@ class EstimationScreen extends StatelessWidget {
                       Gap(6),
                       CustomContainerButton(
                         isLarge: isLarge,
-                        leftIcon: Icons.add_box_outlined,
+                        leftIcon: AppIcons.addOutlineIcon,
                         onPress: () {
                           Get.dialog(
                             CustomDialgueBox(
@@ -224,7 +227,7 @@ class EstimationScreen extends StatelessWidget {
                                       hasJustIcon: true,
                                       iconColor: AppColors.primary,
                                       isCircular: true,
-                                      icon: CupertinoIcons.down_arrow,
+                                      icon: AppIcons.swapIcon,
                                     ),
                                     Gap(8),
                                     CustomOutlinedButton(
@@ -233,7 +236,7 @@ class EstimationScreen extends StatelessWidget {
                                       hasJustIcon: true,
                                       iconColor: AppColors.primary,
                                       isCircular: true,
-                                      icon: Icons.mode_edit_outline_sharp,
+                                      icon: AppIcons.editIcon,
                                     ),
                                     Gap(8),
                                     CustomOutlinedButton(
@@ -242,7 +245,7 @@ class EstimationScreen extends StatelessWidget {
                                       hasJustIcon: true,
                                       iconColor: AppColors.red,
                                       isCircular: true,
-                                      icon: Icons.delete_outline,
+                                      icon: AppIcons.deleteIcon,
                                     )
                                   ],
                                 ),

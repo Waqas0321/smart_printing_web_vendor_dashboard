@@ -10,6 +10,7 @@ import 'package:smart_printing_web/App/Widgets/custom_textfield.dart';
 import '../../../Utils/Const/appColors.dart';
 import '../../../Utils/Const/app_sizes.dart';
 import '../../../Widgets/custom_container_button.dart';
+import '../../../Widgets/custom_text_button.dart';
 import '../../../Widgets/custom_text_widget.dart';
 import '../../../Widgets/process_side_widget.dart';
 class ReplyScreen extends StatelessWidget {
@@ -49,27 +50,25 @@ class ReplyScreen extends StatelessWidget {
                       CustomContainerButton(
                         isLarge: isLarge,
                         containerColor: AppColors.lightPrimary,
-                        leftIcon: Icons.login_outlined,
+                        leftIcon: AppIcons.downloadIcon,
                         text: "Export",
                         hasRightIcon: false,
                         onPress: () {},
                       ),
                       Gap(8),
-                      CustomContainerButton(
-                        isLarge: isLarge,
-                        leftIcon: Icons.replay,
-                        text: "Reply",
-                        hasRightIcon: false,
+                      CustomTextButton(
+                        text: "  Reply  ",
+                        color: AppColors.lightPrimary,
+                        textColor: AppColors.brown,
+                        hasBorder: false,
                         onPress: () {},
                       ),
                       Gap(8),
-                      CustomContainerButton(
-                        isLarge: isLarge,
-                        containerColor: AppColors.orange,
-                        leftIcon: Icons.add_box_outlined,
-                        text: "Need more info",
-                        textColor: AppColors.white,
-                        hasRightIcon: false,
+                      CustomTextButton(
+                        text: " Need more info ",
+                        color: AppColors.lightPrimary,
+                        textColor: AppColors.brown,
+                        hasBorder: false,
                         onPress: () {},
                       ),
                     ],
@@ -163,7 +162,7 @@ class ReplyScreen extends StatelessWidget {
                               textColor: AppColors.brown,
                               fontWeight: FontWeight.w500,
                             ),
-                            SvgPicture.asset(AppIcons.document,color: AppColors.blue,),
+                            SvgPicture.asset(AppIcons.pdfIconIcon,color: AppColors.blue,),
                           ],
                         ),
                         Gap(8),

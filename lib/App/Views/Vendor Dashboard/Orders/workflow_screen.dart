@@ -43,7 +43,7 @@ class OverflowScreen extends StatelessWidget {
                         Spacer(),
                         CustomContainerButton(
                           isLarge: isLarge,
-                          leftIcon: Icons.arrow_back_ios_outlined,
+                          leftIcon: AppIcons.backIcon,
                           text: "Back",
                           textColor: AppColors.brown,
                           hasRightIcon: false,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:smart_printing_web/App/Utils/Const/appColors.dart';
+import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
 import 'package:smart_printing_web/App/Widgets/custom_text_widget.dart';
 
@@ -10,7 +12,7 @@ class CustomOutlinedButton extends StatefulWidget {
   final bool isCircular;
   final Color iconColor;
   final bool hasJustIcon;
-  final IconData icon;
+  final String icon;
   final bool haveHoverEffect;
 
   const CustomOutlinedButton({
@@ -20,7 +22,7 @@ class CustomOutlinedButton extends StatefulWidget {
     this.isCircular = false,
     this.iconColor = AppColors.brown,
     this.hasJustIcon = false,
-    this.icon = Icons.logout,
+    this.icon = AppIcons.swapIcon,
     this.haveHoverEffect = false,
   }) : super(key: key);
 
@@ -48,10 +50,11 @@ class _CustomOutlinedButtonState extends State<CustomOutlinedButton> {
           child: widget.hasJustIcon
               ? Padding(
                   padding: EdgeInsets.all(8),
-                  child: Icon(
+                  child: SvgPicture.asset(
                     widget.icon,
                     color: widget.iconColor,
-                    size: widget.isLarge ? 16 : 20,
+                    height: widget.isLarge ? 16 : 20,
+                    width: widget.isLarge ? 16 : 20,
                   ),
                 )
               : SingleChildScrollView(
@@ -63,11 +66,12 @@ class _CustomOutlinedButtonState extends State<CustomOutlinedButton> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          widget.icon,
-                          color: widget.iconColor,
-                          size: widget.isLarge ? 16 : 20,
-                        ),
+                      SvgPicture.asset(
+                      widget.icon,
+                      color: widget.iconColor,
+                      height: widget.isLarge ? 16 : 20,
+                      width: widget.isLarge ? 16 : 20,
+                    ),
                         widget.isLarge ? Gap(8) : SizedBox.shrink(),
                         widget.isLarge
                             ? CustomTextWidget(

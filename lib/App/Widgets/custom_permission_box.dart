@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import '../Utils/Const/appColors.dart';
@@ -15,7 +16,7 @@ class CustomPersmissionBox extends StatelessWidget {
   final String title;
   final RxBool isChecked;
   final Function(bool) onPress;
-  final IconData icon;
+  final String icon;
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +33,13 @@ class CustomPersmissionBox extends StatelessWidget {
           children: [
             CircleAvatar(
               backgroundColor: AppColors.brown.withOpacity(0.1),
-              child: Icon(icon,color: AppColors.black,),
+              child: SvgPicture.asset(icon,color: AppColors.black,),
             ),
             Gap(8),
             CustomTextWidget(
               text: title,
               fontWeight: FontWeight.w600,
-              fontSize: 16,
+              fontSize: 14,
               textColor: AppColors.black,
             ),
             const Spacer(),

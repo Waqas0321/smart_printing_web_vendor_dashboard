@@ -46,7 +46,8 @@ class HomeScreen extends StatelessWidget {
                           Obx(() {
                             return SidebarItem(
                               isLarge: isLarge,
-                              icon: Icons.dashboard_rounded,
+                              icon: AppIcons.dashboardOutlineIcon,
+                              iconTwo: AppIcons.dashboardFilledIcon,
                               label: "Overview",
                               index: 0,
                               isSelected:
@@ -57,7 +58,8 @@ class HomeScreen extends StatelessWidget {
                           Obx(() {
                             return SidebarItem(
                               isLarge: isLarge,
-                              icon: Icons.text_snippet_outlined,
+                              icon: AppIcons.documentOutlineIcon,
+                              iconTwo: AppIcons.documentFilledIcon,
                               label: "Estimation",
                               index: 1,
                               isSelected:
@@ -68,7 +70,8 @@ class HomeScreen extends StatelessWidget {
                           Obx(() {
                             return SidebarItem(
                               isLarge: isLarge,
-                              icon: Icons.text_snippet_outlined,
+                              icon: AppIcons.documentOutlineIcon,
+                              iconTwo: AppIcons.documentOutlineIcon,
                               label: "Orders",
                               index: 2,
                               isSelected:
@@ -79,7 +82,8 @@ class HomeScreen extends StatelessWidget {
                           Obx(() {
                             return SidebarItem(
                               isLarge: isLarge,
-                              icon: Icons.history_rounded,
+                              icon: AppIcons.historyOutlineIcon,
+                              iconTwo: AppIcons.historyFilledIcon,
                               label: "History",
                               index: 3,
                               isSelected:
@@ -110,7 +114,8 @@ class HomeScreen extends StatelessWidget {
                           Obx(() {
                             return SidebarItem(
                               isLarge: isLarge,
-                              icon: Icons.settings,
+                              icon: AppIcons.settingOutlineIcon,
+                              iconTwo: AppIcons.settingFilledIcon,
                               label: "Settings",
                               index: 4,
                               isSelected:
@@ -121,7 +126,8 @@ class HomeScreen extends StatelessWidget {
                           Obx(() {
                             return SidebarItem(
                               isLarge: isLarge,
-                              icon: Icons.help_center_outlined,
+                              icon: AppIcons.helpOutlineIcon,
+                              iconTwo: AppIcons.helpOutlineIcon,
                               label: "Help Center",
                               index: 5,
                               isSelected:
@@ -136,6 +142,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           CustomOutlinedButton(
                             haveHoverEffect: true,
+                            icon: AppIcons.logoutIcon,
                             isLarge: isLarge,
                             onPressed: () {
                               Get.toNamed(AppRoutesName.loginScreen);

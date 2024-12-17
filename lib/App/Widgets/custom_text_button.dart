@@ -9,6 +9,7 @@ class CustomTextButton extends StatelessWidget {
     required this.hasBorder,
     required this.textColor,
     required this.onPress,
+    this.fontSize = 10,
   });
 
   final Color color;
@@ -16,6 +17,7 @@ class CustomTextButton extends StatelessWidget {
   final bool hasBorder;
   final Color textColor;
   final VoidCallback onPress;
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class CustomTextButton extends StatelessWidget {
         child: CustomTextWidget(
           text: text,
           fontWeight: FontWeight.w500,
-          fontSize: 10,
+          fontSize: fontSize,
           textColor: textColor,
         ),
       ),

@@ -6,10 +6,12 @@ import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Widgets/custom_divider.dart';
 import '../../../../Controllers/Vendor Dashboard/Settings/settings_controller.dart';
 import '../../../../Utils/Const/appColors.dart';
+import '../../../../Utils/Const/app_icons.dart';
 import '../../../../Utils/Const/app_sizes.dart';
 import '../../../../Widgets/custom_container_button.dart';
 import '../../../../Widgets/custom_outline_button.dart';
 import '../../../../Widgets/custom_pagination_class.dart';
+import '../../../../Widgets/custom_text_button.dart';
 import '../../../../Widgets/custom_text_widget.dart';
 
 class ProcessesScreen extends StatelessWidget {
@@ -49,22 +51,21 @@ class ProcessesScreen extends StatelessWidget {
                       Spacer(),
                       CustomContainerButton(
                         isLarge: isLarge,
-                        leftIcon: Icons.login_outlined,
+                        leftIcon: AppIcons.downloadIcon,
                         text: "Export",
                         hasRightIcon: false,
                         onPress: () {},
                       ),
                       Gap(8),
-                      CustomContainerButton(
-                        leftIcon: Icons.add_box_outlined,
-                        containerColor: AppColors.lightPrimary,
-                        isLarge: isLarge,
-                        hasRightIcon: false,
-                        text: "Process",
+                      CustomTextButton(
+                        color: AppColors.lightPrimary,
+                        hasBorder: false,
+                        textColor: AppColors.brown,
+                        text: "  Process  ",
                         onPress: () {
                           processesController.selectedIndexProcesses.value = 1;
                         },
-                      )
+                      ),
                     ],
                   ),
                   Gap(18),
@@ -77,25 +78,25 @@ class ProcessesScreen extends StatelessWidget {
                         hasJustIcon: true,
                         iconColor: AppColors.primary,
                         isCircular: true,
-                        icon: CupertinoIcons.down_arrow,
+                        icon: AppIcons.swapIcon,
                       ),
-                      Gap(6),
+                      Gap(8),
                       CustomOutlinedButton(
                         onPressed: () {},
                         isLarge: isLarge,
                         hasJustIcon: true,
                         iconColor: AppColors.primary,
                         isCircular: true,
-                        icon: Icons.mode_edit_outline_sharp,
+                        icon: AppIcons.editIcon,
                       ),
-                      Gap(6),
+                      Gap(8),
                       CustomOutlinedButton(
                         onPressed: () {},
                         isLarge: isLarge,
                         hasJustIcon: true,
                         iconColor: AppColors.red,
                         isCircular: true,
-                        icon: Icons.delete_outline,
+                        icon: AppIcons.deleteIcon,
                       )
                     ],
                   ),

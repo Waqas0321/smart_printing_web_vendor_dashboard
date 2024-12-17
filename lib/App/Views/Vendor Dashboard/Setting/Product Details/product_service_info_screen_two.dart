@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Product_Details/product_service_info_controller.dart';
-import 'package:smart_printing_web/App/Widgets/custom_checkBox.dart';
 import 'package:smart_printing_web/App/Widgets/custom_text_button.dart';
 import '../../../../Services/image_picker_services.dart';
 import '../../../../Utils/Const/appColors.dart';
+import '../../../../Utils/Const/app_icons.dart';
 import '../../../../Utils/Const/app_sizes.dart';
 import '../../../../Widgets/custom_divider.dart';
 import '../../../../Widgets/custom_text_widget.dart';
@@ -56,8 +57,8 @@ class ProductServiceInfoScreenTwo extends StatelessWidget {
                             color: AppColors.lightPrimary,
                           ),
                           child: Center(
-                            child: Icon(
-                              Icons.card_giftcard,
+                            child:  SvgPicture.asset(
+                              AppIcons.inventoryIcon,
                               color: AppColors.brown,
                             ),
                           ),

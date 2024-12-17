@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import 'package:smart_printing_web/App/Widgets/custom_text_button.dart';
 import '../../../../Controllers/Vendor Dashboard/Settings/Employee Details/add _emloyee_controller.dart';
 import '../../../../Utils/Const/appColors.dart';
@@ -47,7 +48,7 @@ class AddEmployeeDetailsTwo extends StatelessWidget {
                       Spacer(),
                       CustomContainerButton(
                         isLarge: isLarge,
-                        leftIcon: Icons.login_outlined,
+                        leftIcon: AppIcons.downloadIcon,
                         text: "Export",
                         hasRightIcon: false,
                         onPress: () {},

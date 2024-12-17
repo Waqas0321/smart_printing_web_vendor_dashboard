@@ -19,4 +19,29 @@ class AppIcons{
   static const String upload = "${basePath}upload.svg";
   static const String editSquare = "${basePath}Edit Square.svg";
 
+  static const String deleteIcon = "${basePath}Delete.svg";
+  static const String editIcon = "${basePath}Edit.svg";
+  static const String swapIcon = "${basePath}Swap.svg";
+  static const String downloadIcon = "${basePath}Downlaod.svg";
+  static const String dashboardOutlineIcon = "${basePath}Category.svg";
+  static const String documentOutlineIcon = "${basePath}DocumentOutline.svg";
+  static const String historyOutlineIcon = "${basePath}historyOutline.svg";
+  static const String threeUsersOutlineIcon = "${basePath}threUsersOutline.svg";
+  static const String helpOutlineIcon = "${basePath}helpOutline.svg";
+  static const String settingOutlineIcon = "${basePath}SettingOutline.svg";
+  static const String dashboardFilledIcon = "${basePath}dashboardFilled.svg";
+  static const String documentFilledIcon = "${basePath}documentFilled.svg";
+  static const String settingFilledIcon = "${basePath}SettingFilled.svg";
+  static const String pdfIconIcon = "${basePath}pdfIcon.svg";
+  static const String logoutIcon = "${basePath}logoutIcon.svg";
+  static const String reportIcon = "${basePath}reportIcon.svg";
+  static const String addOutlineIcon = "${basePath}addOutline.svg";
+  static const String backIcon = "${basePath}backIcon.svg";
+  static const String calendarIcon = "${basePath}CalendarIcon.svg";
+  static const String belowIcon = "${basePath}belowIcon.svg";
+  static const String historyFilledIcon = "${basePath}historyFilledIcon.svg";
+  static const String inventoryIcon = "${basePath}inventoryIcon.svg";
+  static const String servicesIcon = "${basePath}servicesIcon.svg";
+  static const String bagIcon = "${basePath}BagIcon.svg";
+
 }

@@ -10,6 +10,7 @@ import 'package:smart_printing_web/App/Widgets/custom_outline_button.dart';
 import 'package:smart_printing_web/App/Widgets/custom_text_widget.dart';
 import '../../../../Controllers/Vendor Dashboard/Settings/settings_controller.dart';
 import '../../../../Utils/Const/appColors.dart';
+import '../../../../Utils/Const/app_icons.dart';
 import '../../../../Widgets/custom_container_button.dart';
 import '../../../../Widgets/custom_pagination_class.dart';
 
@@ -51,14 +52,14 @@ class EmployeesDetailsScreen extends StatelessWidget {
                       Spacer(),
                       CustomContainerButton(
                         isLarge: isLarge,
-                        leftIcon: Icons.login_outlined,
+                        leftIcon: AppIcons.downloadIcon,
                         text: "Export",
                         hasRightIcon: false,
                         onPress: () {},
                       ),
                       Gap(8),
                       CustomContainerButton(
-                        leftIcon: Icons.add_box_outlined,
+                        leftIcon: AppIcons.addOutlineIcon,
                         containerColor: AppColors.lightPrimary,
                         isLarge: isLarge,
                         hasRightIcon: false,
@@ -79,25 +80,25 @@ class EmployeesDetailsScreen extends StatelessWidget {
                         hasJustIcon: true,
                         iconColor: AppColors.primary,
                         isCircular: true,
-                        icon: CupertinoIcons.down_arrow,
+                        icon: AppIcons.swapIcon,
                       ),
-                      Gap(6),
+                      Gap(8),
                       CustomOutlinedButton(
                         onPressed: () {},
                         isLarge: isLarge,
                         hasJustIcon: true,
                         iconColor: AppColors.primary,
                         isCircular: true,
-                        icon: Icons.mode_edit_outline_sharp,
+                        icon: AppIcons.editIcon,
                       ),
-                      Gap(6),
+                      Gap(8),
                       CustomOutlinedButton(
                         onPressed: () {},
                         isLarge: isLarge,
                         hasJustIcon: true,
                         iconColor: AppColors.red,
                         isCircular: true,
-                        icon: Icons.delete_outline,
+                        icon: AppIcons.deleteIcon,
                       )
                     ],
                   ),

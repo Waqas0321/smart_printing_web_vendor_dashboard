@@ -69,14 +69,14 @@ class OrdersScreen extends StatelessWidget {
                       CustomContainerButton(
                         isLarge: isLarge,
                         onPress: () {},
-                        leftIcon: Icons.report_outlined,
+                        leftIcon: AppIcons.reportIcon,
                         hasRightIcon: false,
                         text: "Report",
                       ),
                       Gap(6),
                       CustomContainerButton(
                         isLarge: isLarge,
-                        leftIcon: Icons.login_rounded,
+                        leftIcon: AppIcons.downloadIcon,
                         text: "Export",
                         onPress: () {},
                         hasRightIcon: false,
@@ -84,7 +84,7 @@ class OrdersScreen extends StatelessWidget {
                       Gap(6),
                       CustomContainerButton(
                         isLarge: isLarge,
-                        leftIcon: Icons.add_box_outlined,
+                        leftIcon: AppIcons.addOutlineIcon,
                         onPress: () {
                           ordersController.selectedIndex.value = 1;
                         },
@@ -188,7 +188,7 @@ class OrdersScreen extends StatelessWidget {
                         hasJustIcon: true,
                         iconColor: AppColors.primary,
                         isCircular: true,
-                        icon: CupertinoIcons.down_arrow,
+                        icon: AppIcons.swapIcon,
                       ),
                       Gap(8),
                       CustomOutlinedButton(
@@ -197,7 +197,7 @@ class OrdersScreen extends StatelessWidget {
                         hasJustIcon: true,
                         iconColor: AppColors.primary,
                         isCircular: true,
-                        icon: Icons.mode_edit_outline_sharp,
+                        icon: AppIcons.editIcon,
                       ),
                       Gap(8),
                       CustomOutlinedButton(
@@ -206,7 +206,7 @@ class OrdersScreen extends StatelessWidget {
                         hasJustIcon: true,
                         iconColor: AppColors.red,
                         isCircular: true,
-                        icon: Icons.delete_outline,
+                        icon: AppIcons.deleteIcon,
                       )
                     ],
                   ),
@@ -350,22 +350,27 @@ class OrdersScreen extends StatelessWidget {
                                       fontSize: 12,
                                       textColor: AppColors.brown,
                                     ),
-                                    SizedBox(
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 13,
-                                            backgroundImage: AssetImage(AppImages.profileImage),
-                                          ),
-                                          Gap(4),
-                                          CustomTextWidget(
-                                            text: "Dummy",
-                                            fontWeight: FontWeight.w800,
-                                            fontSize: 12,
-                                            textColor: AppColors.black,
-                                          ),
-                                        ],
+                                    GestureDetector(
+                                      onTap:() {
+                                        ordersController.selectedIndex.value = 2;
+                                      },
+                                      child: SizedBox(
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 13,
+                                              backgroundImage: AssetImage(AppImages.profileImage),
+                                            ),
+                                            Gap(4),
+                                            CustomTextWidget(
+                                              text: "Dummy",
+                                              fontWeight: FontWeight.w800,
+                                              fontSize: 12,
+                                              textColor: AppColors.black,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                     CustomTextWidget(

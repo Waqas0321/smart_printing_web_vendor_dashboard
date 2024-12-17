@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import '../Utils/Const/appColors.dart';
 import 'custom_text_widget.dart';
 
@@ -10,8 +12,8 @@ class CustomContainerButton extends StatelessWidget {
     required this.text,
     required this.onPress,
     this.containerColor = AppColors.halfWhite2,
-    this.leftIcon = Icons.calendar_month_outlined,
-    this.rightIcon = Icons.keyboard_arrow_down,
+    this.leftIcon = AppIcons.downloadIcon,
+    this.rightIcon = AppIcons.downloadIcon,
     required this.isLarge,
     this.textColor = AppColors.brown
   });
@@ -21,8 +23,8 @@ class CustomContainerButton extends StatelessWidget {
   final VoidCallback onPress;
   final Color containerColor;
   final Color textColor;
-  final IconData leftIcon;
-  final IconData rightIcon;
+  final String leftIcon;
+  final String rightIcon;
   final bool isLarge;
 
   @override
@@ -35,10 +37,11 @@ class CustomContainerButton extends StatelessWidget {
             color: containerColor, borderRadius: BorderRadius.circular(6)),
         child: Row(
           children: [
-            Icon(
+            SvgPicture.asset(
               leftIcon,
               color: textColor,
-              size: 20,
+              height: 14,
+              width: 14,
             ),
             Gap(4),
           isLarge?  CustomTextWidget(
@@ -49,10 +52,12 @@ class CustomContainerButton extends StatelessWidget {
             ):SizedBox.shrink(),
             Gap(2),
             hasRightIcon
-                ? Icon(
-                    rightIcon,
-                    color: textColor,
-                  )
+                ? SvgPicture.asset(
+              rightIcon,
+              color: textColor,
+              height: 14,
+              width: 14,
+            )
                 : SizedBox.shrink(),
           ],
         ),

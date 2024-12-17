@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Processes/process_builder_controller.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Processes/processes_controller.dart';
+import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import 'package:smart_printing_web/App/Widgets/custom_divider.dart';
 import 'package:smart_printing_web/App/Widgets/custom_text_button.dart';
 import '../../../../Utils/Const/appColors.dart';
@@ -51,18 +52,17 @@ class ProcessBuilderScreen extends StatelessWidget {
                       Spacer(),
                       CustomContainerButton(
                         isLarge: isLarge,
-                        leftIcon: Icons.login_outlined,
+                        leftIcon: AppIcons.downloadIcon,
                         text: "Export",
                         hasRightIcon: false,
                         onPress: () {},
                       ),
                       Gap(6),
-                      CustomContainerButton(
-                        isLarge: isLarge,
-                        containerColor: AppColors.lightPrimary,
-                        leftIcon: Icons.add_box_outlined,
-                        text: "Process",
-                        hasRightIcon: false,
+                      CustomTextButton(
+                       color: AppColors.lightPrimary,
+                        hasBorder: false,
+                        textColor: AppColors.brown,
+                        text: "  Process  ",
                         onPress: () {
                           processesController.selectedIndexProcesses.value = 0;
                         },

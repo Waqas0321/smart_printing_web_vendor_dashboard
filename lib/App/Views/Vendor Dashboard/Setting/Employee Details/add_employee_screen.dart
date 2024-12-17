@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Employee%20Details/add%20_emloyee_controller.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Employee%20Details/emplyees_details_controller.dart';
+import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_images.dart';
 import 'package:smart_printing_web/App/Widgets/custom_text_button.dart';
 import 'package:smart_printing_web/App/Widgets/custom_textfield.dart';
@@ -51,7 +52,7 @@ class AddEmployeeScreen extends StatelessWidget {
                       Spacer(),
                       CustomContainerButton(
                         isLarge: isLarge,
-                        leftIcon: Icons.login_outlined,
+                        leftIcon: AppIcons.downloadIcon,
                         text: "Export",
                         hasRightIcon: false,
                         onPress: () {},

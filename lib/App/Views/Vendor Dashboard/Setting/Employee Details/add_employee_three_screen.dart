@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import '../../../../Controllers/Vendor Dashboard/Settings/Employee Details/add _emloyee_controller.dart';
 import '../../../../Controllers/Vendor Dashboard/Settings/Employee Details/emplyees_details_controller.dart';
 import '../../../../Utils/Const/appColors.dart';
@@ -49,7 +50,7 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                       Spacer(),
                       CustomContainerButton(
                         isLarge: isLarge,
-                        leftIcon: Icons.login_outlined,
+                        leftIcon: AppIcons.downloadIcon,
                         text: "Export",
                         hasRightIcon: false,
                         onPress: () {},
@@ -91,7 +92,7 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                                   Expanded(
                                     child: CustomPersmissionBox(
                                       title: "Provide Estimation",
-                                      icon: Icons.edit_note,
+                                      icon: AppIcons.documentOutlineIcon,
                                       isChecked:
                                           addEmployeeController.isChecked,
                                       onPress: (value) => addEmployeeController
@@ -102,7 +103,7 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                                   Gap(18),
                                   Expanded(
                                     child: CustomPersmissionBox(
-                                      icon: CupertinoIcons.lock,
+                                      icon: AppIcons.bagIcon,
                                       title: "Create Order",
                                       isChecked:
                                           addEmployeeController.isCheckedTwo,
@@ -118,7 +119,7 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: CustomPersmissionBox(
-                                      icon: Icons.edit,
+                                      icon: AppIcons.editIcon,
                                       title: "Edit Work flow",
                                       isChecked:
                                           addEmployeeController.isCheckedThree,
@@ -130,7 +131,7 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                                   Gap(18),
                                   Expanded(
                                     child: CustomPersmissionBox(
-                                      icon: CupertinoIcons.person_2,
+                                      icon: AppIcons.threeUsers,
                                       title: "Create Employees",
                                       isChecked:
                                           addEmployeeController.isCheckedFour,
@@ -146,7 +147,7 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: CustomPersmissionBox(
-                                      icon: CupertinoIcons.arrow_down_to_line,
+                                      icon: AppIcons.swapIcon,
                                       title: "Add Processes",
                                       isChecked:
                                           addEmployeeController.isCheckedFive,
@@ -158,7 +159,7 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                                   Gap(12),
                                   Expanded(
                                     child: CustomPersmissionBox(
-                                      icon: Icons.dashboard_rounded,
+                                      icon: AppIcons.dashboardOutlineIcon,
                                       title: "Machine Operator Dashboard",
                                       isChecked:
                                           addEmployeeController.isCheckedSix,

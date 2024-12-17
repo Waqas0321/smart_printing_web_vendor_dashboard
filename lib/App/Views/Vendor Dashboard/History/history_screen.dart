@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/history_controller.dart';
+import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import '../../../Services/calender_open.dart';
 import '../../../Utils/Const/appColors.dart';
 import '../../../Utils/Const/app_images.dart';
@@ -52,7 +53,10 @@ class HistoryScreen extends StatelessWidget {
                                 selectDateController.selectedDate.value;
                             return CustomContainerButton(
                               isLarge: isLarge,
+                              rightIcon: AppIcons.belowIcon,
                               text: DateFormat('yyyy-MM-dd').format(date),
+                              hasRightIcon: true,
+                              leftIcon: AppIcons.calendarIcon,
                               onPress: () {
                                 selectDateController
                                     .openCalendarDialog(context);
@@ -64,7 +68,7 @@ class HistoryScreen extends StatelessWidget {
                       Spacer(),
                       CustomContainerButton(
                         isLarge: isLarge,
-                        leftIcon: Icons.login_rounded,
+                        leftIcon: AppIcons.downloadIcon,
                         text: "Export",
                         onPress: () {},
                         hasRightIcon: false,
@@ -72,7 +76,7 @@ class HistoryScreen extends StatelessWidget {
                       Gap(6),
                       CustomContainerButton(
                         isLarge: isLarge,
-                        leftIcon: Icons.report_outlined,
+                        leftIcon: AppIcons.reportIcon,
                         onPress: () {},
                         text: "Report",
                         hasRightIcon: false,
@@ -146,7 +150,7 @@ class HistoryScreen extends StatelessWidget {
                         hasJustIcon: true,
                         iconColor: AppColors.red,
                         isCircular: true,
-                        icon: Icons.delete_outline,
+                        icon: AppIcons.deleteIcon,
                       )
                     ],
                   ),

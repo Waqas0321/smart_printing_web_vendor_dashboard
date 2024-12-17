@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Product_Details/product_service_info_controller.dart';
 import 'package:smart_printing_web/App/Utils/Const/appColors.dart';
+import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
 import 'package:smart_printing_web/App/Widgets/custom_divider.dart';
 import 'package:smart_printing_web/App/Widgets/custom_text_widget.dart';
@@ -53,8 +55,8 @@ class ProductServiceInfoScreen extends StatelessWidget {
                             color: AppColors.lightPrimary,
                           ),
                           child: Center(
-                            child: Icon(
-                              Icons.card_giftcard,
+                            child: SvgPicture.asset(
+                              AppIcons.inventoryIcon,
                               color: AppColors.brown,
                             ),
                           ),
@@ -104,8 +106,8 @@ class ProductServiceInfoScreen extends StatelessWidget {
                             color: AppColors.lightPrimary,
                           ),
                           child: Center(
-                            child: Icon(
-                              Icons.print,
+                            child:  SvgPicture.asset(
+                              AppIcons.servicesIcon,
                               color: AppColors.brown,
                             ),
                           ),

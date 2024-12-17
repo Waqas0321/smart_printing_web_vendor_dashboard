@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_printing_web/App/Utils/Const/appColors.dart';
+import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import 'package:smart_printing_web/App/Widgets/custom_text_widget.dart';
 
 class SidebarItem extends StatelessWidget {
-  final IconData icon;
+  final String icon;
   final String label;
   final int index;
   final bool isSelected;
   final VoidCallback onTap;
   final bool isLarge;
+  final String iconTwo;
 
   SidebarItem({
     required this.icon,
@@ -17,6 +20,7 @@ class SidebarItem extends StatelessWidget {
     required this.isSelected,
     required this.onTap,
     required this.isLarge,
+    this.iconTwo = AppIcons.dashboardFilledIcon,
   });
 
   @override
@@ -34,10 +38,11 @@ class SidebarItem extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
-                icon,
+              SvgPicture.asset(
+                isSelected?iconTwo: icon,
                 color: isSelected ? AppColors.black : AppColors.white,
-                size: 22,
+                height: 18,
+                width: 18,
               ),
               const SizedBox(width: 8), // Space between icon and text
               if (isLarge)
