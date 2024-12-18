@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/orders_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Orders/orders_controller.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_images.dart';
 import '../../../Services/calender_open.dart';
 import '../../../Utils/Const/appColors.dart';

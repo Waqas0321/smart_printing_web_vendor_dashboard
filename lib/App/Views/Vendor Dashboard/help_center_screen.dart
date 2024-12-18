@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/help_center_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Help/help_center_controller.dart';
 class HelpCenterScreen extends StatelessWidget {
   const HelpCenterScreen({super.key});
 

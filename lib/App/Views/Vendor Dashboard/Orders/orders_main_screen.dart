@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/orders_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Orders/orders_controller.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Orders/create_order_screen.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Orders/order_details_screen.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Orders/workflow_screen.dart';

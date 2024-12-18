@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/overview_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/OverView/overview_controller.dart';
 import 'package:smart_printing_web/App/Utils/Const/appColors.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
 import 'package:smart_printing_web/App/Widgets/custom_pagination_class.dart';
 import 'package:smart_printing_web/App/Widgets/custom_textfield.dart';
 import '../../Widgets/custom_chart.dart';
+import '../../Widgets/custom_chart_two.dart';
 import '../../Widgets/custom_divider.dart';
 import '../../Widgets/custom_overview_container.dart';
 import '../../Widgets/custom_text_widget.dart';
@@ -80,15 +81,9 @@ class OverviewScreen extends StatelessWidget {
                                 Row(
                                   children: [
                                     Expanded(
-                                      flex: 2,
+                                      flex:2,
                                       child: CustomChart(
                                         overviewController: overviewController,
-                                        bloodGlucoseData:
-                                            overviewController.bloodGlucoseData,
-                                        bloodPressureData: overviewController
-                                            .bloodPressureData,
-                                        temperatureData:
-                                            overviewController.temperatureData,
                                         width:
                                             AppSizes().getWidthPercentage(60),
                                         height:
@@ -97,20 +92,18 @@ class OverviewScreen extends StatelessWidget {
                                     ),
                                     Gap(12),
                                     Expanded(
-                                      flex: 1,
-                                      child: CustomChart(
+                                      flex:1,
+                                      child: CustomChartTwo(
                                         overviewController: overviewController,
-                                        hasOneLine: true,
-                                        singleLineList: overviewController
-                                            .bloodPressureData,
                                         width:
-                                            AppSizes().getWidthPercentage(20),
+                                        AppSizes().getWidthPercentage(40),
                                         height:
-                                            AppSizes().getHeightPercentage(55),
+                                        AppSizes().getHeightPercentage(55),
                                       ),
                                     ),
                                   ],
                                 ),
+                                Gap(12),
                               ],
                             ),
                           ),
@@ -151,21 +144,12 @@ class OverviewScreen extends StatelessWidget {
                                 children: [
                                   CustomChart(
                                     overviewController: overviewController,
-                                    bloodGlucoseData:
-                                        overviewController.bloodGlucoseData,
-                                    bloodPressureData:
-                                        overviewController.bloodPressureData,
-                                    temperatureData:
-                                        overviewController.temperatureData,
                                     width: AppSizes().getWidthPercentage(90),
                                     height: AppSizes().getHeightPercentage(55),
                                   ),
                                   Gap(12),
-                                  CustomChart(
-                                    hasOneLine: true,
+                                  CustomChartTwo(
                                     overviewController: overviewController,
-                                    singleLineList:
-                                        overviewController.temperatureData,
                                     width: AppSizes().getWidthPercentage(90),
                                     height: AppSizes().getHeightPercentage(55),
                                   ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/history_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/History/history_controller.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import '../../../Services/calender_open.dart';
 import '../../../Utils/Const/appColors.dart';

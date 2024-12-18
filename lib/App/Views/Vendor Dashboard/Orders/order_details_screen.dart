@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/orders_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Orders/orders_controller.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_images.dart';
 import 'package:smart_printing_web/App/Widgets/custom_divider.dart';

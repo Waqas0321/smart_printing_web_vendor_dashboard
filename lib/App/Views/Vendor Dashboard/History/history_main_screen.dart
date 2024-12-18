@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/history_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/History/history_controller.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/History/history_screen.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Orders/workflow_screen.dart';
 import '../../../Utils/Const/app_sizes.dart';
