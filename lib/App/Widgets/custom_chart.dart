@@ -40,135 +40,138 @@ class CustomChart extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 45,
-                child: CustomTextWidget(
-                  text: 'Revenue Report',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18,
-                  textColor: AppColors.black,
-                ),
-              ),
-              Gap(24),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        height: 12,
-                        width: 12,
-                        color: AppColors.blue,
-                      ),
-                      Gap(4),
-                      CustomTextWidget(
-                        text: 'Earnings',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 10,
-                        textColor: AppColors.brown,
-                      ),
-                    ],
-                  ),
-                  Gap(4),
-                  CustomTextWidget(
-                    text: '3,345.78k',
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 45,
+                  child: CustomTextWidget(
+                    text: 'Revenue Report',
                     fontWeight: FontWeight.w600,
-                    fontSize: 15,
+                    fontSize: 18,
                     textColor: AppColors.black,
-                  ),
-                ],
-              ),
-              Gap(12),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        height: 12,
-                        width: 12,
-                        color: AppColors.orange,
-                      ),
-                      Gap(4),
-                      CustomTextWidget(
-                        text: 'Invested',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 10,
-                        textColor: AppColors.brown,
-                      ),
-                    ],
-                  ),
-                  Gap(4),
-                  CustomTextWidget(
-                    text: '3,345.78k',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 15,
-                    textColor: AppColors.black,
-                  ),
-                ],
-              ),
-              Gap(12),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        height: 12,
-                        width: 12,
-                        color: AppColors.red,
-                      ),
-                      Gap(4),
-                      CustomTextWidget(
-                        text: 'Expenses',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 10,
-                        textColor: AppColors.brown,
-                      ),
-                    ],
-                  ),
-                  Gap(4),
-                  CustomTextWidget(
-                    text: '3,345.78k',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 15,
-                    textColor: AppColors.black,
-                  ),
-                ],
-              ),
-              Gap(AppSizes().getWidthPercentage(5)),
-              Obx(
-                    () => Container(
-                      height: 35,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<int>(
-                      value: overviewController!.selectedMonths.value,
-                      items: [3, 6, 9, 12]
-                          .map((value) => DropdownMenuItem(
-                        value: value,
-                        child: Text('$value Months'),
-                      ))
-                          .toList(),
-                      onChanged: (value) {
-                        overviewController!.selectedMonths.value = value!;
-                      },
-                    ),
                   ),
                 ),
-              ),
-            ],
+                Gap(24),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          height: 12,
+                          width: 12,
+                          color: AppColors.blue,
+                        ),
+                        Gap(4),
+                        CustomTextWidget(
+                          text: 'Earnings',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 10,
+                          textColor: AppColors.brown,
+                        ),
+                      ],
+                    ),
+                    Gap(4),
+                    CustomTextWidget(
+                      text: '3,345.78k',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 15,
+                      textColor: AppColors.black,
+                    ),
+                  ],
+                ),
+                Gap(12),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          height: 12,
+                          width: 12,
+                          color: AppColors.orange,
+                        ),
+                        Gap(4),
+                        CustomTextWidget(
+                          text: 'Invested',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 10,
+                          textColor: AppColors.brown,
+                        ),
+                      ],
+                    ),
+                    Gap(4),
+                    CustomTextWidget(
+                      text: '3,345.78k',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 15,
+                      textColor: AppColors.black,
+                    ),
+                  ],
+                ),
+                Gap(12),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          height: 12,
+                          width: 12,
+                          color: AppColors.red,
+                        ),
+                        Gap(4),
+                        CustomTextWidget(
+                          text: 'Expenses',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 10,
+                          textColor: AppColors.brown,
+                        ),
+                      ],
+                    ),
+                    Gap(4),
+                    CustomTextWidget(
+                      text: '3,345.78k',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 15,
+                      textColor: AppColors.black,
+                    ),
+                  ],
+                ),
+                Gap(AppSizes().getWidthPercentage(8)),
+                Obx(
+                      () => Container(
+                        height: 35,
+                                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                                        decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                                        ),
+                                        child: DropdownButtonHideUnderline(
+                      child: DropdownButton<int>(
+                        value: overviewController!.selectedMonths.value,
+                        items: [3, 6, 9, 12]
+                            .map((value) => DropdownMenuItem(
+                          value: value,
+                          child: Text('$value Months'),
+                        ))
+                            .toList(),
+                        onChanged: (value) {
+                          overviewController!.selectedMonths.value = value!;
+                        },
+                      ),
+                                        ),
+                                      ),
+                ),
+              ],
+            ),
           ),
           Gap(18),
           Expanded(

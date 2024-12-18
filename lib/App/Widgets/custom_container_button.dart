@@ -32,7 +32,7 @@ class CustomContainerButton extends StatelessWidget {
     return InkWell(
       onTap: onPress,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 4, horizontal: 6),
+        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
         decoration: BoxDecoration(
             color: containerColor, borderRadius: BorderRadius.circular(6)),
         child: Row(
