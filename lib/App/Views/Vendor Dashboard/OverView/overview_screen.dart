@@ -7,11 +7,11 @@ import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
 import 'package:smart_printing_web/App/Widgets/custom_pagination_class.dart';
 import 'package:smart_printing_web/App/Widgets/custom_textfield.dart';
-import '../../Widgets/custom_chart.dart';
-import '../../Widgets/custom_chart_two.dart';
-import '../../Widgets/custom_divider.dart';
-import '../../Widgets/custom_overview_container.dart';
-import '../../Widgets/custom_text_widget.dart';
+import '../../../Widgets/custom_chart.dart';
+import '../../../Widgets/custom_chart_two.dart';
+import '../../../Widgets/custom_divider.dart';
+import '../../../Widgets/custom_overview_container.dart';
+import '../../../Widgets/custom_text_widget.dart';
 
 class OverviewScreen extends StatelessWidget {
   const OverviewScreen({super.key});

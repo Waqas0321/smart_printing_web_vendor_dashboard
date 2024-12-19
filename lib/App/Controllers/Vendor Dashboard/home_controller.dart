@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Estimation/estimation_main_screen.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/History/history_main_screen.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Orders/orders_main_screen.dart';
-import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/help_center_screen.dart';
+import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Help%20Center/help_center_screen.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/setting_main_screen.dart';
 import '../../Views/Vendor Dashboard/Estimation/estimation_screen.dart';
 import '../../Views/Vendor Dashboard/History/history_screen.dart';
 import '../../Views/Vendor Dashboard/Orders/orders_screen.dart';
-import '../../Views/Vendor Dashboard/overview_screen.dart';
+import '../../Views/Vendor Dashboard/OverView/overview_screen.dart';
 
 class HomeController extends GetxController{
   var selectedIndex = 0.obs;
