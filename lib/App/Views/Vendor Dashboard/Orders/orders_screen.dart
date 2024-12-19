@@ -56,6 +56,9 @@ class OrdersScreen extends StatelessWidget {
                                 selectDateController.selectedDate.value;
                             return CustomContainerButton(
                               isLarge: isLarge,
+                              rightIcon: AppIcons.belowIcon,
+                              hasRightIcon: true,
+                              leftIcon: AppIcons.calendarIcon,
                               text: DateFormat('yyyy-MM-dd').format(date),
                               onPress: () {
                                 selectDateController
