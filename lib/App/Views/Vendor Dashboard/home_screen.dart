@@ -136,9 +136,12 @@ class HomeScreen extends StatelessWidget {
                             );
                           }),
                           Gap(12),
-                          Image(
-                            image: AssetImage(AppIcons.sidebarIcon),
-                            width: AppSizes().getWidthPercentage(8.3),
+                          GestureDetector(
+                            onTap: () => homeController.openWhatsAppChat("+923216548001"),
+                            child: Image(
+                              image: AssetImage(AppIcons.sidebarIcon),
+                              width: AppSizes().getWidthPercentage(8.3),
+                            ),
                           ),
                           CustomOutlinedButton(
                             haveHoverEffect: true,
