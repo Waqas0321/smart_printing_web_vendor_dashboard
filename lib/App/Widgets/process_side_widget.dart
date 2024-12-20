@@ -103,7 +103,7 @@ class ProcessSideScreen extends StatelessWidget {
                           text: "Lamination",
                           fontSize: 9,
                         )),
-                    Gap(50),
+                    Gap(90),
                     Container(
                         padding: EdgeInsets.all(4),
                         decoration: BoxDecoration(

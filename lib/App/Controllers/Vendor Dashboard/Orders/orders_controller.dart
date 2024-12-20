@@ -27,7 +27,7 @@ class OrdersController extends GetxController{
   // Navigations
   RxInt selectedIndex = 0.obs;
   RxBool otherScreen = false.obs;
-  //check box
+  //check box list and variables
   List<RxBool> boolList = List.generate(10, (_) => false.obs);
 
   void toggleCheckbox(int index, bool? value) {

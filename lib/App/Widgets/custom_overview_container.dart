@@ -84,17 +84,15 @@ class CustomOverViewContainer extends StatelessWidget {
                     ? AppSizes().getWidthPercentage(fourInOneLine ? 0 : inSetting?4: 6)
                     : AppSizes().getWidthPercentage(25)),
               ),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.only(left: 8),
-                  padding: EdgeInsets.all(9),
-                  decoration: BoxDecoration(
-                      color: subContainerColor.withOpacity(0.3),
-                      borderRadius: BorderRadius.circular(6)),
-                  child: SvgPicture.asset(
-                    iconPath,
-                    color: subContainerColor,
-                  ),
+              Container(
+                margin: EdgeInsets.only(left: 8),
+                padding: EdgeInsets.all(9),
+                decoration: BoxDecoration(
+                    color: subContainerColor.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(6)),
+                child: SvgPicture.asset(
+                  iconPath,
+                  color: subContainerColor,
                 ),
               )
             ],
