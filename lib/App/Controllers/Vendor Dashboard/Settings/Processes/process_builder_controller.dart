@@ -1,15 +1,37 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import '../../../../Utils/Const/appColors.dart';
+import '../../../../Utils/Const/app_sizes.dart';
+import '../../../../Views/Vendor Dashboard/Setting/Processes/field_generator_screen.dart';
 
 class ProcessBuilderController extends GetxController{
-  TextEditingController lengthController = TextEditingController();
-  RxBool isExpanded = false.obs;
 
-  var selectedType1 = "Type 1".obs;
-  var selectedType2 = "Type 1".obs;
+  void openFieldGeneratorScreen(BuildContext context) {
+    OverlayEntry? overlayEntry;
 
-  void expandedFunction() {
-    isExpanded.value = !isExpanded.value;
+    overlayEntry = OverlayEntry(
+      builder: (context) => Stack(
+        children: [
+          GestureDetector(
+            onTap: () {
+              overlayEntry?.remove();
+            },
+            child: Container(
+              color: AppColors.black.withOpacity(0.3),
+            ),
+          ),
+          Positioned(
+            right: 0,
+            top: 0,
+            bottom: 0,
+            width: AppSizes().getWidthPercentage(75),
+            child: FieldGeneratorScreen(overlayEntry: overlayEntry,),
+          ),
+        ],
+      ),
+    );
+
+    Navigator.of(context).overlay?.insert(overlayEntry);
   }
 
 }
