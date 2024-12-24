@@ -262,14 +262,15 @@ class OverviewScreen extends StatelessWidget {
                           ),
                         ),
                         Gap(12),
-                        ListView.separated(
-                          itemCount: overviewController.boolList.length,
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return Table(
-                              defaultVerticalAlignment:
-                                  TableCellVerticalAlignment.middle,
+                      ListView.separated(
+                        itemCount: overviewController.boolList.length,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true, // Ensures proper layout within a scrollable parent
+                        itemBuilder: (context, index) {
+                          return ConstrainedBox(
+                            constraints: BoxConstraints(minHeight: 50), // Adds a minimum height
+                            child: Table(
+                              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                               columnWidths: const <int, TableColumnWidth>{
                                 0: FixedColumnWidth(10), // Checkbox column
                                 1: FlexColumnWidth(1),
@@ -282,12 +283,10 @@ class OverviewScreen extends StatelessWidget {
                                 TableRow(
                                   children: [
                                     Obx(
-                                      () => Checkbox(
-                                        value: overviewController
-                                            .boolList[index].value,
+                                          () => Checkbox(
+                                        value: overviewController.boolList[index].value,
                                         onChanged: (value) {
-                                          overviewController.toggleCheckbox(
-                                              index, value);
+                                          overviewController.toggleCheckbox(index, value);
                                         },
                                         activeColor: AppColors.lightPrimary,
                                         checkColor: AppColors.tertiary,
@@ -331,13 +330,14 @@ class OverviewScreen extends StatelessWidget {
                                   ],
                                 ),
                               ],
-                            );
-                          },
-                          separatorBuilder: (BuildContext context, int index) {
-                            return CustomDivider();
-                          },
-                        ),
-                        Gap(18),
+                            ),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return CustomDivider();
+                        },
+                      ),
+                      Gap(18),
                         CustomPaginationClass(),
                         Gap(18)
                       ],

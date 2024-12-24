@@ -51,7 +51,7 @@ class CustomOverViewContainer extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -78,11 +78,6 @@ class CustomOverViewContainer extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
-              Expanded(
-                child: Gap(isLarge
-                    ? AppSizes().getWidthPercentage(fourInOneLine ? 0 : inSetting?4: 6)
-                    : AppSizes().getWidthPercentage(25)),
               ),
               Container(
                 margin: EdgeInsets.only(left: 8),

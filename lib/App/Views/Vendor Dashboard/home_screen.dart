@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                               label: "Overview",
                               index: 0,
                               isSelected:
-                                  homeController.selectedIndex.value == 0,
+                              homeController.selectedIndex.value == 0,
                               onTap: () => homeController.onSidebarItemTap(0),
                             );
                           }),
@@ -63,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                               label: "Estimation",
                               index: 1,
                               isSelected:
-                                  homeController.selectedIndex.value == 1,
+                              homeController.selectedIndex.value == 1,
                               onTap: () => homeController.onSidebarItemTap(1),
                             );
                           }),
@@ -75,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                               label: "Orders",
                               index: 2,
                               isSelected:
-                                  homeController.selectedIndex.value == 2,
+                              homeController.selectedIndex.value == 2,
                               onTap: () => homeController.onSidebarItemTap(2),
                             );
                           }),
@@ -87,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                               label: "History",
                               index: 3,
                               isSelected:
-                                  homeController.selectedIndex.value == 3,
+                              homeController.selectedIndex.value == 3,
                               onTap: () => homeController.onSidebarItemTap(3),
                             );
                           }),
@@ -119,7 +119,7 @@ class HomeScreen extends StatelessWidget {
                               label: "Settings",
                               index: 4,
                               isSelected:
-                                  homeController.selectedIndex.value == 4,
+                              homeController.selectedIndex.value == 4,
                               onTap: () => homeController.onSidebarItemTap(4),
                             );
                           }),
@@ -131,7 +131,7 @@ class HomeScreen extends StatelessWidget {
                               label: "Help Center",
                               index: 5,
                               isSelected:
-                                  homeController.selectedIndex.value == 5,
+                              homeController.selectedIndex.value == 5,
                               onTap: () => homeController.onSidebarItemTap(5),
                             );
                           }),
