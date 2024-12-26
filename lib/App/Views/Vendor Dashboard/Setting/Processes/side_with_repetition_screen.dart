@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Processes/side_with_repetition_controller.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
-import 'package:smart_printing_web/App/Widgets/custom_divider.dart';
 import 'package:smart_printing_web/App/Widgets/custom_edit_button.dart';
 import 'package:smart_printing_web/App/Widgets/custom_text_button.dart';
 import 'package:smart_printing_web/App/Widgets/custom_textfield.dart';
 import '../../../../Controllers/Vendor Dashboard/Settings/Processes/field_generator_controller.dart';
 import '../../../../Utils/Const/appColors.dart';
+import '../../../../Widgets/custom_divider.dart';
 import '../../../../Widgets/custom_text_widget.dart';
 
 class SideWithRepetitionScreen extends StatelessWidget {
@@ -18,6 +19,7 @@ class SideWithRepetitionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fieldGeneratorController = Get.put(FieldGeneratorController());
+    final sideWithRepetitionController = Get.put(SideWithRepetitionController());
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
@@ -82,7 +84,10 @@ class SideWithRepetitionScreen extends StatelessWidget {
                                   fontSize: 15,
                                   hasBorder: false,
                                   textColor: AppColors.brown,
-                                  onPress: () {},
+                                  onPress: () {
+                                    sideWithRepetitionController.handleSubmit();
+                                    overlayEntry?.remove();
+                                  },
                                 )
                               ],
                             ),
@@ -121,7 +126,7 @@ class SideWithRepetitionScreen extends StatelessWidget {
                                           return Wrap(
                                             spacing: 8.0,
                                             runSpacing: 8.0,
-                                            children: fieldGeneratorController
+                                            children: sideWithRepetitionController
                                                 .sideWithRepetition
                                                 .asMap()
                                                 .entries
@@ -152,7 +157,7 @@ class SideWithRepetitionScreen extends StatelessWidget {
                                                   color: AppColors.brown,
                                                 ),
                                                 onDeleted: () {
-                                                  fieldGeneratorController
+                                                  sideWithRepetitionController
                                                       .removeSideWithRepetition(
                                                       entry.key);
                                                 },
@@ -188,7 +193,7 @@ class SideWithRepetitionScreen extends StatelessWidget {
                                                 height: 34,
                                                 child: CustomTextField(
                                                   controller:
-                                                  fieldGeneratorController
+                                                  sideWithRepetitionController
                                                       .sidesController,
                                                   hintText:
                                                   "No.",
@@ -206,8 +211,9 @@ class SideWithRepetitionScreen extends StatelessWidget {
                                               hasBorder: true,
                                               textColor: AppColors.brown,
                                               onPress: () {
-                                                fieldGeneratorController
+                                                sideWithRepetitionController
                                                     .addSideWithRepetition();
+                                                sideWithRepetitionController.onInit();
                                               },
                                             )
                                           ],
@@ -243,7 +249,7 @@ class SideWithRepetitionScreen extends StatelessWidget {
                                                       height: 34,
                                                       child: CustomTextField(
                                                         controller:
-                                                        fieldGeneratorController
+                                                        sideWithRepetitionController
                                                             .repetitionSideOneController,
                                                         hintText:
                                                         "No.",
@@ -285,7 +291,7 @@ class SideWithRepetitionScreen extends StatelessWidget {
                                                       height: 34,
                                                       child: CustomTextField(
                                                         controller:
-                                                        fieldGeneratorController
+                                                        sideWithRepetitionController
                                                             .repetitionMultiplierController,
                                                         hintText:
                                                         "No.",
@@ -339,22 +345,17 @@ class SideWithRepetitionScreen extends StatelessWidget {
                             Obx(() {
                               return ListView.separated(
                                 shrinkWrap: true,
-                                itemCount: fieldGeneratorController
-                                    .sideWithRepetition.length,
+                                itemCount: sideWithRepetitionController.sideWithRepetition.length,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8),
+                                    padding: const EdgeInsets.symmetric(vertical: 8),
                                     child: Column(
                                       children: [
                                         Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            SizedBox(
-                                              width: 50,
-                                            ),
+                                            SizedBox(width: 50),
                                             CustomTextButton(
                                               color: AppColors.lightPrimary,
                                               text: "Direct Timer",
@@ -370,13 +371,12 @@ class SideWithRepetitionScreen extends StatelessWidget {
                                               textColor: AppColors.brown,
                                               onPress: () {},
                                             ),
-                                            Gap(12)
+                                            Gap(12),
                                           ],
                                         ),
                                         Gap(6),
                                         Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             CustomTextWidget(
                                               text: "Option ${index + 1}",
@@ -389,18 +389,23 @@ class SideWithRepetitionScreen extends StatelessWidget {
                                               child: Row(
                                                 children: [
                                                   SizedBox(
-                                                      width: 40,
-                                                      height: 35,
-                                                      child: CustomTextField(
-                                                          contentSize: 14,
-                                                          borderColor: AppColors
-                                                              .lightPrimary,
-                                                          borderRadius: 4,
-                                                          hintFontSize: 14,
-                                                          hintText: "00",
-                                                          controller:
-                                                          fieldGeneratorController
-                                                              .directTier1Controller)),
+                                                    width: 40,
+                                                    height: 35,
+                                                    child: CustomTextField(
+                                                      contentSize: 14,
+                                                      borderColor: AppColors.lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 14,
+                                                      hintText: "00",
+                                                      controller: sideWithRepetitionController
+                                                          .directTier1Controllers[index],
+                                                      onChanged: (value) {
+                                                        if (value.length == 2) {
+                                                          FocusScope.of(context).nextFocus();
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
                                                   Gap(2),
                                                   CustomTextWidget(
                                                     text: ":",
@@ -410,18 +415,23 @@ class SideWithRepetitionScreen extends StatelessWidget {
                                                   ),
                                                   Gap(2),
                                                   SizedBox(
-                                                      width: 40,
-                                                      height: 35,
-                                                      child: CustomTextField(
-                                                          contentSize: 14,
-                                                          borderColor: AppColors
-                                                              .lightPrimary,
-                                                          borderRadius: 4,
-                                                          hintFontSize: 14,
-                                                          hintText: "05",
-                                                          controller:
-                                                          fieldGeneratorController
-                                                              .directTier2Controller)),
+                                                    width: 40,
+                                                    height: 35,
+                                                    child: CustomTextField(
+                                                      contentSize: 14,
+                                                      borderColor: AppColors.lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 14,
+                                                      hintText: "05",
+                                                      controller: sideWithRepetitionController
+                                                          .directTier2Controllers[index],
+                                                      onChanged: (value) {
+                                                        if (value.length == 2) {
+                                                          FocusScope.of(context).nextFocus();
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
                                                   Gap(2),
                                                   CustomTextWidget(
                                                     text: ":",
@@ -431,18 +441,23 @@ class SideWithRepetitionScreen extends StatelessWidget {
                                                   ),
                                                   Gap(2),
                                                   SizedBox(
-                                                      width: 40,
-                                                      height: 35,
-                                                      child: CustomTextField(
-                                                          contentSize: 14,
-                                                          borderColor: AppColors
-                                                              .lightPrimary,
-                                                          borderRadius: 4,
-                                                          hintFontSize: 14,
-                                                          hintText: "00",
-                                                          controller:
-                                                          fieldGeneratorController
-                                                              .directTier3Controller)),
+                                                    width: 40,
+                                                    height: 35,
+                                                    child: CustomTextField(
+                                                      contentSize: 14,
+                                                      borderColor: AppColors.lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 14,
+                                                      hintText: "00",
+                                                      controller: sideWithRepetitionController
+                                                          .directTier3Controllers[index],
+                                                      onChanged: (value) {
+                                                        if (value.length == 2) {
+                                                          FocusScope.of(context).unfocus();
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -457,18 +472,18 @@ class SideWithRepetitionScreen extends StatelessWidget {
                                               child: Row(
                                                 children: [
                                                   SizedBox(
-                                                      width: 40,
-                                                      height: 35,
-                                                      child: CustomTextField(
-                                                          contentSize: 14,
-                                                          borderColor: AppColors
-                                                              .lightPrimary,
-                                                          borderRadius: 4,
-                                                          hintFontSize: 14,
-                                                          hintText: "30",
-                                                          controller:
-                                                          fieldGeneratorController
-                                                              .percentController)),
+                                                    width: 40,
+                                                    height: 35,
+                                                    child: CustomTextField(
+                                                      contentSize: 14,
+                                                      borderColor: AppColors.lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 14,
+                                                      hintText: "30",
+                                                      controller: sideWithRepetitionController
+                                                          .percentControllers[index],
+                                                    ),
+                                                  ),
                                                   Gap(2),
                                                   CustomTextWidget(
                                                     text: "%",
@@ -487,21 +502,22 @@ class SideWithRepetitionScreen extends StatelessWidget {
                                                             child: ListTile(
                                                               leading: Radio<String>(
                                                                 value: "Increase",
-                                                                groupValue: fieldGeneratorController.selectedValue.value,
+                                                                groupValue: sideWithRepetitionController
+                                                                    .selectedValues[index].value,
                                                                 onChanged: (value) {
-                                                                  print(value);
                                                                   if (value != null) {
-                                                                    fieldGeneratorController.selectedValue.value = value;
+                                                                    sideWithRepetitionController
+                                                                        .selectedValues[index].value = value;
                                                                   }
                                                                 },
-                                                                activeColor: AppColors.lightPrimary, // Set active color
+                                                                activeColor: AppColors.lightPrimary,
                                                               ),
                                                               title: CustomTextWidget(
                                                                 text: "Increase",
                                                                 textColor: AppColors.black,
                                                                 fontSize: 10,
                                                               ),
-                                                              contentPadding: EdgeInsets.zero, // To align properly
+                                                              contentPadding: EdgeInsets.zero,
                                                             ),
                                                           );
                                                         }),
@@ -510,27 +526,28 @@ class SideWithRepetitionScreen extends StatelessWidget {
                                                             child: ListTile(
                                                               leading: Radio<String>(
                                                                 value: "Decrease",
-                                                                groupValue: fieldGeneratorController.selectedValue.value,
+                                                                groupValue: sideWithRepetitionController
+                                                                    .selectedValues[index].value,
                                                                 onChanged: (value) {
-                                                                  print(value);
                                                                   if (value != null) {
-                                                                    fieldGeneratorController.selectedValue.value = value;
+                                                                    sideWithRepetitionController
+                                                                        .selectedValues[index].value = value;
                                                                   }
                                                                 },
-                                                                activeColor: AppColors.lightPrimary, // Set active color
+                                                                activeColor: AppColors.lightPrimary,
                                                               ),
                                                               title: CustomTextWidget(
                                                                 text: "Decrease",
                                                                 textColor: AppColors.black,
                                                                 fontSize: 10,
                                                               ),
-                                                              contentPadding: EdgeInsets.zero, // To align properly
+                                                              contentPadding: EdgeInsets.zero,
                                                             ),
                                                           );
                                                         }),
                                                       ],
                                                     ),
-                                                  )
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -539,9 +556,12 @@ class SideWithRepetitionScreen extends StatelessWidget {
                                       ],
                                     ),
                                   );
-                                }, separatorBuilder: (BuildContext context, int index) { return CustomDivider(); },
+                                },
+                                separatorBuilder: (BuildContext context, int index) {
+                                  return CustomDivider();
+                                },
                               );
-                            }),
+                            })
                           ],
                         ),
                       )

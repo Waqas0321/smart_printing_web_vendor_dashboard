@@ -19,12 +19,13 @@ class CustomTextField extends StatefulWidget {
     this.maxLines = 1,
     this.hintFontSize = 18,
     this.borderColor =AppColors.tertiary,
-    this.contentSize = 18,
+    this.contentSize = 18, this.onChanged,
   });
 
   final String hintText;
   final TextEditingController controller;
   final bool isObsecure;
+  final Function(String)? onChanged;
   final bool isValidateFun;
   final String errorText;
   final bool isSuffixIcon;
@@ -54,6 +55,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       minLines: null,
+      onChanged: widget.onChanged,
       maxLines: widget.maxLines,
       controller: widget.controller,
       cursorColor: AppColors.lightPrimary,

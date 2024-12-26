@@ -8,4 +8,13 @@ class SideWithRepetitionModel {
     required this.repetitionOnSide1,
     required this.repetitionMultiplier,
   });
+
+  // Convert object to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      "sides": sides,
+      "repetitionOnSide1": repetitionOnSide1,
+      "repetitionMultiplier": repetitionMultiplier,
+    };
+  }
 }

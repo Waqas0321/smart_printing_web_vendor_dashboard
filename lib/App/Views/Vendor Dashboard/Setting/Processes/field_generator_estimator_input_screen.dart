@@ -68,6 +68,7 @@ class FieldGeneratorEstimatorInputValue extends StatelessWidget {
                                   onTap: () {
                                     fieldGeneratorController
                                         .navigateToScreen(item.title,context);
+                                    overlayEntry?.remove();
                                   },
                                   child: Column(
                                     crossAxisAlignment:
@@ -122,6 +123,7 @@ class FieldGeneratorEstimatorInputValue extends StatelessWidget {
                                   onTap: () {
                                     fieldGeneratorController
                                         .navigateToScreen(item.subtitle!,context);
+                                    overlayEntry?.remove();
                                   },
                                   child: Column(
                                     crossAxisAlignment:

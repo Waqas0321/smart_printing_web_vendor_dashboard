@@ -71,6 +71,7 @@ class FieldGeneratorScreen extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           fieldGeneratorController.openFieldGeneratorEstimatorInputScreen(context);
+                          overlayEntry?.remove();
                         },
                         child: Row(
                           mainAxisAlignment:

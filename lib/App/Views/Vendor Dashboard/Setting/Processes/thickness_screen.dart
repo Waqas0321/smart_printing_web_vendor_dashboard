@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Processes/thickness_controller.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
 import 'package:smart_printing_web/App/Widgets/custom_divider.dart';
 import 'package:smart_printing_web/App/Widgets/custom_edit_button.dart';
@@ -18,6 +19,7 @@ class ThicknessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fieldGeneratorController = Get.put(FieldGeneratorController());
+    final thicknessController = Get.put(ThicknessController());
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
@@ -82,7 +84,10 @@ class ThicknessScreen extends StatelessWidget {
                                   fontSize: 15,
                                   hasBorder: false,
                                   textColor: AppColors.brown,
-                                  onPress: () {},
+                                  onPress: () {
+                                    thicknessController.handleSubmit();
+                                    overlayEntry?.remove();
+                                  },
                                 )
                               ],
                             ),
@@ -140,7 +145,7 @@ class ThicknessScreen extends StatelessWidget {
                                           return Wrap(
                                             spacing: 8.0,
                                             runSpacing: 8.0,
-                                            children: fieldGeneratorController
+                                            children: thicknessController
                                                 .thickness
                                                 .asMap()
                                                 .entries
@@ -171,7 +176,7 @@ class ThicknessScreen extends StatelessWidget {
                                                   color: AppColors.brown,
                                                 ),
                                                 onDeleted: () {
-                                                  fieldGeneratorController
+                                                  thicknessController
                                                       .removeThickness(
                                                       entry.key);
                                                 },
@@ -188,7 +193,7 @@ class ThicknessScreen extends StatelessWidget {
                                                 height: 34,
                                                 child: CustomTextField(
                                                   controller:
-                                                  fieldGeneratorController
+                                                  thicknessController
                                                       .basicLevelController,
                                                   hintText:
                                                   "Basic level",
@@ -204,7 +209,7 @@ class ThicknessScreen extends StatelessWidget {
                                                 height: 34,
                                                 child: CustomTextField(
                                                   controller:
-                                                  fieldGeneratorController
+                                                  thicknessController
                                                       .mediumLevelController,
                                                   hintText:
                                                   "Medium level",
@@ -220,7 +225,7 @@ class ThicknessScreen extends StatelessWidget {
                                                 height: 34,
                                                 child: CustomTextField(
                                                   controller:
-                                                  fieldGeneratorController
+                                                  thicknessController
                                                       .heavyLevelController,
                                                   hintText:
                                                   "Heavy level",
@@ -239,8 +244,9 @@ class ThicknessScreen extends StatelessWidget {
                                               hasBorder: true,
                                               textColor: AppColors.brown,
                                               onPress: () {
-                                                fieldGeneratorController
+                                                thicknessController
                                                     .addThickness();
+                                                thicknessController.onInit();
                                               },
                                             )
                                           ],
@@ -283,22 +289,17 @@ class ThicknessScreen extends StatelessWidget {
                             Obx(() {
                               return ListView.separated(
                                 shrinkWrap: true,
-                                itemCount: fieldGeneratorController
-                                    .thickness.length,
+                                itemCount: thicknessController.thickness.length,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8),
+                                    padding: const EdgeInsets.symmetric(vertical: 8),
                                     child: Column(
                                       children: [
                                         Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            SizedBox(
-                                              width: 50,
-                                            ),
+                                            SizedBox(width: 50),
                                             CustomTextButton(
                                               color: AppColors.lightPrimary,
                                               text: "Direct Timer",
@@ -314,13 +315,12 @@ class ThicknessScreen extends StatelessWidget {
                                               textColor: AppColors.brown,
                                               onPress: () {},
                                             ),
-                                            Gap(12)
+                                            Gap(12),
                                           ],
                                         ),
                                         Gap(6),
                                         Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             CustomTextWidget(
                                               text: "Option ${index + 1}",
@@ -333,18 +333,23 @@ class ThicknessScreen extends StatelessWidget {
                                               child: Row(
                                                 children: [
                                                   SizedBox(
-                                                      width: 40,
-                                                      height: 35,
-                                                      child: CustomTextField(
-                                                          contentSize: 14,
-                                                          borderColor: AppColors
-                                                              .lightPrimary,
-                                                          borderRadius: 4,
-                                                          hintFontSize: 14,
-                                                          hintText: "00",
-                                                          controller:
-                                                          fieldGeneratorController
-                                                              .directTier1Controller)),
+                                                    width: 40,
+                                                    height: 35,
+                                                    child: CustomTextField(
+                                                      contentSize: 14,
+                                                      borderColor: AppColors.lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 14,
+                                                      hintText: "00",
+                                                      controller: thicknessController
+                                                          .directTier1Controllers[index],
+                                                      onChanged: (value) {
+                                                        if (value.length == 2) {
+                                                          FocusScope.of(context).nextFocus();
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
                                                   Gap(2),
                                                   CustomTextWidget(
                                                     text: ":",
@@ -354,18 +359,23 @@ class ThicknessScreen extends StatelessWidget {
                                                   ),
                                                   Gap(2),
                                                   SizedBox(
-                                                      width: 40,
-                                                      height: 35,
-                                                      child: CustomTextField(
-                                                          contentSize: 14,
-                                                          borderColor: AppColors
-                                                              .lightPrimary,
-                                                          borderRadius: 4,
-                                                          hintFontSize: 14,
-                                                          hintText: "05",
-                                                          controller:
-                                                          fieldGeneratorController
-                                                              .directTier2Controller)),
+                                                    width: 40,
+                                                    height: 35,
+                                                    child: CustomTextField(
+                                                      contentSize: 14,
+                                                      borderColor: AppColors.lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 14,
+                                                      hintText: "05",
+                                                      controller: thicknessController
+                                                          .directTier2Controllers[index],
+                                                      onChanged: (value) {
+                                                        if (value.length == 2) {
+                                                          FocusScope.of(context).nextFocus();
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
                                                   Gap(2),
                                                   CustomTextWidget(
                                                     text: ":",
@@ -375,18 +385,23 @@ class ThicknessScreen extends StatelessWidget {
                                                   ),
                                                   Gap(2),
                                                   SizedBox(
-                                                      width: 40,
-                                                      height: 35,
-                                                      child: CustomTextField(
-                                                          contentSize: 14,
-                                                          borderColor: AppColors
-                                                              .lightPrimary,
-                                                          borderRadius: 4,
-                                                          hintFontSize: 14,
-                                                          hintText: "00",
-                                                          controller:
-                                                          fieldGeneratorController
-                                                              .directTier3Controller)),
+                                                    width: 40,
+                                                    height: 35,
+                                                    child: CustomTextField(
+                                                      contentSize: 14,
+                                                      borderColor: AppColors.lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 14,
+                                                      hintText: "00",
+                                                      controller: thicknessController
+                                                          .directTier3Controllers[index],
+                                                      onChanged: (value) {
+                                                        if (value.length == 2) {
+                                                          FocusScope.of(context).unfocus();
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -401,18 +416,18 @@ class ThicknessScreen extends StatelessWidget {
                                               child: Row(
                                                 children: [
                                                   SizedBox(
-                                                      width: 40,
-                                                      height: 35,
-                                                      child: CustomTextField(
-                                                          contentSize: 14,
-                                                          borderColor: AppColors
-                                                              .lightPrimary,
-                                                          borderRadius: 4,
-                                                          hintFontSize: 14,
-                                                          hintText: "30",
-                                                          controller:
-                                                          fieldGeneratorController
-                                                              .percentController)),
+                                                    width: 40,
+                                                    height: 35,
+                                                    child: CustomTextField(
+                                                      contentSize: 14,
+                                                      borderColor: AppColors.lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 14,
+                                                      hintText: "30",
+                                                      controller: thicknessController
+                                                          .percentControllers[index],
+                                                    ),
+                                                  ),
                                                   Gap(2),
                                                   CustomTextWidget(
                                                     text: "%",
@@ -431,21 +446,22 @@ class ThicknessScreen extends StatelessWidget {
                                                             child: ListTile(
                                                               leading: Radio<String>(
                                                                 value: "Increase",
-                                                                groupValue: fieldGeneratorController.selectedValue.value,
+                                                                groupValue: thicknessController
+                                                                    .selectedValues[index].value,
                                                                 onChanged: (value) {
-                                                                  print(value);
                                                                   if (value != null) {
-                                                                    fieldGeneratorController.selectedValue.value = value;
+                                                                    thicknessController
+                                                                        .selectedValues[index].value = value;
                                                                   }
                                                                 },
-                                                                activeColor: AppColors.lightPrimary, // Set active color
+                                                                activeColor: AppColors.lightPrimary,
                                                               ),
                                                               title: CustomTextWidget(
                                                                 text: "Increase",
                                                                 textColor: AppColors.black,
                                                                 fontSize: 10,
                                                               ),
-                                                              contentPadding: EdgeInsets.zero, // To align properly
+                                                              contentPadding: EdgeInsets.zero,
                                                             ),
                                                           );
                                                         }),
@@ -454,27 +470,28 @@ class ThicknessScreen extends StatelessWidget {
                                                             child: ListTile(
                                                               leading: Radio<String>(
                                                                 value: "Decrease",
-                                                                groupValue: fieldGeneratorController.selectedValue.value,
+                                                                groupValue: thicknessController
+                                                                    .selectedValues[index].value,
                                                                 onChanged: (value) {
-                                                                  print(value);
                                                                   if (value != null) {
-                                                                    fieldGeneratorController.selectedValue.value = value;
+                                                                    thicknessController
+                                                                        .selectedValues[index].value = value;
                                                                   }
                                                                 },
-                                                                activeColor: AppColors.lightPrimary, // Set active color
+                                                                activeColor: AppColors.lightPrimary,
                                                               ),
                                                               title: CustomTextWidget(
                                                                 text: "Decrease",
                                                                 textColor: AppColors.black,
                                                                 fontSize: 10,
                                                               ),
-                                                              contentPadding: EdgeInsets.zero, // To align properly
+                                                              contentPadding: EdgeInsets.zero,
                                                             ),
                                                           );
                                                         }),
                                                       ],
                                                     ),
-                                                  )
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -483,9 +500,12 @@ class ThicknessScreen extends StatelessWidget {
                                       ],
                                     ),
                                   );
-                                }, separatorBuilder: (BuildContext context, int index) { return CustomDivider(); },
+                                },
+                                separatorBuilder: (BuildContext context, int index) {
+                                  return CustomDivider();
+                                },
                               );
-                            }),
+                            })
                           ],
                         ),
                       )
