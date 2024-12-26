@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
 import 'package:smart_printing_web/App/Widgets/custom_divider.dart';
-import 'package:smart_printing_web/App/Widgets/custom_text_button.dart';
 import '../../../../Controllers/Vendor Dashboard/Settings/Processes/field_generator_controller.dart';
 import '../../../../Utils/Const/appColors.dart';
 import '../../../../Widgets/custom_text_widget.dart';
@@ -68,7 +67,7 @@ class FieldGeneratorEstimatorInputValue extends StatelessWidget {
                                 return GestureDetector(
                                   onTap: () {
                                     fieldGeneratorController
-                                        .addSelectedPreMadeItem(item.title);
+                                        .navigateToScreen(item.title,context);
                                   },
                                   child: Column(
                                     crossAxisAlignment:
@@ -122,8 +121,7 @@ class FieldGeneratorEstimatorInputValue extends StatelessWidget {
                                 return GestureDetector(
                                   onTap: () {
                                     fieldGeneratorController
-                                        .addSelectedBaseCalculationItem(
-                                            item.title);
+                                        .navigateToScreen(item.subtitle!,context);
                                   },
                                   child: Column(
                                     crossAxisAlignment:
@@ -170,8 +168,6 @@ class FieldGeneratorEstimatorInputValue extends StatelessWidget {
                                     .estimatorInputValuesItems[index];
                                 return GestureDetector(
                                   onTap: () {
-                                    fieldGeneratorController
-                                        .addSelectedInputValuesItem(item.title);
                                   },
                                   child: Column(
                                     crossAxisAlignment:

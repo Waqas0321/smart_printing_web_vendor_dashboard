@@ -10,8 +10,8 @@ import '../../../../Controllers/Vendor Dashboard/Settings/Processes/field_genera
 import '../../../../Utils/Const/appColors.dart';
 import '../../../../Widgets/custom_text_widget.dart';
 
-class FieldGeneratorBasicCalculationScreen extends StatelessWidget {
-  FieldGeneratorBasicCalculationScreen({super.key, required this.overlayEntry});
+class SizeWithTimerScreen extends StatelessWidget {
+  SizeWithTimerScreen({super.key, required this.overlayEntry});
 
   OverlayEntry? overlayEntry;
 
@@ -98,7 +98,7 @@ class FieldGeneratorBasicCalculationScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   CustomTextWidget(
-                                    text: "Dropdown Menu with Timer Per Option",
+                                    text: "Dimension Box",
                                     fontSize: 15,
                                     fontWeight: FontWeight.w400,
                                     textColor: AppColors.brown,
@@ -107,10 +107,10 @@ class FieldGeneratorBasicCalculationScreen extends StatelessWidget {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       CustomTextWidget(
-                                        text: "Lamination Type",
+                                        text: "Dimension",
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600,
                                         textColor: AppColors.black,
@@ -129,40 +129,58 @@ class FieldGeneratorBasicCalculationScreen extends StatelessWidget {
                                         border: Border.all(
                                             width: 0.3, color: AppColors.brown),
                                         borderRadius:
-                                            BorderRadius.circular(12)),
+                                        BorderRadius.circular(12)),
                                     child: Column(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                      MainAxisAlignment.start,
                                       children: [
                                         Obx(() {
                                           return Wrap(
                                             spacing: 8.0,
                                             runSpacing: 8.0,
                                             children: fieldGeneratorController
-                                                .laminationTypes
+                                                .sizeWithTimer
                                                 .asMap()
                                                 .entries
                                                 .map(
                                                   (entry) => Chip(
-                                                    backgroundColor:
-                                                        AppColors.halfWhite2,
-                                                    label: CustomTextWidget(
-                                                      text: entry.value,
+                                                backgroundColor:
+                                                AppColors.halfWhite2,
+                                                label: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  children: [
+                                                    CustomTextWidget(
+                                                      text: "Length :${entry.value.length.toString()}",
                                                     ),
-                                                    deleteIcon: Icon(
-                                                      Icons.cancel,
-                                                      size: 18,
-                                                      color: AppColors.brown,
+                                                    Gap(4),
+                                                    CustomTextWidget(
+                                                      text: "Width :${entry.value.width.toString()}",
                                                     ),
-                                                    onDeleted: () {
-                                                      fieldGeneratorController
-                                                          .removeLaminationType(
-                                                              entry.key);
-                                                    },
-                                                  ),
-                                                )
+                                                    Gap(4),
+                                                    CustomTextWidget(
+                                                      text: "Height :${entry.value.height.toString()}",
+                                                    ),
+                                                    Gap(4),
+                                                    CustomTextWidget(
+                                                      text: "Measurement :${entry.value.measurement.toString()}",
+                                                    ),
+                                                  ],
+                                                ),
+                                                deleteIcon: Icon(
+                                                  Icons.cancel,
+                                                  size: 18,
+                                                  color: AppColors.brown,
+                                                ),
+                                                onDeleted: () {
+                                                  fieldGeneratorController
+                                                      .removeSizeWithTimer(
+                                                      entry.key);
+                                                },
+                                              ),
+                                            )
                                                 .toList(),
                                           );
                                         }),
@@ -174,18 +192,109 @@ class FieldGeneratorBasicCalculationScreen extends StatelessWidget {
                                                 height: 34,
                                                 child: CustomTextField(
                                                   controller:
-                                                      fieldGeneratorController
-                                                          .laminationTypeController,
+                                                  fieldGeneratorController
+                                                      .sBTLengthController,
                                                   hintText:
-                                                      "Enter lamination type",
+                                                  "Length",
                                                   hintFontSize: 14,
                                                   borderRadius: 6,
                                                   contentSize: 15,
                                                 ),
                                               ),
                                             ),
+                                           Gap(4),
+                                           CustomTextWidget(text: "X",fontSize: 18,),
+                                            Gap(4),
+                                            Expanded(
+                                              child: SizedBox(
+                                                height: 34,
+                                                child: CustomTextField(
+                                                  controller:
+                                                  fieldGeneratorController
+                                                      .sBTWidthController,
+                                                  hintText:
+                                                  "Width",
+                                                  hintFontSize: 14,
+                                                  borderRadius: 6,
+                                                  contentSize: 15,
+                                                ),
+                                              ),
+                                            ),
+                                            Gap(4),
+                                            CustomTextWidget(text: "X",fontSize: 18,),
+                                            Gap(4),
+                                            Expanded(
+                                              child: SizedBox(
+                                                height: 34,
+                                                child: CustomTextField(
+                                                  controller:
+                                                  fieldGeneratorController
+                                                      .sBTHeightController,
+                                                  hintText:
+                                                  "Height",
+                                                  hintFontSize: 14,
+                                                  borderRadius: 6,
+                                                  contentSize: 15,
+                                                ),
+                                              ),
+                                            ),
+                                            Gap(32),
+                                            SizedBox(
+                                              width: 160,
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  Obx(() {
+                                                    return Expanded(
+                                                      child: ListTile(
+                                                        leading: Radio<String>(
+                                                          value: "CM",
+                                                          groupValue: fieldGeneratorController.selectedMeasurement.value,
+                                                          onChanged: (value) {
+                                                            print(value);
+                                                            if (value != null) {
+                                                              fieldGeneratorController.selectedMeasurement.value = value;
+                                                            }
+                                                          },
+                                                          activeColor: AppColors.lightPrimary, // Set active color
+                                                        ),
+                                                        title: CustomTextWidget(
+                                                          text: "CM",
+                                                          textColor: AppColors.black,
+                                                          fontSize: 10,
+                                                        ),
+                                                        contentPadding: EdgeInsets.zero, // To align properly
+                                                      ),
+                                                    );
+                                                  }),
+                                                  Obx(() {
+                                                    return Expanded(
+                                                      child: ListTile(
+                                                        leading: Radio<String>(
+                                                          value: "INCH",
+                                                          groupValue: fieldGeneratorController.selectedMeasurement.value,
+                                                          onChanged: (value) {
+                                                            print(value);
+                                                            if (value != null) {
+                                                              fieldGeneratorController.selectedMeasurement.value = value;
+                                                            }
+                                                          },
+                                                          activeColor: AppColors.lightPrimary, // Set active color
+                                                        ),
+                                                        title: CustomTextWidget(
+                                                          text: "INCH",
+                                                          textColor: AppColors.black,
+                                                          fontSize: 10,
+                                                        ),
+                                                        contentPadding: EdgeInsets.zero, // To align properly
+                                                      ),
+                                                    );
+                                                  }),
+                                                ],
+                                              ),
+                                            ),
                                             Gap(AppSizes()
-                                                .getWidthPercentage(10)),
+                                                .getWidthPercentage(6)),
                                             CustomTextButton(
                                               color: AppColors.lightPrimary,
                                               text: "Done",
@@ -193,7 +302,7 @@ class FieldGeneratorBasicCalculationScreen extends StatelessWidget {
                                               textColor: AppColors.brown,
                                               onPress: () {
                                                 fieldGeneratorController
-                                                    .addLaminationType();
+                                                    .addSizeWithTimer();
                                               },
                                             )
                                           ],
@@ -237,7 +346,7 @@ class FieldGeneratorBasicCalculationScreen extends StatelessWidget {
                               return ListView.separated(
                                 shrinkWrap: true,
                                 itemCount: fieldGeneratorController
-                                    .laminationTypes.length,
+                                    .sizeWithTimer.length,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   return Padding(
@@ -247,7 +356,7 @@ class FieldGeneratorBasicCalculationScreen extends StatelessWidget {
                                       children: [
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                           children: [
                                             SizedBox(
                                               width: 50,
@@ -273,7 +382,7 @@ class FieldGeneratorBasicCalculationScreen extends StatelessWidget {
                                         Gap(6),
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                           children: [
                                             CustomTextWidget(
                                               text: "Option ${index + 1}",
@@ -296,8 +405,8 @@ class FieldGeneratorBasicCalculationScreen extends StatelessWidget {
                                                           hintFontSize: 14,
                                                           hintText: "00",
                                                           controller:
-                                                              fieldGeneratorController
-                                                                  .directTier1Controller)),
+                                                          fieldGeneratorController
+                                                              .directTier1Controller)),
                                                   Gap(2),
                                                   CustomTextWidget(
                                                     text: ":",
@@ -317,8 +426,8 @@ class FieldGeneratorBasicCalculationScreen extends StatelessWidget {
                                                           hintFontSize: 14,
                                                           hintText: "05",
                                                           controller:
-                                                              fieldGeneratorController
-                                                                  .directTier2Controller)),
+                                                          fieldGeneratorController
+                                                              .directTier2Controller)),
                                                   Gap(2),
                                                   CustomTextWidget(
                                                     text: ":",
@@ -338,8 +447,8 @@ class FieldGeneratorBasicCalculationScreen extends StatelessWidget {
                                                           hintFontSize: 14,
                                                           hintText: "00",
                                                           controller:
-                                                              fieldGeneratorController
-                                                                  .directTier3Controller)),
+                                                          fieldGeneratorController
+                                                              .directTier3Controller)),
                                                 ],
                                               ),
                                             ),
@@ -364,8 +473,8 @@ class FieldGeneratorBasicCalculationScreen extends StatelessWidget {
                                                           hintFontSize: 14,
                                                           hintText: "30",
                                                           controller:
-                                                              fieldGeneratorController
-                                                                  .percentController)),
+                                                          fieldGeneratorController
+                                                              .percentController)),
                                                   Gap(2),
                                                   CustomTextWidget(
                                                     text: "%",
@@ -374,61 +483,61 @@ class FieldGeneratorBasicCalculationScreen extends StatelessWidget {
                                                     textColor: AppColors.brown,
                                                   ),
                                                   Gap(12),
-                                              SizedBox(
-                                                width: 200,
-                                                child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  children: [
-                                                    Obx(() {
-                                                      return Expanded(
-                                                        child: ListTile(
-                                                          leading: Radio<String>(
-                                                            value: "Increase",
-                                                            groupValue: fieldGeneratorController.selectedValue.value,
-                                                            onChanged: (value) {
-                                                              print(value);
-                                                              if (value != null) {
-                                                                fieldGeneratorController.selectedValue.value = value;
-                                                              }
-                                                            },
-                                                            activeColor: AppColors.lightPrimary, // Set active color
-                                                          ),
-                                                          title: CustomTextWidget(
-                                                            text: "Increase",
-                                                            textColor: AppColors.black,
-                                                            fontSize: 10,
-                                                          ),
-                                                          contentPadding: EdgeInsets.zero, // To align properly
-                                                        ),
-                                                      );
-                                                    }),
-                                                    Obx(() {
-                                                      return Expanded(
-                                                        child: ListTile(
-                                                          leading: Radio<String>(
-                                                            value: "Decrease",
-                                                            groupValue: fieldGeneratorController.selectedValue.value,
-                                                            onChanged: (value) {
-                                                              print(value);
-                                                              if (value != null) {
-                                                                fieldGeneratorController.selectedValue.value = value;
-                                                              }
-                                                            },
-                                                            activeColor: AppColors.lightPrimary, // Set active color
-                                                          ),
-                                                          title: CustomTextWidget(
-                                                            text: "Decrease",
-                                                            textColor: AppColors.black,
-                                                            fontSize: 10,
-                                                          ),
-                                                          contentPadding: EdgeInsets.zero, // To align properly
-                                                        ),
-                                                      );
-                                                    }),
-                                                  ],
-                                                ),
-                                              )
-                                              ],
+                                                  SizedBox(
+                                                    width: 200,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      children: [
+                                                        Obx(() {
+                                                          return Expanded(
+                                                            child: ListTile(
+                                                              leading: Radio<String>(
+                                                                value: "Increase",
+                                                                groupValue: fieldGeneratorController.selectedValue.value,
+                                                                onChanged: (value) {
+                                                                  print(value);
+                                                                  if (value != null) {
+                                                                    fieldGeneratorController.selectedValue.value = value;
+                                                                  }
+                                                                },
+                                                                activeColor: AppColors.lightPrimary, // Set active color
+                                                              ),
+                                                              title: CustomTextWidget(
+                                                                text: "Increase",
+                                                                textColor: AppColors.black,
+                                                                fontSize: 10,
+                                                              ),
+                                                              contentPadding: EdgeInsets.zero, // To align properly
+                                                            ),
+                                                          );
+                                                        }),
+                                                        Obx(() {
+                                                          return Expanded(
+                                                            child: ListTile(
+                                                              leading: Radio<String>(
+                                                                value: "Decrease",
+                                                                groupValue: fieldGeneratorController.selectedValue.value,
+                                                                onChanged: (value) {
+                                                                  print(value);
+                                                                  if (value != null) {
+                                                                    fieldGeneratorController.selectedValue.value = value;
+                                                                  }
+                                                                },
+                                                                activeColor: AppColors.lightPrimary, // Set active color
+                                                              ),
+                                                              title: CustomTextWidget(
+                                                                text: "Decrease",
+                                                                textColor: AppColors.black,
+                                                                fontSize: 10,
+                                                              ),
+                                                              contentPadding: EdgeInsets.zero, // To align properly
+                                                            ),
+                                                          );
+                                                        }),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
                                               ),
                                             ),
                                           ],
