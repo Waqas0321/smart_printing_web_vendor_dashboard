@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Processes/process_builder_controller.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Processes/processes_controller.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Processes/type_drop_down_controller.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import 'package:smart_printing_web/App/Widgets/custom_divider.dart';
 import 'package:smart_printing_web/App/Widgets/custom_text_button.dart';
@@ -21,6 +22,7 @@ class ProcessBuilderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final processesController = Get.put(ProcessesController());
     final processesBuilderController = Get.put(ProcessBuilderController());
+    final typeDropDownController = Get.put(TypeDropDownController());
     return LayoutBuilder(
       builder: (context, constraints) {
         final bool isLarge = AppSizes().isDesktop();
@@ -121,7 +123,7 @@ class ProcessBuilderScreen extends StatelessWidget {
                                     color: AppColors.lightPrimary,
                                     thickness: 4,
                                   ),
-                                  
+
                                   Gap(22),
                                   CustomTextWidget(
                                     text: "Estimator Form",
@@ -130,7 +132,7 @@ class ProcessBuilderScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w600,
                                   ),
                                   Gap(12),
-                                  DottedBorder(
+                                 DottedBorder(
                                     color: AppColors.brown,
                                     dashPattern: [12, 6],
                                     borderType: BorderType.RRect,

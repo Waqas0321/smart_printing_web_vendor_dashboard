@@ -10,4 +10,14 @@ class SizeWithTimer {
     required this.height,
     required this.measurement,
   });
+
+  // Convert object to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'length': length,
+      'width': width,
+      'height': height,
+      'measurement': measurement,
+    };
+  }
 }

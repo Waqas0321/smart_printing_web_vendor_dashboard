@@ -1,53 +1,60 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import '../../../../Models/side_with_repetition_model.dart';
+import '../../../../Models/size_with_timer.dart';
 import '../../../../Services/show_toast.dart';
 
-class SideWithRepetitionController extends GetxController{
+class SizeWithTimerController extends GetxController{
   List<TextEditingController> directTier1Controllers = [];
   List<TextEditingController> directTier2Controllers = [];
   List<TextEditingController> directTier3Controllers = [];
   List<TextEditingController> percentControllers = [];
   // Side with Repetition
-  TextEditingController sidesController = TextEditingController();
-  TextEditingController repetitionSideOneController = TextEditingController();
-  TextEditingController repetitionMultiplierController = TextEditingController();
-  RxList<SideWithRepetitionModel> sideWithRepetition = <SideWithRepetitionModel>[].obs;
-  void addSideWithRepetition() {
+  // Size With Base Timer
+  TextEditingController sBTLengthController = TextEditingController();
+  TextEditingController sBTWidthController = TextEditingController();
+  TextEditingController sBTHeightController = TextEditingController();
+  RxString inch = "INCH".obs;
+  RxString cm = "CM".obs;
+  RxString selectedMeasurement = "CM".obs;
+  RxList<SizeWithTimer> sizeWithTimer = <SizeWithTimer>[].obs;
+  bool _isNumeric(String value) {
+    return double.tryParse(value) != null;
+  }
+  void addSizeWithTimer() {
     // Check if all controllers have valid numeric values
-    if (sidesController.text.trim().isNotEmpty &&
-        repetitionSideOneController.text.trim().isNotEmpty &&
-        repetitionMultiplierController.text.trim().isNotEmpty &&
-        _isNumeric(sidesController.text.trim()) &&
-        _isNumeric(repetitionSideOneController.text.trim()) &&
-        _isNumeric(repetitionMultiplierController.text.trim())) {
+    if (sBTLengthController.text.trim().isNotEmpty &&
+        sBTWidthController.text.trim().isNotEmpty &&
+        sBTHeightController.text.trim().isNotEmpty &&
+        _isNumeric(sBTLengthController.text.trim()) &&
+        _isNumeric(sBTWidthController.text.trim()) &&
+        _isNumeric(sBTHeightController.text.trim())) {
       // Add a new SizeWithTimer object to the list
-      sideWithRepetition.add(
-        SideWithRepetitionModel(
-          sides: double.parse(sidesController.text.trim()),
-          repetitionOnSide1: double.parse(repetitionSideOneController.text.trim()),
-          repetitionMultiplier: double.parse(repetitionMultiplierController.text.trim()),
-
+      sizeWithTimer.add(
+        SizeWithTimer(
+            length: double.parse(sBTLengthController.text.trim()),
+            width: double.parse(sBTWidthController.text.trim()),
+            height: double.parse(sBTHeightController.text.trim()),
+            measurement: selectedMeasurement.toString()
         ),
       );
       // Clear the controllers after adding to the list
-      sidesController.clear();
-      repetitionSideOneController.clear();
-      repetitionMultiplierController.clear();
+      sBTHeightController.clear();
+      sBTWidthController.clear();
+      sBTLengthController.clear();
     } else {
       ShowToast().showTopRightToast(
           "Please enter valid numeric values in all fields before adding!");
     }
   }
-  void removeSideWithRepetition(int index) {
-    sideWithRepetition.removeAt(index);
+  void removeSizeWithTimer(int index) {
+    sizeWithTimer.removeAt(index);
   }
 
   var selectedValues = <RxString>[].obs;
   @override
   void onInit() {
     super.onInit();
-    initializeControllers(sideWithRepetition.length);
+    initializeControllers(sizeWithTimer.length);
   }
   @override
   void onClose() {
@@ -76,7 +83,7 @@ class SideWithRepetitionController extends GetxController{
 
   List<Map<String, dynamic>> collectUserInputs() {
     List<Map<String, dynamic>> resultList = [];
-    for (int index = 0; index < sideWithRepetition.length; index++) {
+    for (int index = 0; index <sizeWithTimer.length; index++) {
       String directTier1 = directTier1Controllers[index].text;
       String directTier2 = directTier2Controllers[index].text;
       String directTier3 = directTier3Controllers[index].text;
@@ -88,8 +95,8 @@ class SideWithRepetitionController extends GetxController{
       String selectedValue = selectedValues[index].value;
 
       // Collect the current `sideWithRepetition` list and serialize each object
-      List<Map<String, dynamic>> requiredQuantities = sideWithRepetition
-          .map((sideWithRepetitionModel) => sideWithRepetitionModel.toJson())
+      List<Map<String, dynamic>> requiredQuantities = sizeWithTimer
+          .map((sizeWithTimer) => sizeWithTimer.toJson())
           .toList();
 
       // Create an object with the collected data
@@ -118,8 +125,5 @@ class SideWithRepetitionController extends GetxController{
 
   void sendDataToBackend(List<Map<String, dynamic>> data) {
     print("Sending data to backend: $data");
-  }
-  bool _isNumeric(String value) {
-    return double.tryParse(value) != null;
   }
 }

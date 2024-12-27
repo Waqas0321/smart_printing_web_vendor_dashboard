@@ -11,7 +11,7 @@ class ShowToast {
       textColor: AppColors.primary,
       fontSize: 16.0,
       webPosition: "right",
-      timeInSecForIosWeb: 3,
+      timeInSecForIosWeb: 2,
       webBgColor: "white",
     );
   }

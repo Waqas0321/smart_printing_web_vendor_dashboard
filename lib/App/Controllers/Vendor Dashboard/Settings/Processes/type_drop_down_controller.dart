@@ -48,9 +48,9 @@ class TypeDropDownController extends GetxController{
     percentControllers = List.generate(length, (index) => TextEditingController());
     selectedValues.value = List.generate(length, (index) => "Increase".obs);
   }
-
+  List<Map<String, dynamic>> resultList = [];
   List<Map<String, dynamic>> collectUserInputs() {
-    List<Map<String, dynamic>> resultList = [];
+
     for (int index = 0; index <laminationTypes.length; index++) {
       String directTier1 = directTier1Controllers[index].text;
       String directTier2 = directTier2Controllers[index].text;

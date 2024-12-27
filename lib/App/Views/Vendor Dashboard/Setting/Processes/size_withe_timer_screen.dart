@@ -7,6 +7,7 @@ import 'package:smart_printing_web/App/Widgets/custom_edit_button.dart';
 import 'package:smart_printing_web/App/Widgets/custom_text_button.dart';
 import 'package:smart_printing_web/App/Widgets/custom_textfield.dart';
 import '../../../../Controllers/Vendor Dashboard/Settings/Processes/field_generator_controller.dart';
+import '../../../../Controllers/Vendor Dashboard/Settings/Processes/size_with_timer_controller.dart';
 import '../../../../Utils/Const/appColors.dart';
 import '../../../../Widgets/custom_text_widget.dart';
 
@@ -18,6 +19,7 @@ class SizeWithTimerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fieldGeneratorController = Get.put(FieldGeneratorController());
+    final sizeWithTimerController = Get.put(SizeWithTimerController());
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
@@ -82,7 +84,10 @@ class SizeWithTimerScreen extends StatelessWidget {
                                   fontSize: 15,
                                   hasBorder: false,
                                   textColor: AppColors.brown,
-                                  onPress: () {},
+                                  onPress: () {
+                                    sizeWithTimerController.handleSubmit();
+                                    overlayEntry?.remove();
+                                  },
                                 )
                               ],
                             ),
@@ -140,7 +145,7 @@ class SizeWithTimerScreen extends StatelessWidget {
                                           return Wrap(
                                             spacing: 8.0,
                                             runSpacing: 8.0,
-                                            children: fieldGeneratorController
+                                            children: sizeWithTimerController
                                                 .sizeWithTimer
                                                 .asMap()
                                                 .entries
@@ -175,7 +180,7 @@ class SizeWithTimerScreen extends StatelessWidget {
                                                   color: AppColors.brown,
                                                 ),
                                                 onDeleted: () {
-                                                  fieldGeneratorController
+                                                  sizeWithTimerController
                                                       .removeSizeWithTimer(
                                                       entry.key);
                                                 },
@@ -192,7 +197,7 @@ class SizeWithTimerScreen extends StatelessWidget {
                                                 height: 34,
                                                 child: CustomTextField(
                                                   controller:
-                                                  fieldGeneratorController
+                                                  sizeWithTimerController
                                                       .sBTLengthController,
                                                   hintText:
                                                   "Length",
@@ -210,7 +215,7 @@ class SizeWithTimerScreen extends StatelessWidget {
                                                 height: 34,
                                                 child: CustomTextField(
                                                   controller:
-                                                  fieldGeneratorController
+                                                  sizeWithTimerController
                                                       .sBTWidthController,
                                                   hintText:
                                                   "Width",
@@ -228,7 +233,7 @@ class SizeWithTimerScreen extends StatelessWidget {
                                                 height: 34,
                                                 child: CustomTextField(
                                                   controller:
-                                                  fieldGeneratorController
+                                                  sizeWithTimerController
                                                       .sBTHeightController,
                                                   hintText:
                                                   "Height",
@@ -249,11 +254,11 @@ class SizeWithTimerScreen extends StatelessWidget {
                                                       child: ListTile(
                                                         leading: Radio<String>(
                                                           value: "CM",
-                                                          groupValue: fieldGeneratorController.selectedMeasurement.value,
+                                                          groupValue: sizeWithTimerController.selectedMeasurement.value,
                                                           onChanged: (value) {
                                                             print(value);
                                                             if (value != null) {
-                                                              fieldGeneratorController.selectedMeasurement.value = value;
+                                                              sizeWithTimerController.selectedMeasurement.value = value;
                                                             }
                                                           },
                                                           activeColor: AppColors.lightPrimary, // Set active color
@@ -272,11 +277,11 @@ class SizeWithTimerScreen extends StatelessWidget {
                                                       child: ListTile(
                                                         leading: Radio<String>(
                                                           value: "INCH",
-                                                          groupValue: fieldGeneratorController.selectedMeasurement.value,
+                                                          groupValue: sizeWithTimerController.selectedMeasurement.value,
                                                           onChanged: (value) {
                                                             print(value);
                                                             if (value != null) {
-                                                              fieldGeneratorController.selectedMeasurement.value = value;
+                                                              sizeWithTimerController.selectedMeasurement.value = value;
                                                             }
                                                           },
                                                           activeColor: AppColors.lightPrimary, // Set active color
@@ -301,8 +306,9 @@ class SizeWithTimerScreen extends StatelessWidget {
                                               hasBorder: true,
                                               textColor: AppColors.brown,
                                               onPress: () {
-                                                fieldGeneratorController
+                                                sizeWithTimerController
                                                     .addSizeWithTimer();
+                                                sizeWithTimerController.onInit();
                                               },
                                             )
                                           ],
@@ -342,226 +348,226 @@ class SizeWithTimerScreen extends StatelessWidget {
                               textColor: AppColors.black,
                             ),
                             SizedBox(height: 18),
-                            // Obx(() {
-                            //   return ListView.separated(
-                            //     shrinkWrap: true,
-                            //     itemCount: fieldGeneratorController.cRequiredQuantity.length,
-                            //     physics: NeverScrollableScrollPhysics(),
-                            //     itemBuilder: (context, index) {
-                            //       return Padding(
-                            //         padding: const EdgeInsets.symmetric(vertical: 8),
-                            //         child: Column(
-                            //           children: [
-                            //             Row(
-                            //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //               children: [
-                            //                 SizedBox(width: 50),
-                            //                 CustomTextButton(
-                            //                   color: AppColors.lightPrimary,
-                            //                   text: "Direct Timer",
-                            //                   hasBorder: false,
-                            //                   textColor: AppColors.brown,
-                            //                   onPress: () {},
-                            //                 ),
-                            //                 Gap(12),
-                            //                 CustomTextButton(
-                            //                   color: AppColors.lightPrimary,
-                            //                   text: "Percentile Timer",
-                            //                   hasBorder: false,
-                            //                   textColor: AppColors.brown,
-                            //                   onPress: () {},
-                            //                 ),
-                            //                 Gap(12),
-                            //               ],
-                            //             ),
-                            //             Gap(6),
-                            //             Row(
-                            //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //               children: [
-                            //                 CustomTextWidget(
-                            //                   text: "Option ${index + 1}",
-                            //                   fontSize: 16,
-                            //                   fontWeight: FontWeight.w600,
-                            //                   textColor: AppColors.black,
-                            //                 ),
-                            //                 SingleChildScrollView(
-                            //                   scrollDirection: Axis.horizontal,
-                            //                   child: Row(
-                            //                     children: [
-                            //                       SizedBox(
-                            //                         width: 40,
-                            //                         height: 35,
-                            //                         child: CustomTextField(
-                            //                           contentSize: 14,
-                            //                           borderColor: AppColors.lightPrimary,
-                            //                           borderRadius: 4,
-                            //                           hintFontSize: 14,
-                            //                           hintText: "00",
-                            //                           controller: fieldGeneratorController
-                            //                               .directTier1Controllers[index],
-                            //                           onChanged: (value) {
-                            //                             if (value.length == 2) {
-                            //                               FocusScope.of(context).nextFocus();
-                            //                             }
-                            //                           },
-                            //                         ),
-                            //                       ),
-                            //                       Gap(2),
-                            //                       CustomTextWidget(
-                            //                         text: ":",
-                            //                         fontSize: 12,
-                            //                         fontWeight: FontWeight.w500,
-                            //                         textColor: AppColors.brown,
-                            //                       ),
-                            //                       Gap(2),
-                            //                       SizedBox(
-                            //                         width: 40,
-                            //                         height: 35,
-                            //                         child: CustomTextField(
-                            //                           contentSize: 14,
-                            //                           borderColor: AppColors.lightPrimary,
-                            //                           borderRadius: 4,
-                            //                           hintFontSize: 14,
-                            //                           hintText: "05",
-                            //                           controller: fieldGeneratorController
-                            //                               .directTier2Controllers[index],
-                            //                           onChanged: (value) {
-                            //                             if (value.length == 2) {
-                            //                               FocusScope.of(context).nextFocus();
-                            //                             }
-                            //                           },
-                            //                         ),
-                            //                       ),
-                            //                       Gap(2),
-                            //                       CustomTextWidget(
-                            //                         text: ":",
-                            //                         fontSize: 12,
-                            //                         fontWeight: FontWeight.w500,
-                            //                         textColor: AppColors.brown,
-                            //                       ),
-                            //                       Gap(2),
-                            //                       SizedBox(
-                            //                         width: 40,
-                            //                         height: 35,
-                            //                         child: CustomTextField(
-                            //                           contentSize: 14,
-                            //                           borderColor: AppColors.lightPrimary,
-                            //                           borderRadius: 4,
-                            //                           hintFontSize: 14,
-                            //                           hintText: "00",
-                            //                           controller: fieldGeneratorController
-                            //                               .directTier3Controllers[index],
-                            //                           onChanged: (value) {
-                            //                             if (value.length == 2) {
-                            //                               FocusScope.of(context).unfocus();
-                            //                             }
-                            //                           },
-                            //                         ),
-                            //                       ),
-                            //                     ],
-                            //                   ),
-                            //                 ),
-                            //                 CustomTextWidget(
-                            //                   text: "OR",
-                            //                   fontSize: 18,
-                            //                   fontWeight: FontWeight.w500,
-                            //                   textColor: AppColors.brown,
-                            //                 ),
-                            //                 SingleChildScrollView(
-                            //                   scrollDirection: Axis.horizontal,
-                            //                   child: Row(
-                            //                     children: [
-                            //                       SizedBox(
-                            //                         width: 40,
-                            //                         height: 35,
-                            //                         child: CustomTextField(
-                            //                           contentSize: 14,
-                            //                           borderColor: AppColors.lightPrimary,
-                            //                           borderRadius: 4,
-                            //                           hintFontSize: 14,
-                            //                           hintText: "30",
-                            //                           controller: fieldGeneratorController
-                            //                               .percentControllers[index],
-                            //                         ),
-                            //                       ),
-                            //                       Gap(2),
-                            //                       CustomTextWidget(
-                            //                         text: "%",
-                            //                         fontSize: 12,
-                            //                         fontWeight: FontWeight.w500,
-                            //                         textColor: AppColors.brown,
-                            //                       ),
-                            //                       Gap(12),
-                            //                       SizedBox(
-                            //                         width: 200,
-                            //                         child: Row(
-                            //                           mainAxisAlignment: MainAxisAlignment.start,
-                            //                           children: [
-                            //                             Obx(() {
-                            //                               return Expanded(
-                            //                                 child: ListTile(
-                            //                                   leading: Radio<String>(
-                            //                                     value: "Increase",
-                            //                                     groupValue: fieldGeneratorController
-                            //                                         .selectedValues[index].value,
-                            //                                     onChanged: (value) {
-                            //                                       if (value != null) {
-                            //                                         fieldGeneratorController
-                            //                                             .selectedValues[index].value = value;
-                            //                                       }
-                            //                                     },
-                            //                                     activeColor: AppColors.lightPrimary,
-                            //                                   ),
-                            //                                   title: CustomTextWidget(
-                            //                                     text: "Increase",
-                            //                                     textColor: AppColors.black,
-                            //                                     fontSize: 10,
-                            //                                   ),
-                            //                                   contentPadding: EdgeInsets.zero,
-                            //                                 ),
-                            //                               );
-                            //                             }),
-                            //                             Obx(() {
-                            //                               return Expanded(
-                            //                                 child: ListTile(
-                            //                                   leading: Radio<String>(
-                            //                                     value: "Decrease",
-                            //                                     groupValue: fieldGeneratorController
-                            //                                         .selectedValues[index].value,
-                            //                                     onChanged: (value) {
-                            //                                       if (value != null) {
-                            //                                         fieldGeneratorController
-                            //                                             .selectedValues[index].value = value;
-                            //                                       }
-                            //                                     },
-                            //                                     activeColor: AppColors.lightPrimary,
-                            //                                   ),
-                            //                                   title: CustomTextWidget(
-                            //                                     text: "Decrease",
-                            //                                     textColor: AppColors.black,
-                            //                                     fontSize: 10,
-                            //                                   ),
-                            //                                   contentPadding: EdgeInsets.zero,
-                            //                                 ),
-                            //                               );
-                            //                             }),
-                            //                           ],
-                            //                         ),
-                            //                       ),
-                            //                     ],
-                            //                   ),
-                            //                 ),
-                            //               ],
-                            //             ),
-                            //           ],
-                            //         ),
-                            //       );
-                            //     },
-                            //     separatorBuilder: (BuildContext context, int index) {
-                            //       return CustomDivider();
-                            //     },
-                            //   );
-                            // })
+                            Obx(() {
+                              return ListView.separated(
+                                shrinkWrap: true,
+                                itemCount: sizeWithTimerController.sizeWithTimer.length,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 8),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            SizedBox(width: 50),
+                                            CustomTextButton(
+                                              color: AppColors.lightPrimary,
+                                              text: "Direct Timer",
+                                              hasBorder: false,
+                                              textColor: AppColors.brown,
+                                              onPress: () {},
+                                            ),
+                                            Gap(12),
+                                            CustomTextButton(
+                                              color: AppColors.lightPrimary,
+                                              text: "Percentile Timer",
+                                              hasBorder: false,
+                                              textColor: AppColors.brown,
+                                              onPress: () {},
+                                            ),
+                                            Gap(12),
+                                          ],
+                                        ),
+                                        Gap(6),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            CustomTextWidget(
+                                              text: "Option ${index + 1}",
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                              textColor: AppColors.black,
+                                            ),
+                                            SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 40,
+                                                    height: 35,
+                                                    child: CustomTextField(
+                                                      contentSize: 14,
+                                                      borderColor: AppColors.lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 14,
+                                                      hintText: "00",
+                                                      controller: sizeWithTimerController
+                                                          .directTier1Controllers[index],
+                                                      onChanged: (value) {
+                                                        if (value.length == 2) {
+                                                          FocusScope.of(context).nextFocus();
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
+                                                  Gap(2),
+                                                  CustomTextWidget(
+                                                    text: ":",
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                    textColor: AppColors.brown,
+                                                  ),
+                                                  Gap(2),
+                                                  SizedBox(
+                                                    width: 40,
+                                                    height: 35,
+                                                    child: CustomTextField(
+                                                      contentSize: 14,
+                                                      borderColor: AppColors.lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 14,
+                                                      hintText: "05",
+                                                      controller: sizeWithTimerController
+                                                          .directTier2Controllers[index],
+                                                      onChanged: (value) {
+                                                        if (value.length == 2) {
+                                                          FocusScope.of(context).nextFocus();
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
+                                                  Gap(2),
+                                                  CustomTextWidget(
+                                                    text: ":",
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                    textColor: AppColors.brown,
+                                                  ),
+                                                  Gap(2),
+                                                  SizedBox(
+                                                    width: 40,
+                                                    height: 35,
+                                                    child: CustomTextField(
+                                                      contentSize: 14,
+                                                      borderColor: AppColors.lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 14,
+                                                      hintText: "00",
+                                                      controller: sizeWithTimerController
+                                                          .directTier3Controllers[index],
+                                                      onChanged: (value) {
+                                                        if (value.length == 2) {
+                                                          FocusScope.of(context).unfocus();
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            CustomTextWidget(
+                                              text: "OR",
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500,
+                                              textColor: AppColors.brown,
+                                            ),
+                                            SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 40,
+                                                    height: 35,
+                                                    child: CustomTextField(
+                                                      contentSize: 14,
+                                                      borderColor: AppColors.lightPrimary,
+                                                      borderRadius: 4,
+                                                      hintFontSize: 14,
+                                                      hintText: "30",
+                                                      controller: sizeWithTimerController
+                                                          .percentControllers[index],
+                                                    ),
+                                                  ),
+                                                  Gap(2),
+                                                  CustomTextWidget(
+                                                    text: "%",
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                    textColor: AppColors.brown,
+                                                  ),
+                                                  Gap(12),
+                                                  SizedBox(
+                                                    width: 200,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      children: [
+                                                        Obx(() {
+                                                          return Expanded(
+                                                            child: ListTile(
+                                                              leading: Radio<String>(
+                                                                value: "Increase",
+                                                                groupValue: sizeWithTimerController
+                                                                    .selectedValues[index].value,
+                                                                onChanged: (value) {
+                                                                  if (value != null) {
+                                                                    sizeWithTimerController
+                                                                        .selectedValues[index].value = value;
+                                                                  }
+                                                                },
+                                                                activeColor: AppColors.lightPrimary,
+                                                              ),
+                                                              title: CustomTextWidget(
+                                                                text: "Increase",
+                                                                textColor: AppColors.black,
+                                                                fontSize: 10,
+                                                              ),
+                                                              contentPadding: EdgeInsets.zero,
+                                                            ),
+                                                          );
+                                                        }),
+                                                        Obx(() {
+                                                          return Expanded(
+                                                            child: ListTile(
+                                                              leading: Radio<String>(
+                                                                value: "Decrease",
+                                                                groupValue: sizeWithTimerController
+                                                                    .selectedValues[index].value,
+                                                                onChanged: (value) {
+                                                                  if (value != null) {
+                                                                    sizeWithTimerController
+                                                                        .selectedValues[index].value = value;
+                                                                  }
+                                                                },
+                                                                activeColor: AppColors.lightPrimary,
+                                                              ),
+                                                              title: CustomTextWidget(
+                                                                text: "Decrease",
+                                                                textColor: AppColors.black,
+                                                                fontSize: 10,
+                                                              ),
+                                                              contentPadding: EdgeInsets.zero,
+                                                            ),
+                                                          );
+                                                        }),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                separatorBuilder: (BuildContext context, int index) {
+                                  return CustomDivider();
+                                },
+                              );
+                            })
                           ],
                         ),
                       )
