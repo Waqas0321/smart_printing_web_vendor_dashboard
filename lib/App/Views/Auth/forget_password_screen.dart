@@ -97,7 +97,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                                   text: forgetPasswordController.isLoading.value?"Loading...":"Proceed",
                                   onPress: () {
                                     if(forgetPasswordController.formKey.currentState!.validate()){
-                                      forgetPasswordController.forgetPassword();
+                                      // forgetPasswordController.forgetPassword();
                                       Get.toNamed(AppRoutesName.createNewPasswordScreen);
                                     }else{
                                       ShowToast().showTopRightToast("Please enter your email");
