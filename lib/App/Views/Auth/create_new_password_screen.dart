@@ -21,6 +21,8 @@ class CreateNewPasswordScreen extends StatelessWidget {
     CreateNewPasswordController createNewPasswordController =
         Get.put(CreateNewPasswordController());
     createNewPasswordController.onInit();
+    createNewPasswordController.checkInitialLink();
+    createNewPasswordController.listenForDeepLinks();
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {

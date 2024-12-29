@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Services/api_services.dart';
 import 'package:smart_printing_web/App/Services/show_toast.dart';
 import 'package:uni_links/uni_links.dart';
-import '../../Views/Auth/login_screen.dart';
-import '../../Widgets/custom_dialgue_box.dart';
 
 class CreateNewPasswordController extends GetxController {
   // Text field controller
@@ -28,6 +26,7 @@ class CreateNewPasswordController extends GetxController {
         Uri fragmentUri = Uri.parse('?$fragment');
         token.value = fragmentUri.queryParameters['token'] ?? '';
         if (token.isNotEmpty) {
+          print('token : ${token}');
         } else {
           print('No token found in the URI fragment.');
         }
