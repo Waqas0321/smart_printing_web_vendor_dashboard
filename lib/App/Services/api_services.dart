@@ -85,7 +85,6 @@ class ApiServices {
         ),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print("Response: ${response.data}");
         showToast.showTopRightToast('Request successful: ${response.data['message'] ?? 'No message provided.'}');
         Get.dialog(
           CustomDialgueBox(
@@ -99,15 +98,12 @@ class ApiServices {
           false, // Prevent closing by tapping outside
         );
       } else {
-        print("Error Response: ${response.data}");
         showToast.showTopRightToast(response.data['message'] ?? 'Something went wrong.');
       }
     } on DioException catch (dioError) {
       if (dioError.response != null) {
-        print("Dio Error Response: ${dioError.response?.data}");
         showToast.showTopRightToast(dioError.response?.data['message'] ?? 'Error occurred.');
       } else {
-        print("Dio Error: $dioError");
         showToast.showTopRightToast('Network error or server unreachable.');
       }
     } catch (e) {
