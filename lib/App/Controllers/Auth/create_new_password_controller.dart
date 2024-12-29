@@ -45,12 +45,13 @@ class CreateNewPasswordController extends GetxController {
       final String? initialLink = await getInitialLink();
       if (initialLink != null) {
         final Uri initialUri = Uri.parse(initialLink); // Parse the String into Uri
-        print('Initial URI: $initialUri');
+
         String? fragment = initialUri.fragment;
         Uri fragmentUri = Uri.parse('?$fragment');
         token.value = fragmentUri.queryParameters['token'] ?? '';
         if (token.isNotEmpty) {
           print('Token extracted from initial link: $token');
+          ShowToast().showTopToast(token.value);
         } else {
           print('No token found in the initial URI fragment.');
         }

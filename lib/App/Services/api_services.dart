@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
 import 'package:smart_printing_web/App/Services/show_toast.dart';
@@ -26,10 +25,7 @@ class ApiServices {
         final message = responseData['message'] ?? 'Login successful!';
         print("Response: ${response.data}");
         showToast.showTopToast(message);
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
-        );
+        Get.to(HomeScreen());
       } else {
         final errorMessage = response.data['message'] ?? 'Something went wrong!';
         showToast.showTopToast(errorMessage);
@@ -101,7 +97,7 @@ class ApiServices {
             isLarge: isLarge,
             onPress: () async{
               final Uri uri = Uri.parse(url);
-              if (!await launchUrl(uri, mode: LaunchMode.inAppBrowserView)) {
+              if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
               throw 'Could not launch $url';
               }
             },
