@@ -31277,7 +31277,7 @@ case 3:return B.S7
 case 4:return B.zh}},
 aOi(a,b){var s=0,r=A.R(t.y),q,p
 var $async$aOi=A.S(function(c,d){if(c===1)return A.O(d,r)
-while(true)switch(s){case 0:if(b===B.Lg||b===B.Lh)p=!(a.gf0()==="https"||a.gf0()==="http")
+while(true)switch(s){case 0:if(b===B.Lg||b===B.oQ)p=!(a.gf0()==="https"||a.gf0()==="http")
 else p=!1
 if(p)throw A.c(A.hl(a,"url","To use an in-app web view, you must provide an http(s) URL."))
 q=$.aTh().wz(a.l(0),new A.Sv(A.bg4(b),new A.Sb(!0,!0,B.ia),null))
@@ -96530,7 +96530,7 @@ return A.W(A.aSq(A.eU(q,0,null)),$async$wT)
 case 5:s=c?2:4
 break
 case 2:s=6
-return A.W(A.aOi(A.eU(q,0,null),B.oQ),$async$wT)
+return A.W(A.aOi(A.eU(q,0,null),B.Lh),$async$wT)
 case 6:s=3
 break
 case 4:A.cv("Could not launch "+q)
@@ -96648,7 +96648,7 @@ h=o.b
 if(i){i=J.aO(n.a,"message")
 h.dd(A.l(i==null?"No message provided.":i))
 h.dd("Go to your login screen")
-m="https://smart-printing-web-vendor-dashboard-iez1.vercel.app/#/login"
+m="https://spw-vendor-dashboard.vercel.app/"
 A.aQ3($.ad(),A.aPG(null,"Password Updated","assets/icons/Tick Square.svg",!0,a,!1,!1,new A.a9i(m),null),!1,j)}else{j=J.aO(n.a,"message")
 h.dd(j==null?"Something went wrong.":j)}q=1
 s=5
@@ -108618,8 +108618,8 @@ B.hV=new A.Ey(1,"domText")
 B.kn=new A.Ey(2,"sizedSpan")
 B.a2y=new A.xO(0,"platformDefault")
 B.Lg=new A.xO(1,"inAppWebView")
-B.Lh=new A.xO(2,"inAppBrowserView")
-B.oQ=new A.xO(3,"externalApplication")
+B.oQ=new A.xO(2,"inAppBrowserView")
+B.Lh=new A.xO(3,"externalApplication")
 B.oR=new A.EE(0,"opportunity")
 B.ko=new A.EE(2,"mandatory")
 B.oS=new A.EE(3,"endOfText")
