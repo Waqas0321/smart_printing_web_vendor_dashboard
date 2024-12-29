@@ -32,7 +32,7 @@ class ThicknessController extends GetxController{
       mediumLevelController.clear();
       heavyLevelController.clear();
     } else {
-      ShowToast().showTopRightToast("Please fill in all the fields before adding!");
+      ShowToast().showTopToast("Please fill in all the fields before adding!");
     }
   }
   void removeThickness(int index) {

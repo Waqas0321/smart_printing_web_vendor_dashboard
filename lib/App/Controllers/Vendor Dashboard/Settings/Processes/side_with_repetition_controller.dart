@@ -35,7 +35,7 @@ class SideWithRepetitionController extends GetxController{
       repetitionSideOneController.clear();
       repetitionMultiplierController.clear();
     } else {
-      ShowToast().showTopRightToast(
+      ShowToast().showTopToast(
           "Please enter valid numeric values in all fields before adding!");
     }
   }

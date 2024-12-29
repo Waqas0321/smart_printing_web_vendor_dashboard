@@ -99,7 +99,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                                     if(forgetPasswordController.formKey.currentState!.validate()){
                                       forgetPasswordController.forgetPassword();
                                     }else{
-                                      ShowToast().showTopRightToast("Please enter your email");
+                                      ShowToast().showTopToast("Please enter your email");
                                     }
                                   },
                                 ),

@@ -132,7 +132,7 @@ class LoginScreen extends StatelessWidget {
                                     if(loginController.formKey.currentState!.validate()){
                                       loginController.login();
                                     }else{
-                                      ShowToast().showTopRightToast("Please enter all fields");
+                                      ShowToast().showTopToast("Please enter all fields");
                                     }
                                   },
                                 ),

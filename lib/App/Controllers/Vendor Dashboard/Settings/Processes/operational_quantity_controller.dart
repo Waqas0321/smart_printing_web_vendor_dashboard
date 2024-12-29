@@ -16,10 +16,10 @@ class OperationalQuantityController extends GetxController{
         operationalQuantity.add(operationalQuantityController.text.trim());
         operationalQuantityController.clear();
       } else {
-        ShowToast().showTopRightToast("Please enter a valid numeric value!");
+        ShowToast().showTopToast("Please enter a valid numeric value!");
       }
     } else {
-      ShowToast().showTopRightToast("Please fill in the field before adding!");
+      ShowToast().showTopToast("Please fill in the field before adding!");
     }
   }
   void removeOperationalQuantity(int index) {

@@ -21,12 +21,12 @@ class ImagePickerService extends GetxController {
 
       if (pickedFile != null) {
         selectedImage.value = File(pickedFile.path);
-        showToast.showTopRightToast("Image Upload Successfully");
+        showToast.showTopToast("Image Upload Successfully");
       } else {
-        showToast.showTopRightToast("No image selected");
+        showToast.showTopToast("No image selected");
       }
     } catch (e) {
-      showToast.showTopRightToast("Failed Upload: $e");
+      showToast.showTopToast("Failed Upload: $e");
     }
   }
 }

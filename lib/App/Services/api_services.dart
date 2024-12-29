@@ -24,25 +24,25 @@ class ApiServices {
         final responseData = response.data;
         final message = responseData['message'] ?? 'Login successful!';
         print("Response: ${response.data}");
-        showToast.showTopRightToast(message);
+        showToast.showTopToast(message);
         Get.to(HomeScreen());
       } else {
         final errorMessage = response.data['message'] ?? 'Something went wrong!';
-        showToast.showTopRightToast(errorMessage);
+        showToast.showTopToast(errorMessage);
       }
     } on DioException catch (dioError) {
       if (dioError.response != null) {
         final errorResponse = dioError.response?.data;
         final errorMessage = errorResponse['message'] ?? 'An error occurred during login.';
         print("Error Response: ${dioError.response}");
-        showToast.showTopRightToast(errorMessage);
+        showToast.showTopToast(errorMessage);
       } else {
         print("Dio Error: $dioError");
-        showToast.showTopRightToast('Network error or server not reachable.');
+        showToast.showTopToast('Network error or server not reachable.');
       }
     } catch (e) {
       print("Exception: $e");
-      showToast.showTopRightToast('An unexpected error occurred: $e');
+      showToast.showTopToast('An unexpected error occurred: $e');
     }
   }
   Future<void> forgetPassword(String url, Map<String, dynamic> requestData) async {
@@ -57,23 +57,23 @@ class ApiServices {
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         print("Response: ${response.data}");
-        showToast.showTopRightToast('${response.data['message'] ?? 'No message provided.'}');
+        showToast.showTopToast('${response.data['message'] ?? 'No message provided.'}');
         Get.toNamed(AppRoutesName.loginScreen);
       } else {
         print("Error Response: ${response.data}");
-        showToast.showTopRightToast(response.data['message'] ?? 'Something went wrong.');
+        showToast.showTopToast(response.data['message'] ?? 'Something went wrong.');
       }
     } on DioException catch (dioError) {
       if (dioError.response != null) {
         print("Dio Error Response: ${dioError.response?.data}");
-        showToast.showTopRightToast(dioError.response?.data['message'] ?? 'Error occurred.');
+        showToast.showTopToast(dioError.response?.data['message'] ?? 'Error occurred.');
       } else {
         print("Dio Error: $dioError");
-        showToast.showTopRightToast('Network error or server unreachable.');
+        showToast.showTopToast('Network error or server unreachable.');
       }
     } catch (e) {
       print("Exception: $e");
-      showToast.showTopRightToast('Unexpected error: $e');
+      showToast.showTopToast('Unexpected error: $e');
     }
   }
   Future<void> newPassword(bool isLarge, String url, Map<String, dynamic> requestData) async {
@@ -87,8 +87,8 @@ class ApiServices {
         ),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-        showToast.showTopRightToast('${response.data['message'] ?? 'No message provided.'}');
-        showToast.showTopRightToast('Go to your login screen');
+        showToast.showTopToast('${response.data['message'] ?? 'No message provided.'}');
+        showToast.showTopToast('Go to your login screen');
         final String url =
             "https://smart-printing-web-vendor-dashboard-iez1.vercel.app/#/login";
         Get.dialog(
@@ -106,17 +106,17 @@ class ApiServices {
           false, // Prevent closing by tapping outside
         );
       } else {
-        showToast.showTopRightToast(response.data['message'] ?? 'Something went wrong.');
+        showToast.showTopToast(response.data['message'] ?? 'Something went wrong.');
       }
     } on DioException catch (dioError) {
       if (dioError.response != null) {
-        showToast.showTopRightToast(dioError.response?.data['message'] ?? 'Error occurred.');
+        showToast.showTopToast(dioError.response?.data['message'] ?? 'Error occurred.');
       } else {
-        showToast.showTopRightToast('Network error or server unreachable.');
+        showToast.showTopToast('Network error or server unreachable.');
       }
     } catch (e) {
       print("Exception: $e");
-      showToast.showTopRightToast('Unexpected error: $e');
+      showToast.showTopToast('Unexpected error: $e');
     }
   }
 

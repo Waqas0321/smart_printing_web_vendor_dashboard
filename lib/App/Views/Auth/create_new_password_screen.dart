@@ -112,7 +112,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
                                   onPress: () {
                                       if(createNewPasswordController.formKey.currentState!.validate()){
                                         if(createNewPasswordController.createPasswordController.text != createNewPasswordController.confirmPasswordController.text ){
-                                          ShowToast().showTopRightToast("Please! match new password and confirm password");
+                                          ShowToast().showTopToast("Please! match new password and confirm password");
                                         }else{
                                           createNewPasswordController.createNewPassword(isLarge);
                                         }

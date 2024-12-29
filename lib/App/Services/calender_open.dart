@@ -36,7 +36,7 @@ class OpenCalendarService extends GetxController {
       selectedDate.value = pickedDate;
       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
       String formattedMessage = "Selected Date: $formattedDate";
-      ShowToast().showTopRightToast(formattedMessage);
+      ShowToast().showTopToast(formattedMessage);
     }
   }
 }
