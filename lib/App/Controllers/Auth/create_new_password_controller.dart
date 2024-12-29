@@ -51,7 +51,7 @@ class CreateNewPasswordController extends GetxController {
         token.value = fragmentUri.queryParameters['token'] ?? '';
         if (token.isNotEmpty) {
           print('Token extracted from initial link: $token');
-          ShowToast().showTopToast(token.value);
+
         } else {
           print('No token found in the initial URI fragment.');
         }
@@ -64,6 +64,7 @@ class CreateNewPasswordController extends GetxController {
 
   RxBool isLoading = false.obs;
   Future<void> createNewPassword(bool isLarge) async {
+    ShowToast().showTopToast(token.value);
     try {
       isLoading.value = true;
       await apiServices.newPassword(

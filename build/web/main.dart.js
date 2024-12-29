@@ -95761,8 +95761,8 @@ k=A.eU("?"+A.l(l),0,null)
 i=o.cx
 h=k.gx9().h(0,"token")
 i.sj(0,h==null?"":h)
-if(J.bi(i.gj(0))!==0){A.cA("Token extracted from initial link: "+i.l(0))
-new A.fT().d8(i.gj(0))}else A.cA("No token found in the initial URI fragment.")}q=1
+if(J.bi(i.gj(0))!==0)A.cA("Token extracted from initial link: "+i.l(0))
+else A.cA("No token found in the initial URI fragment.")}q=1
 s=5
 break
 case 3:q=2
@@ -95779,10 +95779,12 @@ return A.Q($async$vn,r)},
 AR(a){return this.app(a)},
 app(a){var s=0,r=A.R(t.H),q,p=2,o,n=[],m=this,l,k,j,i
 var $async$AR=A.S(function(b,c){if(b===1){o=c
-s=p}while(true)switch(s){case 0:p=4
+s=p}while(true)switch(s){case 0:j=m.cx
+new A.fT().d8(j.gj(0))
+p=4
 m.cy.sj(0,!0)
 s=7
-return A.W(m.CW.Cj(a,"/vendor/resetPassword",A.aR(["token",m.cx,"newPassword",m.ax.a.a],t.N,t.z)),$async$AR)
+return A.W(m.CW.Cj(a,"/vendor/resetPassword",A.aR(["token",j,"newPassword",m.ax.a.a],t.N,t.z)),$async$AR)
 case 7:n.push(6)
 s=5
 break
