@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
 import 'package:smart_printing_web/App/Services/show_toast.dart';
-import 'package:smart_printing_web/App/Views/Auth/login_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../Routes/app_routes_name.dart';
 import '../Views/Vendor Dashboard/home_screen.dart';
 import '../Widgets/custom_dialgue_box.dart';
 
@@ -57,6 +58,7 @@ class ApiServices {
       if (response.statusCode == 200 || response.statusCode == 201) {
         print("Response: ${response.data}");
         showToast.showTopRightToast('${response.data['message'] ?? 'No message provided.'}');
+        Get.toNamed(AppRoutesName.loginScreen);
       } else {
         print("Error Response: ${response.data}");
         showToast.showTopRightToast(response.data['message'] ?? 'Something went wrong.');
@@ -85,13 +87,19 @@ class ApiServices {
         ),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-        showToast.showTopRightToast('Request successful: ${response.data['message'] ?? 'No message provided.'}');
+        showToast.showTopRightToast('${response.data['message'] ?? 'No message provided.'}');
+        showToast.showTopRightToast('Go to your login screen');
+        final String url =
+            "https://smart-printing-web-vendor-dashboard-iez1.vercel.app/#/login";
         Get.dialog(
           CustomDialgueBox(
             isFirst: true,
             isLarge: isLarge,
-            onPress: () {
-              Get.to(LoginScreen());
+            onPress: () async{
+              final Uri uri = Uri.parse(url);
+              if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+              throw 'Could not launch $url';
+              }
             },
           ),
           barrierDismissible:
