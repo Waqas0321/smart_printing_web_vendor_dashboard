@@ -7,6 +7,7 @@ import 'package:smart_printing_web/App/Utils/Const/appColors.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_images.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
+import 'package:smart_printing_web/App/Views/Auth/create_new_password_screen.dart';
 import 'package:smart_printing_web/App/Widgets/custom_text_widget.dart';
 import 'package:smart_printing_web/App/Widgets/custom_textfield.dart';
 import '../../Controllers/Auth/forget_password_controller.dart';
@@ -100,6 +101,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                                       forgetPasswordController.forgetPassword();
                                     }else{
                                       ShowToast().showTopToast("Please enter your email");
+                                      Get.to(CreateNewPasswordScreen());
                                     }
                                   },
                                 ),
