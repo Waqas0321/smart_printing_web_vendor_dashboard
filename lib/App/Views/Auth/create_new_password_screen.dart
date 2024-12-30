@@ -23,15 +23,15 @@ class CreateNewPasswordScreen extends StatelessWidget {
     CreateNewPasswordController createNewPasswordController =
         Get.put(CreateNewPasswordController());
     final Uri uri = Uri.base;
-    final String? token = uri.fragment.contains('?')
-        ? Uri.parse('https://dummy.url/?${uri.fragment.split('?')[1]}').queryParameters['token']
-        : null;
+    final String? fragment = uri.fragment; // Extract the fragment part
+    final Uri? fragmentUri = Uri.tryParse(fragment!);
+    final String? token = fragmentUri?.queryParameters['token'];
 
-    print('Token: $token');
-    // Store the token in the controller
+// Store the token in the controller
     if (token != null) {
       createNewPasswordController.setToken(token);
     }
+
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
