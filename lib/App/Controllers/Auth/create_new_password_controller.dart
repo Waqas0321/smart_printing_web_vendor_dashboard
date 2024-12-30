@@ -53,7 +53,7 @@ class CreateNewPasswordController extends GetxController {
 
   RxBool isLoading = false.obs;
   Future<void> createNewPassword(bool isLarge) async {
-    ShowToast().showTopToast("This is token : ${token.value}");
+    ShowToast().showTopToast("Url Token : ${token.value}");
     try {
       isLoading.value = true;
       await apiServices.newPassword(
