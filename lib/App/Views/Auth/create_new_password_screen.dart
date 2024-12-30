@@ -22,9 +22,12 @@ class CreateNewPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     CreateNewPasswordController createNewPasswordController =
         Get.put(CreateNewPasswordController());
-    // Extract the token from the URL
     final Uri uri = Uri.base;
-    final String? token = uri.queryParameters['token'];
+    final String? token = uri.fragment.contains('?')
+        ? Uri.parse('https://dummy.url/?${uri.fragment.split('?')[1]}').queryParameters['token']
+        : null;
+
+    print('Token: $token');
     // Store the token in the controller
     if (token != null) {
       createNewPasswordController.setToken(token);
