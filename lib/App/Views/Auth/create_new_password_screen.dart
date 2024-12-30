@@ -70,7 +70,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
                             ),
                             Gap(AppSizes().getHeightPercentage(5)),
                             CustomTextWidget(
-                              text: "Create a New\nPassword",
+                              text: "Create a New\nPassword....",
                               fontSize: 50,
                               fontWeight: FontWeight.w600,
                               textColor: AppColors.black,
