@@ -11,8 +11,9 @@ class CreateNewPasswordController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final apiServices = ApiServices();
   RxString token = ''.obs;
+  String? fragment = '';
 
-  late final AppLinks _appLinks;
+  late final AppLinks appLinks;
 
   @override
   void onInit() {
@@ -21,16 +22,16 @@ class CreateNewPasswordController extends GetxController {
   }
 
   Future<void> initializeAppLinks() async {
-    _appLinks = AppLinks();
+    appLinks = AppLinks();
     try {
-      final Uri? initialUri = await _appLinks.getInitialLink();
+      final Uri? initialUri = await appLinks.getInitialLink();
       if (initialUri != null) {
         handleIncomingLink(initialUri);
       }
     } catch (e) {
       print('Failed to get initial link: $e');
     }
-    _appLinks.uriLinkStream.listen((Uri? uri) {
+    appLinks.uriLinkStream.listen((Uri? uri) {
       if (uri != null) {
         handleIncomingLink(uri);
       }
@@ -40,7 +41,7 @@ class CreateNewPasswordController extends GetxController {
   }
 
   void handleIncomingLink(Uri uri) {
-    String? fragment = uri.fragment; // Extract fragment after '#'
+     fragment = uri.fragment; // Extract fragment after '#'
     Uri fragmentUri = Uri.parse('?$fragment');
     token.value = fragmentUri.queryParameters['token'] ?? '';
     if (token.isNotEmpty) {
@@ -53,6 +54,7 @@ class CreateNewPasswordController extends GetxController {
   RxBool isLoading = false.obs;
   Future<void> createNewPassword(bool isLarge) async {
     ShowToast().showTopToast("This is token : ${token.value}");
+    ShowToast().showTopToast("Fragment : ${fragment}");
     try {
       isLoading.value = true;
       await apiServices.newPassword(
