@@ -12,49 +12,48 @@ class CreateNewPasswordController extends GetxController {
   final apiServices = ApiServices();
   RxString token = ''.obs;
   String? fragment = '';
-
-  late final AppLinks appLinks;
-
-  @override
-  void onInit() {
-    super.onInit();
-    initializeAppLinks();
+  // late final AppLinks appLinks;
+  void setToken(String newToken) {
+    token.value = newToken;
   }
 
-  Future<void> initializeAppLinks() async {
-    appLinks = AppLinks();
-    try {
-      final Uri? initialUri = await appLinks.getInitialLink();
-      if (initialUri != null) {
-        handleIncomingLink(initialUri);
-      }
-    } catch (e) {
-      print('Failed to get initial link: $e');
-    }
-    appLinks.uriLinkStream.listen((Uri? uri) {
-      if (uri != null) {
-        handleIncomingLink(uri);
-      }
-    }, onError: (Object err) {
-      print('Failed to receive link: $err');
-    });
-  }
-
-  void handleIncomingLink(Uri uri) {
-     fragment = uri.fragment; // Extract fragment after '#'
-    Uri fragmentUri = Uri.parse('?$fragment');
-    token.value = fragmentUri.queryParameters['token'] ?? '';
-    if (token.isNotEmpty) {
-      print('Token: $token');
-    } else {
-      print('No token found in the URI fragment.');
-    }
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   initializeAppLinks();
+  // }
+  // Future<void> initializeAppLinks() async {
+  //   appLinks = AppLinks();
+  //   try {
+  //     final Uri? initialUri = await appLinks.getInitialLink();
+  //     if (initialUri != null) {
+  //       handleIncomingLink(initialUri);
+  //     }
+  //   } catch (e) {
+  //     print('Failed to get initial link: $e');
+  //   }
+  //   appLinks.uriLinkStream.listen((Uri? uri) {
+  //     if (uri != null) {
+  //       handleIncomingLink(uri);
+  //     }
+  //   }, onError: (Object err) {
+  //     print('Failed to receive link: $err');
+  //   });
+  // }
+  // void handleIncomingLink(Uri uri) {
+  //    fragment = uri.fragment; // Extract fragment after '#'
+  //   Uri fragmentUri = Uri.parse('?$fragment');
+  //   token.value = fragmentUri.queryParameters['token'] ?? '';
+  //   if (token.isNotEmpty) {
+  //     print('Token: $token');
+  //   } else {
+  //     print('No token found in the URI fragment.');
+  //   }
+  // }
 
   RxBool isLoading = false.obs;
   Future<void> createNewPassword(bool isLarge) async {
     ShowToast().showTopToast("This is token : ${token.value}");
-    ShowToast().showTopToast("Fragment : ${fragment}");
     try {
       isLoading.value = true;
       await apiServices.newPassword(

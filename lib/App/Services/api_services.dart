@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
+import 'package:smart_printing_web/App/Models/employ_model.dart';
 import 'package:smart_printing_web/App/Services/show_toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Routes/app_routes_name.dart';
@@ -10,9 +10,9 @@ import '../Widgets/custom_dialgue_box.dart';
 class ApiServices {
   String baseUrl = "https://360-hour-print.vercel.app";
   final showToast = ShowToast();
+  final dio = Dio();
 
   Future<void> loginWithEmailPassword(String url, Map<String, String> requestBody) async {
-    final dio = Dio();
     try {
       final response = await dio.post(
         baseUrl + url,
@@ -47,7 +47,6 @@ class ApiServices {
     }
   }
   Future<void> forgetPassword(String url, Map<String, dynamic> requestData) async {
-    final dio = Dio();
     try {
       final response = await dio.post(
         baseUrl + url,
@@ -78,7 +77,6 @@ class ApiServices {
     }
   }
   Future<void> newPassword(bool isLarge, String url, Map<String, dynamic> requestData) async {
-    final dio = Dio();
     try {
       final response = await dio.post(
         baseUrl + url,
@@ -120,9 +118,25 @@ class ApiServices {
       showToast.showTopToast('Unexpected error: $e');
     }
   }
-
-
-
-
-
+  Future<void> addEmployee(EmployeeModel employee,String url) async {
+    String apiUrl = baseUrl + url;
+    try {
+      final response = await dio.post(
+        apiUrl,
+        data: employee.toJson(),
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+        }),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print("${response.data["message"]}");
+        ShowToast().showTopToast("${response.data["message"]}");
+      } else {
+        print("${response.statusCode}");
+        ShowToast().showTopToast("${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error occurred: $e");
+    }
+  }
 }

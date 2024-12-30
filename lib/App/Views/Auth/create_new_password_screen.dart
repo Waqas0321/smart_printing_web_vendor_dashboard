@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -20,7 +22,13 @@ class CreateNewPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     CreateNewPasswordController createNewPasswordController =
         Get.put(CreateNewPasswordController());
-    createNewPasswordController.onInit();
+    // Extract the token from the URL
+    final Uri uri = Uri.base;
+    final String? token = uri.queryParameters['token'];
+    // Store the token in the controller
+    if (token != null) {
+      createNewPasswordController.setToken(token);
+    }
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
