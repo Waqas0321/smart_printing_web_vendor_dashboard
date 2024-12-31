@@ -78,48 +78,103 @@ class ApiServices {
   }
   Future<void> newPassword(bool isLarge, String url, Map<String, dynamic> requestData) async {
     try {
-
       final response = await dio.post(
         baseUrl + url,
         data: requestData,
         options: Options(
           headers: {"Content-Type": "application/json"},
+          sendTimeout: Duration(seconds: 10),  // Timeout for sending the request
+          receiveTimeout: Duration(seconds: 15), // Timeout for receiving the response
         ),
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         showToast.showTopToast('${response.data['message'] ?? 'No message provided.'}');
         showToast.showTopToast('Go to your login screen');
-        final String url =
-            "https://spw-vendor-dashboard.vercel.app/";
+        final String url = "https://spw-vendor-dashboard.vercel.app/";
         Get.dialog(
           CustomDialgueBox(
             isFirst: true,
             isLarge: isLarge,
-            onPress: () async{
+            onPress: () async {
               final Uri uri = Uri.parse(url);
               if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-              throw 'Could not launch $url';
+                throw 'Could not launch $url';
               }
             },
           ),
-          barrierDismissible:
-          false, // Prevent closing by tapping outside
+          barrierDismissible: false, // Prevent closing by tapping outside
         );
       } else {
         showToast.showTopToast(response.data['message'] ?? 'Something went wrong.');
       }
     } on DioException catch (dioError) {
-      if (dioError.response != null) {
-        showToast.showTopToast(dioError.response?.data['message'] ?? 'Error occurred.');
+      // Check for specific error types
+      if (dioError.type == DioErrorType.connectionTimeout) {
+        // Connection timeout
+        showToast.showTopToast('Connection timeout. Please try again.');
+      } else if (dioError.type == DioErrorType.receiveTimeout) {
+        // Receive timeout
+        showToast.showTopToast('Server took too long to respond.');
+      } else if (dioError.type == DioErrorType.unknown) {
+        // Other network related errors, like DNS failure
+        if (dioError.message!.contains('SocketException')) {
+          showToast.showTopToast('No internet connection or server unreachable.');
+        } else {
+          showToast.showTopToast('Unexpected network error: ${dioError.message}');
+        }
       } else {
-        showToast.showTopToast('Network error or server unreachable.');
+        showToast.showTopToast('Error: ${dioError.message}');
       }
     } catch (e) {
       print("Exception: $e");
       showToast.showTopToast('Unexpected error: $e');
     }
   }
+
+  // Future<void> newPassword(bool isLarge, String url, Map<String, dynamic> requestData) async {
+  //   try {
+  //     final response = await dio.post(
+  //       baseUrl + url,
+  //       data: requestData,
+  //       options: Options(
+  //         headers: {"Content-Type": "application/json"},
+  //       ),
+  //     );
+  //
+  //     if (response.statusCode == 200 || response.statusCode == 201) {
+  //       showToast.showTopToast('${response.data['message'] ?? 'No message provided.'}');
+  //       showToast.showTopToast('Go to your login screen');
+  //       final String url =
+  //           "https://spw-vendor-dashboard.vercel.app/";
+  //       Get.dialog(
+  //         CustomDialgueBox(
+  //           isFirst: true,
+  //           isLarge: isLarge,
+  //           onPress: () async{
+  //             final Uri uri = Uri.parse(url);
+  //             if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+  //             throw 'Could not launch $url';
+  //             }
+  //           },
+  //         ),
+  //         barrierDismissible:
+  //         false, // Prevent closing by tapping outside
+  //       );
+  //     } else {
+  //       showToast.showTopToast(response.data['message'] ?? 'Something went wrong.');
+  //     }
+  //   } on DioException catch (dioError) {
+  //     if (dioError.response != null) {
+  //       showToast.showTopToast(dioError.response?.data['message'] ?? 'Error occurred.');
+  //     } else {
+  //       showToast.showTopToast('Network error or server unreachable.');
+  //     }
+  //   } catch (e) {
+  //     print("Exception: $e");
+  //     showToast.showTopToast('Unexpected error: $e');
+  //   }
+  // }
   Future<void> addEmployee(EmployeeModel employee,String url) async {
     String apiUrl = baseUrl + url;
     try {
