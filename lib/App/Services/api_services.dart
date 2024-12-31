@@ -69,7 +69,7 @@ class ApiServices {
         showToast.showTopToast(dioError.response?.data['message'] ?? 'Error occurred.');
       } else {
         print("Dio Error: $dioError");
-        showToast.showTopToast('Network error or server unreachable.');
+        showToast.showTopToast('Network error or server unreachable.: $dioError');
       }
     } catch (e) {
       print("Exception: $e");
@@ -82,6 +82,9 @@ class ApiServices {
       final response = await dio.post(
         baseUrl + url,
         data: requestData,
+        options: Options(
+          headers: {"Content-Type": "application/json"},
+        ),
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
