@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:app_links/app_links.dart';
 import 'package:smart_printing_web/App/Services/api_services.dart';
 import 'package:smart_printing_web/App/Services/show_toast.dart';
 
@@ -8,9 +7,10 @@ class CreateNewPasswordController extends GetxController {
   // Text field controller
   TextEditingController createPasswordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKeyCreatePassword = GlobalKey<FormState>();
   final apiServices = ApiServices();
   RxString token = ''.obs;
+  RxString baseUrl = ''.obs;
   String? fragment = '';
   // late final AppLinks appLinks;
   void setToken(String newToken) {
@@ -54,6 +54,7 @@ class CreateNewPasswordController extends GetxController {
   RxBool isLoading = false.obs;
   Future<void> createNewPassword(bool isLarge) async {
     ShowToast().showTopToast("Url Token : ${token.value}");
+    ShowToast().showTopToast("Base Url : ${baseUrl.value}");
     try {
       isLoading.value = true;
       await apiServices.newPassword(

@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget {
                         .copyWith(scrollbars: false, overscroll: false),
                     child: SingleChildScrollView(
                       child: Form(
-                        key: loginController.formKey,
+                        key: loginController.formKeyLogin,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -126,7 +126,7 @@ class LoginScreen extends StatelessWidget {
                                 child: CustomElevatedButton(
                                   text:loginController.isLoading.value?"Loading...": "Login",
                                   onPress: () {
-                                    if(loginController.formKey.currentState!.validate()){
+                                    if(loginController.formKeyLogin.currentState!.validate()){
                                       loginController.login();
                                     }else{
                                       ShowToast().showTopToast("Please enter all fields");

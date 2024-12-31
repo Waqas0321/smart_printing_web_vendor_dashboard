@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:smart_printing_web/App/Routes/app_routes_name.dart';
 import 'package:smart_printing_web/App/Utils/Const/appColors.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_images.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
-import 'package:smart_printing_web/App/Views/Auth/create_new_password_screen.dart';
 import 'package:smart_printing_web/App/Widgets/custom_text_widget.dart';
 import 'package:smart_printing_web/App/Widgets/custom_textfield.dart';
 import '../../Controllers/Auth/forget_password_controller.dart';
@@ -39,7 +37,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                         .copyWith(scrollbars: false, overscroll: false),
                     child: SingleChildScrollView(
                       child: Form(
-                        key: forgetPasswordController.formKey,
+                        key: forgetPasswordController.formKeyForgetPassword,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -97,11 +95,10 @@ class ForgetPasswordScreen extends StatelessWidget {
                                 child: CustomElevatedButton(
                                   text: forgetPasswordController.isLoading.value?"Loading...":"Proceed",
                                   onPress: () {
-                                    if(forgetPasswordController.formKey.currentState!.validate()){
+                                    if(forgetPasswordController.formKeyForgetPassword.currentState!.validate()){
                                       forgetPasswordController.forgetPassword();
                                     }else{
                                       ShowToast().showTopToast("Please enter your email");
-                                      Get.to(CreateNewPasswordScreen());
                                     }
                                   },
                                 ),

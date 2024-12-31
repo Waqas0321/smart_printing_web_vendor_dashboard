@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -23,14 +21,24 @@ class CreateNewPasswordScreen extends StatelessWidget {
     CreateNewPasswordController createNewPasswordController =
         Get.put(CreateNewPasswordController());
     final Uri uri = Uri.base;
-    final String? fragment = uri.fragment; // Extract the fragment part
-    final Uri? fragmentUri = Uri.tryParse(fragment!);
-    final String? token = fragmentUri?.queryParameters['token'];
-
-// Store the token in the controller
-    if (token != null) {
-      createNewPasswordController.setToken(token);
+    // final Uri updatedUri = uri.replace(
+    //   fragment: '${uri.fragment}?token=77777ash4657dggfjdahfkahjvshfdvacjfvcavchsfvc', // Append token directly to fragment
+    // );
+    createNewPasswordController.baseUrl.value = uri.toString();
+    final String? fragment = uri.fragment;
+    if (fragment != null) {
+      final Uri? fragmentUri = Uri.tryParse(fragment);
+      final String? token = fragmentUri?.queryParameters['token'];
+      if (token != null) {
+        createNewPasswordController.setToken(token);
+      } else {
+        print('Token not found in the fragment.');
+      }
+    } else {
+      print('Fragment is null.');
     }
+
+
 
     return Scaffold(
       body: LayoutBuilder(
@@ -50,7 +58,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
                         .copyWith(scrollbars: false, overscroll: false),
                     child: SingleChildScrollView(
                       child: Form(
-                        key: createNewPasswordController.formKey,
+                        key: createNewPasswordController.formKeyCreatePassword,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -120,7 +128,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
                                 child: CustomElevatedButton(
                                   text: createNewPasswordController.isLoading.value?"Loading...": "Proceed",
                                   onPress: () {
-                                      if(createNewPasswordController.formKey.currentState!.validate()){
+                                      if(createNewPasswordController.formKeyCreatePassword.currentState!.validate()){
                                         if(createNewPasswordController.createPasswordController.text != createNewPasswordController.confirmPasswordController.text ){
                                           ShowToast().showTopToast("Please! match new password and confirm password");
                                         }else{

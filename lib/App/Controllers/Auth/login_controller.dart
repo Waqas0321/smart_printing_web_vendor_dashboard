@@ -4,7 +4,7 @@ import 'package:smart_printing_web/App/Services/api_services.dart';
 
 class LoginController extends GetxController{
   final apiServices = ApiServices();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKeyLogin = GlobalKey<FormState>();
   // Text field Controller
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();

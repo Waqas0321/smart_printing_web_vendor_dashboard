@@ -7,7 +7,7 @@ class ForgetPasswordController extends GetxController{
   final apiServices = ApiServices();
   // Text field Controller
   TextEditingController emailController = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKeyForgetPassword = GlobalKey<FormState>();
   RxBool isLoading = false.obs;
   Future<void> forgetPassword() async {
     try {
