@@ -9,6 +9,7 @@ import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_images.dart';
 import 'package:smart_printing_web/App/Widgets/custom_text_button.dart';
 import 'package:smart_printing_web/App/Widgets/custom_textfield.dart';
+import '../../../../Services/image_picker_services.dart';
 import '../../../../Utils/Const/appColors.dart';
 import '../../../../Utils/Const/app_sizes.dart';
 import '../../../../Widgets/custom_container_button.dart';
@@ -85,53 +86,68 @@ class AddEmployeeScreen extends StatelessWidget {
                             textColor: AppColors.black,
                           ),
                           Gap(18),
-                          Center(
-                            child: Stack(
-                              children: [
-                                Container(
-                                  height: 100,
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                      color: AppColors.white,
-                                      borderRadius: BorderRadius.circular(16),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: AppColors.brown
-                                                .withOpacity(0.06),
-                                            blurRadius: 5,
-                                            spreadRadius: 3)
-                                      ]),
-                                  child: Icon(
-                                    CupertinoIcons.person,
-                                    size: 60,
-                                    color: AppColors.brown.withOpacity(0.5),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 0,
-                                  right: 0,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: AppColors.white,
-                                        shape: BoxShape.circle,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: AppColors.brown
-                                                  .withOpacity(0.06),
-                                              blurRadius: 5,
-                                              spreadRadius: 3)
-                                        ]),
-                                    child: IconButton(
-                                      icon: const Icon(Icons.camera_alt,
-                                          size: 20, color: AppColors.primary),
-                                      onPressed: () {
-                                        // Camera action here
-                                      },
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
+                          Obx(
+                           () {
+                             final imageService =
+                             Get.put(ImagePickerService());
+                             return Center(
+                               child: Stack(
+                                 children: [
+                                   Container(
+                                     height: 100,
+                                     width: 100,
+                                     decoration: BoxDecoration(
+                                         color: AppColors.white,
+                                         borderRadius: BorderRadius.circular(16),
+                                         boxShadow: [
+                                           BoxShadow(
+                                               color: AppColors.brown
+                                                   .withOpacity(0.06),
+                                               blurRadius: 5,
+                                               spreadRadius: 3)
+                                         ]),
+                                     child: imageService.selectedImage.value == null
+                                         ?Icon(
+                                       CupertinoIcons.person,
+                                       size: 60,
+                                       color: AppColors.brown.withOpacity(0.5),
+                                     ):Image.network(
+                                       imageService
+                                           .selectedImage.value!.path,
+                                       fit: BoxFit.cover,
+                                     ),
+                                   ),
+                                   Positioned(
+                                     bottom: 0,
+                                     right: 0,
+                                     child: GestureDetector(
+                                       onTap: () => imageService
+                                           .pickImageFromGallery(context),
+                                       child: Container(
+                                         decoration: BoxDecoration(
+                                             color: AppColors.white,
+                                             shape: BoxShape.circle,
+                                             boxShadow: [
+                                               BoxShadow(
+                                                   color: AppColors.brown
+                                                       .withOpacity(0.06),
+                                                   blurRadius: 5,
+                                                   spreadRadius: 3)
+                                             ]),
+                                         child: IconButton(
+                                           icon: const Icon(Icons.camera_alt,
+                                               size: 20, color: AppColors.primary),
+                                           onPressed: () {
+                                             // Camera action here
+                                           },
+                                         ),
+                                       ),
+                                     ),
+                                   )
+                                 ],
+                               ),
+                             );
+                           }
                           ),
                           Gap(24),
                           Row(

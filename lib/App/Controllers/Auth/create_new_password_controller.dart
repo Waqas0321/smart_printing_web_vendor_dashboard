@@ -62,7 +62,7 @@ class CreateNewPasswordController extends GetxController {
           isLarge,
           "/vendor/resetPassword",
           {
-            "token": token,
+            "token": token.value.toString(),
             "newPassword": createPasswordController.text,
           });
     } catch (e) {
