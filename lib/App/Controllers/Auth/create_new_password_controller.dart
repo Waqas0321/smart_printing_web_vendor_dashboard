@@ -55,6 +55,7 @@ class CreateNewPasswordController extends GetxController {
   Future<void> createNewPassword(bool isLarge) async {
     ShowToast().showTopToast("Url Token : ${token.value}");
     ShowToast().showTopToast("Base Url : ${baseUrl.value}");
+    ShowToast().showTopToast("Base Url : ${createPasswordController.text.toString()}");
     try {
       isLoading.value = true;
       await apiServices.newPassword(

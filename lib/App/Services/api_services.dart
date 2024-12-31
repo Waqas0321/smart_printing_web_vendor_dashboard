@@ -78,13 +78,12 @@ class ApiServices {
   }
   Future<void> newPassword(bool isLarge, String url, Map<String, dynamic> requestData) async {
     try {
+
       final response = await dio.post(
         baseUrl + url,
         data: requestData,
-        options: Options(
-          headers: {"Content-Type": "application/json"},
-        ),
       );
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         showToast.showTopToast('${response.data['message'] ?? 'No message provided.'}');
         showToast.showTopToast('Go to your login screen');
