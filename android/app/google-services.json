@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "240195487829",
+    "project_id": "tellmeapp-f9f0a",
+    "storage_bucket": "tellmeapp-f9f0a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240195487829:android:cf9cb90e7e0ae656926cdc",
+        "android_client_info": {
+          "package_name": "com.ws.tellmews"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyc51HhxbYjEWpXcWuu-WNFZ83LYoQHAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
