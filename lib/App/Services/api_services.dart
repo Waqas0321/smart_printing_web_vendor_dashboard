@@ -1,18 +1,22 @@
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
 import 'package:smart_printing_web/App/Models/employ_model.dart';
+import 'package:smart_printing_web/App/Services/prefrence_services.dart';
 import 'package:smart_printing_web/App/Services/show_toast.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../Models/product_model.dart';
 import '../Routes/app_routes_name.dart';
-import '../Views/Vendor Dashboard/home_screen.dart';
 import '../Widgets/custom_dialgue_box.dart';
 
 class ApiServices {
   String baseUrl = "https://360-hour-print.vercel.app";
+
   final showToast = ShowToast();
   final dio = Dio();
 
+  /// Login Admin
   Future<void> loginWithEmailPassword(String url, Map<String, String> requestBody) async {
+
     try {
       final response = await dio.post(
         baseUrl + url,
@@ -25,8 +29,9 @@ class ApiServices {
         final responseData = response.data;
         final message = responseData['message'] ?? 'Login successful!';
         print("Response: ${response.data}");
+        await SharedPreferencesService.setString('token', responseData['token']);
         showToast.showTopToast(message);
-        Get.to(HomeScreen());
+        Get.toNamed(AppRoutesName.homeScreen);
       } else {
         final errorMessage = response.data['message'] ?? 'Something went wrong!';
         showToast.showTopToast(errorMessage);
@@ -46,6 +51,7 @@ class ApiServices {
       showToast.showTopToast('An unexpected error occurred: $e');
     }
   }
+  /// Forget Password Function
   Future<void> forgetPassword(String url, Map<String, dynamic> requestData) async {
     try {
       final response = await dio.post(
@@ -76,7 +82,7 @@ class ApiServices {
       showToast.showTopToast('Unexpected error: $e');
     }
   }
-
+  /// Create new password
   Future<void> newPassword(bool isLarge, String url, Map<String, String> requestBody) async {
     try {
       final response = await dio.post(
@@ -119,16 +125,21 @@ class ApiServices {
       showToast.showTopToast('Unexpected error: $e');
     }
   }
+  /// Add Employee
   Future<void> addEmployee(EmployeeModel employee,String url) async {
     String apiUrl = baseUrl + url;
+    String? token = await SharedPreferencesService.getString('token');
+    print("Token from Shared Prefrence:.......... $token");
     try {
       final response = await dio.post(
         apiUrl,
         data: employee.toJson(),
         options: Options(headers: {
           'Content-Type': 'application/json',
+          'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmQ3ZTc5YWM3YTdlYmQ1OGUxOThkZCIsImVtYWlsIjoiYWRtaW5AZW1haWwuY29tIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzM1NjY4OTYwLCJleHAiOjE3MzU3NTUzNjB9.LBKKwukgcZwJ3fMC0TltKuvdIcYeJnx8tUytT8yeojw"
         }),
       );
+      print("Response Status Code : ${response.statusCode}");
       if (response.statusCode == 200 || response.statusCode == 201) {
         print("${response.data["message"]}");
         ShowToast().showTopToast("${response.data["message"]}");
@@ -140,4 +151,87 @@ class ApiServices {
       print("Error occurred: $e");
     }
   }
+  /// Get Employees
+  Future<List<EmployeeModel>> getEmployees(String url) async {
+    String apiUrl = baseUrl + url;
+    String? token = await SharedPreferencesService.getString('token');
+    print("Token from Shared Preferences: $token");
+    try {
+      final response = await dio.get(
+        apiUrl,
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token,
+        }),
+      );
+      print("Response Status Code: ${response.statusCode}");
+      if (response.statusCode == 200) {
+        final List<dynamic>? data = response.data["employees"];
+        if (data == null) {
+          print("No employees data found in response.");
+          ShowToast().showTopToast("No employees found.");
+          return [];
+        }
+
+        return data.map((json) => EmployeeModel.fromJson(json)).toList();
+      } else {
+        print("API error: ${response.statusCode}");
+        ShowToast().showTopToast("Error: ${response.statusCode}");
+        return [];
+      }
+    } catch (e) {
+      print("Error occurred: $e");
+      ShowToast().showTopToast("Failed to fetch employees: $e");
+      return [];
+    }
+  }
+  ///Post Product
+  Future<void> postProduct(String url, ProductModel product) async {
+    try {
+      String apiUrl = baseUrl + url;
+      String? token = await SharedPreferencesService.getString('token');
+      print("Shared Prefrence Token : $token");
+      final response = await dio.post(
+        apiUrl,
+        data: product.toJson(),
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token,
+        }),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print("Product added successfully: ${response.data}");
+      } else {
+        print("Failed to add product: ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error occurred while posting product: $e");
+    }
+  }
+  /// Get Products
+  Future<List<ProductModel>> getProducts(String url) async {
+    try {
+      String apiUrl = baseUrl + url;
+      String? token = await SharedPreferencesService.getString('token');
+      final response = await dio.get(
+        apiUrl,
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token,
+        }),
+      );
+      if (response.statusCode == 200) {
+        final List<dynamic> data = response.data["products"]; // Adjust based on API response
+        return data.map((json) => ProductModel.fromJson(json)).toList();
+      } else {
+        print("Failed to fetch products: ${response.statusCode}");
+        return [];
+      }
+    } catch (e) {
+      print("Error occurred while fetching products: $e");
+      return [];
+    }
+  }
+
+
 }

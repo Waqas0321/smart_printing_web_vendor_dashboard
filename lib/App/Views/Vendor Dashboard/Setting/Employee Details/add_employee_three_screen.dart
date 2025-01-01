@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -93,11 +92,11 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                                     child: CustomPersmissionBox(
                                       title: "Provide Estimation",
                                       icon: AppIcons.documentOutlineIcon,
-                                      isChecked:
-                                          addEmployeeController.isChecked,
-                                      onPress: (value) => addEmployeeController
-                                          .toggleCheckbox(addEmployeeController
-                                              .isChecked), // Toggle logic
+                                      isChecked: addEmployeeController.provideEstimationCheckbox, // Make sure it's a `.value` because it's an `RxBool`
+                                      onPress: (value) {
+                                        // Toggle checkbox and update permission in controller
+                                        addEmployeeController.toggleCheckbox(addEmployeeController.provideEstimationCheckbox, 'provideEstimation', addEmployeeController.permissions);
+                                      }, // Toggle logic
                                     ),
                                   ),
                                   Gap(18),
@@ -105,15 +104,16 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                                     child: CustomPersmissionBox(
                                       icon: AppIcons.bagIcon,
                                       title: "Create Order",
-                                      isChecked:
-                                          addEmployeeController.isCheckedTwo,
-                                      onPress: (value) => addEmployeeController
-                                          .toggleCheckbox(addEmployeeController
-                                              .isCheckedTwo),
+                                      isChecked: addEmployeeController.createOrderCheckbox, // Make sure it's a `.value`
+                                      onPress: (value) {
+                                        // Toggle checkbox and update permission in controller
+                                        addEmployeeController.toggleCheckbox(addEmployeeController.createOrderCheckbox, 'createOrder', addEmployeeController.permissions);
+                                      },
                                     ),
                                   ),
                                 ],
                               ),
+
                               Gap(18),
                               Row(
                                 children: [
@@ -122,10 +122,10 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                                       icon: AppIcons.editIcon,
                                       title: "Edit Work flow",
                                       isChecked:
-                                          addEmployeeController.isCheckedThree,
-                                      onPress: (value) => addEmployeeController
-                                          .toggleCheckbox(addEmployeeController
-                                              .isCheckedThree),
+                                          addEmployeeController.editWorkFlowCheckbox,
+                                      onPress: (value) {
+                                        addEmployeeController.toggleCheckbox(addEmployeeController.editWorkFlowCheckbox, 'editWorkFlow',addEmployeeController.permissions);
+                                      },
                                     ),
                                   ),
                                   Gap(18),
@@ -134,10 +134,10 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                                       icon: AppIcons.threeUsers,
                                       title: "Create Employees",
                                       isChecked:
-                                          addEmployeeController.isCheckedFour,
-                                      onPress: (value) => addEmployeeController
-                                          .toggleCheckbox(addEmployeeController
-                                              .isCheckedFour),
+                                          addEmployeeController.createEmployeeCheckbox,
+                                      onPress: (value) {
+                                        addEmployeeController.toggleCheckbox(addEmployeeController.createEmployeeCheckbox, 'createEmployee',addEmployeeController.permissions);
+                                      },
                                     ),
                                   ),
                                 ],
@@ -150,10 +150,10 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                                       icon: AppIcons.swapIcon,
                                       title: "Add Processes",
                                       isChecked:
-                                          addEmployeeController.isCheckedFive,
-                                      onPress: (value) => addEmployeeController
-                                          .toggleCheckbox(addEmployeeController
-                                              .isCheckedFive),
+                                          addEmployeeController.addProcessesCheckbox,
+                                      onPress: (value) {
+                                        addEmployeeController.toggleCheckbox(addEmployeeController.addProcessesCheckbox, 'addProcesses',addEmployeeController.permissions);
+                                      },
                                     ),
                                   ),
                                   Gap(12),
@@ -162,10 +162,10 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                                       icon: AppIcons.dashboardOutlineIcon,
                                       title: "Machine Operator Dashboard",
                                       isChecked:
-                                          addEmployeeController.isCheckedSix,
-                                      onPress: (value) => addEmployeeController
-                                          .toggleCheckbox(addEmployeeController
-                                              .isCheckedSix),
+                                          addEmployeeController.machineOperatorDashboardCheckbox,
+                                      onPress: (value) {
+                                        addEmployeeController.toggleCheckbox(addEmployeeController.machineOperatorDashboardCheckbox, 'machineOperatorDashboard',addEmployeeController.permissions);
+                                      },
                                     ),
                                   ),
                                 ],
@@ -179,6 +179,7 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                             hasBorder: false,
                             textColor: AppColors.brown,
                             onPress: () {
+                              addEmployeeController.handleAddEmployee();
                               employeeDetailsController
                                   .selectedIndexEmployee.value = 0;
                             },

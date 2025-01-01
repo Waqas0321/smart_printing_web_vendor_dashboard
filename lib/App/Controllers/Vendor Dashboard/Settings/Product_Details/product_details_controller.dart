@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_printing_web/App/Services/api_services.dart';
 import 'package:smart_printing_web/App/Utils/Const/appColors.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/Product%20Details/product_details_main_screen.dart';
 
+import '../../../../Models/product_model.dart';
 import '../../../../Views/Vendor Dashboard/Setting/Product Details/product_service_info_screen.dart';
 
 class ProductDetailsController extends GetxController{
@@ -46,6 +48,14 @@ class ProductDetailsController extends GetxController{
     );
 
     Navigator.of(context).overlay?.insert(overlayEntry);
+  }
+
+  final RxList<ProductModel> products = <ProductModel>[].obs;
+  Future<List<ProductModel>> fetchProducts() async {
+    String endpoint = "/vendor/getProducts";
+    final fetchedProducts = await ApiServices().getProducts(endpoint);
+    products.assignAll(fetchedProducts);
+    return fetchedProducts;
   }
 
 }

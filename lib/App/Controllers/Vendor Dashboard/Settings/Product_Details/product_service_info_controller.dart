@@ -1,20 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_printing_web/App/Services/api_services.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/Product%20Details/product_service_info_screen_two.dart';
 import '../../../../Utils/Const/appColors.dart';
 import '../../../../Utils/Const/app_sizes.dart';
 
 class ProductServiceInfoController extends GetxController {
+  ApiServices apiServices = ApiServices();
+
+  /// Text field Controllers
   TextEditingController nameController = TextEditingController();
+  TextEditingController skuController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  TextEditingController salePriceController = TextEditingController();
+  TextEditingController catagoryController = TextEditingController();
+  TextEditingController taxController = TextEditingController();
+  TextEditingController incomeAmountController = TextEditingController();
 
-  //check box
-  RxBool boolValue = false.obs;
-
+  ///check boxes
+  RxBool purchaseInfo = false.obs;
+  RxBool inclusiveTax = false.obs;
   void toggleCheckbox(bool? value) {
-    boolValue.value = value ?? false;
+    purchaseInfo.value = value ?? false;
   }
 
+  /// Product Image
+  RxString imageUrl = "".obs;
+
+  /// Go to Next Overlay Screen
   void openProductServiceInfoTwo(BuildContext context) {
     OverlayEntry? overlayEntry;
 

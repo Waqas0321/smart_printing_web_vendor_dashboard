@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      navigatorKey: Get.key,
       title: AppStrings.appTitle,
       theme: AppTheme.lightTheme,
       debugShowCheckedModeBanner: false,

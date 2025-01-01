@@ -14,14 +14,17 @@ import '../../../../Widgets/custom_textfield.dart';
 
 class ProductServiceInfoScreenTwo extends StatelessWidget {
   const ProductServiceInfoScreenTwo({
-    super.key, required this.overlayEntry,
+    super.key,
+    required this.overlayEntry,
   });
+
   final OverlayEntry overlayEntry;
 
   @override
   Widget build(BuildContext context) {
     ProductServiceInfoController productServiceInfoController =
         Get.put(ProductServiceInfoController());
+    final imageService = Get.put(ImagePickerService());
     return LayoutBuilder(
       builder: (context, constraints) {
         final isLarge = AppSizes().isDesktop();
@@ -57,7 +60,7 @@ class ProductServiceInfoScreenTwo extends StatelessWidget {
                             color: AppColors.lightPrimary,
                           ),
                           child: Center(
-                            child:  SvgPicture.asset(
+                            child: SvgPicture.asset(
                               AppIcons.inventoryIcon,
                               color: AppColors.brown,
                             ),
@@ -83,10 +86,12 @@ class ProductServiceInfoScreenTwo extends StatelessWidget {
                     Gap(16),
                     Obx(
                       () {
-                        final imageService = Get.put(ImagePickerService());
                         return GestureDetector(
-                          onTap: () =>
-                              imageService.pickImageFromGallery(context),
+                          onTap: () {
+                            imageService.pickImageFromGallery(context);
+                            productServiceInfoController.imageUrl =
+                                imageService.imageUrl;
+                          },
                           child: Container(
                             clipBehavior: Clip.antiAlias,
                             height: 100,
@@ -154,7 +159,7 @@ class ProductServiceInfoScreenTwo extends StatelessWidget {
                               hintFontSize: 12,
                               borderRadius: 6,
                               controller:
-                                  productServiceInfoController.nameController)
+                                  productServiceInfoController.skuController)
                         ],
                       ),
                     ),
@@ -175,8 +180,8 @@ class ProductServiceInfoScreenTwo extends StatelessWidget {
                               hintText: "Text goes here",
                               hintFontSize: 12,
                               borderRadius: 6,
-                              controller:
-                                  productServiceInfoController.nameController)
+                              controller: productServiceInfoController
+                                  .catagoryController)
                         ],
                       ),
                     ),
@@ -198,8 +203,8 @@ class ProductServiceInfoScreenTwo extends StatelessWidget {
                               hintText: "Text goes here",
                               hintFontSize: 12,
                               borderRadius: 6,
-                              controller:
-                                  productServiceInfoController.nameController)
+                              controller: productServiceInfoController
+                                  .descriptionController)
                         ],
                       ),
                     ),
@@ -224,7 +229,7 @@ class ProductServiceInfoScreenTwo extends StatelessWidget {
                                     hintFontSize: 12,
                                     borderRadius: 6,
                                     controller: productServiceInfoController
-                                        .nameController)
+                                        .salePriceController)
                               ],
                             ),
                           ),
@@ -246,19 +251,73 @@ class ProductServiceInfoScreenTwo extends StatelessWidget {
                                     hintFontSize: 12,
                                     borderRadius: 6,
                                     controller: productServiceInfoController
-                                        .nameController)
+                                        .incomeAmountController)
                               ],
                             ),
                           ),
                         ],
                       ),
                     ),
-                    Gap(16),
+                    Gap(11),
                     Row(
                       children: [
                         Obx(
                           () => Checkbox(
-                            value: productServiceInfoController.boolValue.value,
+                            value:
+                                productServiceInfoController.inclusiveTax.value,
+                            onChanged: (value) {
+                              productServiceInfoController
+                                  .toggleCheckbox(value);
+                            },
+                            activeColor: AppColors.lightPrimary,
+                            checkColor: AppColors.tertiary,
+                          ),
+                        ),
+                        Gap(4),
+                        CustomTextWidget(
+                          text: "Inclusive of tax",
+                          fontSize: 10,
+                          textColor: AppColors.brown,
+                          fontWeight: FontWeight.w500,
+                        )
+                      ],
+                    ),
+                    Gap(16),
+                    SizedBox(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomTextWidget(
+                            text: "Tax",
+                            fontSize: 12,
+                            textColor: AppColors.brown,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          Gap(6),
+                          CustomTextField(
+                              hintText: "Enter Tax",
+                              hintFontSize: 12,
+                              borderRadius: 6,
+                              controller:
+                                  productServiceInfoController.taxController)
+                        ],
+                      ),
+                    ),
+                    Gap(16),
+                    CustomTextWidget(
+                      text: "Purchase Information",
+                      fontSize: 12,
+                      textColor: AppColors.brown,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    Gap(9),
+                    Row(
+                      children: [
+                        Obx(
+                          () => Checkbox(
+                            value:
+                                productServiceInfoController.purchaseInfo.value,
                             onChanged: (value) {
                               productServiceInfoController
                                   .toggleCheckbox(value);

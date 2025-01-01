@@ -93,7 +93,7 @@ class AddEmployeeDetailsTwo extends StatelessWidget {
                               hintText: "ID",
                               hintFontSize: 12,
                               contentSize: 14,
-                              controller: addEmployeeController.nameController),
+                              controller: addEmployeeController.userIDController),
                           Gap(18),
                           CustomTextWidget(
                             text: "Password*",
@@ -107,7 +107,7 @@ class AddEmployeeDetailsTwo extends StatelessWidget {
                               hintText: "Password",
                               hintFontSize: 12,
                               contentSize: 14,
-                              controller: addEmployeeController.nameController),
+                              controller: addEmployeeController.passwordController),
                           Gap(24),
                           CustomTextButton(
                             color: AppColors.lightPrimary,
