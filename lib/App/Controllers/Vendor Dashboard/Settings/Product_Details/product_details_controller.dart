@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_printing_web/App/Models/get_product_model.dart';
 import 'package:smart_printing_web/App/Services/api_services.dart';
 import 'package:smart_printing_web/App/Utils/Const/appColors.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
@@ -49,13 +50,9 @@ class ProductDetailsController extends GetxController{
 
     Navigator.of(context).overlay?.insert(overlayEntry);
   }
-
-  final RxList<ProductModel> products = <ProductModel>[].obs;
-  Future<List<ProductModel>> fetchProducts() async {
+  Future<List<GetProduct>> fetchProducts() async {
     String endpoint = "/vendor/getProducts";
-    final fetchedProducts = await ApiServices().getProducts(endpoint);
-    products.assignAll(fetchedProducts);
-    return fetchedProducts;
+    return await ApiServices().getProduct(endpoint);
   }
 
 }

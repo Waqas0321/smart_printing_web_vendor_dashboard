@@ -131,8 +131,8 @@ class AddEmployeeScreen extends StatelessWidget {
                                           imageService
                                               .pickImageFromGallery(context);
                                           addEmployeeController
-                                                  .profileImageUrl.value =
-                                              imageService.imageUrl.toString();
+                                                  .profileImageUrl =
+                                              imageService.imageUrl;
                                           addEmployeeController.selectedImage =
                                               imageService.selectedImage;
                                         },

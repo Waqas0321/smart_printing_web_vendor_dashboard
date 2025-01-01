@@ -229,7 +229,7 @@ class ProductServiceInfoScreenTwo extends StatelessWidget {
                                     hintFontSize: 12,
                                     borderRadius: 6,
                                     controller: productServiceInfoController
-                                        .salePriceController)
+                                        .rateController)
                               ],
                             ),
                           ),

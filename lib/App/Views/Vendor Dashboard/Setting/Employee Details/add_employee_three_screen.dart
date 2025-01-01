@@ -182,6 +182,7 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                               addEmployeeController.handleAddEmployee();
                               employeeDetailsController
                                   .selectedIndexEmployee.value = 0;
+                              addEmployeeController.selectedIndexEmployee.value = 0;
                             },
                           )
                         ],

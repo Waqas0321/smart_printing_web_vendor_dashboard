@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
-import 'package:smart_printing_web/App/Models/employ_model.dart';
+import 'package:smart_printing_web/App/Models/add_employ_model.dart';
+import 'package:smart_printing_web/App/Models/get_employee_model.dart';
+import 'package:smart_printing_web/App/Models/get_product_model.dart';
 import 'package:smart_printing_web/App/Services/prefrence_services.dart';
 import 'package:smart_printing_web/App/Services/show_toast.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -126,17 +128,17 @@ class ApiServices {
     }
   }
   /// Add Employee
-  Future<void> addEmployee(EmployeeModel employee,String url) async {
+  Future<void> addEmployee(AddEmployeeModel employee,String url) async {
+    print("Profile Image Here :${employee.profileImage}");
     String apiUrl = baseUrl + url;
     String? token = await SharedPreferencesService.getString('token');
-    print("Token from Shared Prefrence:.......... $token");
     try {
       final response = await dio.post(
         apiUrl,
         data: employee.toJson(),
         options: Options(headers: {
           'Content-Type': 'application/json',
-          'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmQ3ZTc5YWM3YTdlYmQ1OGUxOThkZCIsImVtYWlsIjoiYWRtaW5AZW1haWwuY29tIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzM1NjY4OTYwLCJleHAiOjE3MzU3NTUzNjB9.LBKKwukgcZwJ3fMC0TltKuvdIcYeJnx8tUytT8yeojw"
+          'Authorization': "Bearer $token"
         }),
       );
       print("Response Status Code : ${response.statusCode}");
@@ -152,86 +154,123 @@ class ApiServices {
     }
   }
   /// Get Employees
-  Future<List<EmployeeModel>> getEmployees(String url) async {
-    String apiUrl = baseUrl + url;
+  Future<List<GetEmployeeModel>> getEmployees(String endpoint) async {
+    String apiUrl = "$baseUrl$endpoint";
     String? token = await SharedPreferencesService.getString('token');
     print("Token from Shared Preferences: $token");
     try {
       final response = await dio.get(
         apiUrl,
-        options: Options(headers: {
-          'Content-Type': 'application/json',
-          'Authorization': token,
-        }),
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer $token",
+          },
+        ),
       );
       print("Response Status Code: ${response.statusCode}");
       if (response.statusCode == 200) {
-        final List<dynamic>? data = response.data["employees"];
-        if (data == null) {
-          print("No employees data found in response.");
+        final responseData = response.data;
+        if (responseData["success"] != true || responseData["data"] == null) {
+          print("Invalid or missing data in the response.");
+          return [];
+        }
+        final employeesData = responseData["data"] as List<dynamic>;
+        if (employeesData.isEmpty) {
+          print("No employees data found.");
           ShowToast().showTopToast("No employees found.");
           return [];
         }
-
-        return data.map((json) => EmployeeModel.fromJson(json)).toList();
+        return employeesData
+            .map<GetEmployeeModel>((json) => GetEmployeeModel.fromJson(json))
+            .toList();
       } else {
-        print("API error: ${response.statusCode}");
-        ShowToast().showTopToast("Error: ${response.statusCode}");
+        print("API error with status code: ${response.statusCode}");
         return [];
       }
-    } catch (e) {
-      print("Error occurred: $e");
-      ShowToast().showTopToast("Failed to fetch employees: $e");
+    } catch (error) {
+      print("Error occurred: $error");
       return [];
     }
   }
+
   ///Post Product
-  Future<void> postProduct(String url, ProductModel product) async {
+  Future<void> postProduct(String url, GetProductResponse product) async {
     try {
-      String apiUrl = baseUrl + url;
+      String apiUrl = '$baseUrl$url';
       String? token = await SharedPreferencesService.getString('token');
-      print("Shared Prefrence Token : $token");
+
+      if (token == null || token.isEmpty) {
+        print("Error: No token found in SharedPreferences.");
+        return;
+      }
+      print("Shared Preference Token: $token");
       final response = await dio.post(
         apiUrl,
         data: product.toJson(),
-        options: Options(headers: {
-          'Content-Type': 'application/json',
-          'Authorization': token,
-        }),
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer $token",
+          },
+        ),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         print("Product added successfully: ${response.data}");
       } else {
-        print("Failed to add product: ${response.statusCode}");
+        print("Failed to add product. Status code: ${response.statusCode}, Response: ${response.data}");
+      }
+    } on DioError catch (dioError) {
+      if (dioError.response != null) {
+        print(
+            "DioError: ${dioError.response?.statusCode} - ${dioError.response?.data}");
+      } else {
+        print("DioError: ${dioError.message}");
       }
     } catch (e) {
-      print("Error occurred while posting product: $e");
+      print("Unexpected error occurred while posting product: $e");
     }
   }
+
   /// Get Products
-  Future<List<ProductModel>> getProducts(String url) async {
+  Future<List<GetProduct>> getProduct(String url) async {
     try {
-      String apiUrl = baseUrl + url;
+      String apiUrl = '$baseUrl$url';
       String? token = await SharedPreferencesService.getString('token');
+      print("Shared Preference Token: $token");
       final response = await dio.get(
         apiUrl,
-        options: Options(headers: {
-          'Content-Type': 'application/json',
-          'Authorization': token,
-        }),
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer $token",
+          },
+        ),
       );
-      if (response.statusCode == 200) {
-        final List<dynamic> data = response.data["products"]; // Adjust based on API response
-        return data.map((json) => ProductModel.fromJson(json)).toList();
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final List<dynamic> productData = response.data["products"];
+        return productData
+            .map((json) => GetProduct.fromJson(json))
+            .toList();
       } else {
-        print("Failed to fetch products: ${response.statusCode}");
+        print("Failed to retrieve products. Status code: ${response.statusCode}, Response: ${response.data}");
         return [];
       }
+    } on DioException catch (dioError) {
+      if (dioError.response != null) {
+        print("DioError: ${dioError.response?.statusCode} - ${dioError.response?.data}");
+      } else {
+        print("DioError: ${dioError.message}");
+      }
+      return [];
     } catch (e) {
-      print("Error occurred while fetching products: $e");
+      print("Unexpected error occurred while retrieving products: $e");
       return [];
     }
   }
+
+
+
 
 
 }

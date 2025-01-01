@@ -13,16 +13,28 @@ class ProductServiceInfoController extends GetxController {
   TextEditingController nameController = TextEditingController();
   TextEditingController skuController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  TextEditingController salePriceController = TextEditingController();
+  TextEditingController rateController = TextEditingController();
   TextEditingController catagoryController = TextEditingController();
   TextEditingController taxController = TextEditingController();
   TextEditingController incomeAmountController = TextEditingController();
 
+
+  /// Double values
   ///check boxes
   RxBool purchaseInfo = false.obs;
   RxBool inclusiveTax = false.obs;
   void toggleCheckbox(bool? value) {
     purchaseInfo.value = value ?? false;
+  }
+
+  /// Convert from String to double
+  double convertTextToDouble(TextEditingController controller) {
+    try {
+      return double.parse(controller.text.trim());
+    } catch (e) {
+      print("Error converting text to double: $e");
+      return 0.0;
+    }
   }
 
   /// Product Image
@@ -58,4 +70,7 @@ class ProductServiceInfoController extends GetxController {
 
     Navigator.of(context).overlay?.insert(overlayEntry);
   }
+
+
+
 }

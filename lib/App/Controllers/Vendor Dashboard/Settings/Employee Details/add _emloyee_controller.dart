@@ -5,7 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Services/api_services.dart';
-import '../../../../Models/employ_model.dart';
+import '../../../../Models/add_employ_model.dart';
 
 class AddEmployeeController extends GetxController {
   Permissions permissions = Permissions();
@@ -79,12 +79,11 @@ class AddEmployeeController extends GetxController {
     fileUrls.removeAt(index);
     print(fileUrls);
   }
-
   /// Navigate Pages indexes
   RxInt selectedIndexEmployee = 0.obs;
-
   /// Upload to backend
   Future<void> handleAddEmployee() async {
+    print("Profile Image Here :${profileImageUrl}");
     permissions = Permissions(
       provideEstimation: provideEstimationCheckbox.value,
       createEmployee: createEmployeeCheckbox.value,
@@ -93,19 +92,35 @@ class AddEmployeeController extends GetxController {
       addProcesses: addProcessesCheckbox.value,
       machineOperatorDashboard: machineOperatorDashboardCheckbox.value,
     );
-    EmployeeModel employee = EmployeeModel(
+    AddEmployeeModel employee = AddEmployeeModel(
       name: nameController.text.trim(),
       email: emailAddressController.text.trim(),
       position: positionController.text.trim(),
       phone: phoneNumberController.text.trim(),
-      profileImage: profileImageUrl.value.toString(),
-      otherFiles: fileUrls,
+      profileImage: profileImageUrl.value,
+      otherFiles: fileUrls.value,
       userID: userIDController.text.trim(),
       password: passwordController.text.trim(),
       permissions: permissions,
     );
     String url = '/vendor/addEmployee';
-    // Call the API function
     await ApiServices().addEmployee(employee, url);
+    provideEstimationCheckbox.refresh();
+    createOrderCheckbox.refresh();
+    editWorkFlowCheckbox.refresh();
+    createEmployeeCheckbox.refresh();
+    machineOperatorDashboardCheckbox.refresh();
+    addProcessesCheckbox.refresh();
+    nameController.clear();
+    emailAddressController.clear();
+    positionController.clear();
+    phoneNumberController.clear();
+    userIDController.clear();
+    passwordController.clear();
+    profileImageUrl.value = "";
+    fileUrls.value = [];
+    selectedImage.value = null;
+    selectedFiles.value = [];
+
   }
 }
