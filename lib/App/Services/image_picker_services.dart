@@ -53,7 +53,7 @@ class ImagePickerService extends GetxController {
           await reader.onLoadEnd.first;
           final byteData = reader.result as Uint8List;
           final uploadTask =
-              storageRef.putData(byteData); // Upload the byte data
+              storageRef.putData(byteData, SettableMetadata(contentType: 'image/jpeg')); // Upload the byte data
           TaskSnapshot snapshot = await uploadTask;
           String downloadUrl = await snapshot.ref.getDownloadURL();
           return downloadUrl;

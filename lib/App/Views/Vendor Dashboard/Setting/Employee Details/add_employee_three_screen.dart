@@ -173,17 +173,16 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                             ],
                           ),
                           Gap(24),
-                          CustomTextButton(
-                            color: AppColors.lightPrimary,
-                            text: "Proceed",
-                            hasBorder: false,
-                            textColor: AppColors.brown,
-                            onPress: () {
-                              addEmployeeController.handleAddEmployee();
-                              employeeDetailsController
-                                  .selectedIndexEmployee.value = 0;
-                              addEmployeeController.selectedIndexEmployee.value = 0;
-                            },
+                          Obx(
+                            () =>  CustomTextButton(
+                              color: AppColors.lightPrimary,
+                              text: addEmployeeController.isLoading.value?"Loading...":"Proceed",
+                              hasBorder: false,
+                              textColor: AppColors.brown,
+                              onPress: () {
+                                addEmployeeController.handleAddEmployee();
+                              },
+                            ),
                           )
                         ],
                       ),

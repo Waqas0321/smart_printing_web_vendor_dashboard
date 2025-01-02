@@ -6,11 +6,14 @@ import 'package:smart_printing_web/App/Models/get_product_model.dart';
 import 'package:smart_printing_web/App/Services/prefrence_services.dart';
 import 'package:smart_printing_web/App/Services/show_toast.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../Models/product_model.dart';
+import '../Controllers/Vendor Dashboard/Settings/Employee Details/add _emloyee_controller.dart';
+import '../Controllers/Vendor Dashboard/Settings/Employee Details/emplyees_details_controller.dart';
 import '../Routes/app_routes_name.dart';
 import '../Widgets/custom_dialgue_box.dart';
 
 class ApiServices {
+  final addEmployeeController = Get.put(AddEmployeeController());
+  final employeeDetailsController = Get.put(EmployeesDetailsController());
   String baseUrl = "https://360-hour-print.vercel.app";
 
   final showToast = ShowToast();
@@ -129,7 +132,6 @@ class ApiServices {
   }
   /// Add Employee
   Future<void> addEmployee(AddEmployeeModel employee,String url) async {
-    print("Profile Image Here :${employee.profileImage}");
     String apiUrl = baseUrl + url;
     String? token = await SharedPreferencesService.getString('token');
     try {
@@ -142,12 +144,15 @@ class ApiServices {
         }),
       );
       print("Response Status Code : ${response.statusCode}");
+      print("Response Body : ${response.data}");
       if (response.statusCode == 200 || response.statusCode == 201) {
+        employeeDetailsController.selectedIndexEmployee.value = 0;
+        addEmployeeController.selectedIndexEmployee.value = 0;
         print("${response.data["message"]}");
         ShowToast().showTopToast("${response.data["message"]}");
       } else {
         print("${response.statusCode}");
-        ShowToast().showTopToast("${response.statusCode}");
+        ShowToast().showTopToast("${response.data["message"]}");
       }
     } catch (e) {
       print("Error occurred: $e");

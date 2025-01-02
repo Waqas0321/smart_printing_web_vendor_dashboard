@@ -82,45 +82,54 @@ class AddEmployeeController extends GetxController {
   /// Navigate Pages indexes
   RxInt selectedIndexEmployee = 0.obs;
   /// Upload to backend
+  RxBool isLoading = false.obs;
   Future<void> handleAddEmployee() async {
-    print("Profile Image Here :${profileImageUrl}");
-    permissions = Permissions(
-      provideEstimation: provideEstimationCheckbox.value,
-      createEmployee: createEmployeeCheckbox.value,
-      editWorkFlow: editWorkFlowCheckbox.value,
-      createOrder: createOrderCheckbox.value,
-      addProcesses: addProcessesCheckbox.value,
-      machineOperatorDashboard: machineOperatorDashboardCheckbox.value,
-    );
-    AddEmployeeModel employee = AddEmployeeModel(
-      name: nameController.text.trim(),
-      email: emailAddressController.text.trim(),
-      position: positionController.text.trim(),
-      phone: phoneNumberController.text.trim(),
-      profileImage: profileImageUrl.value,
-      otherFiles: fileUrls.value,
-      userID: userIDController.text.trim(),
-      password: passwordController.text.trim(),
-      permissions: permissions,
-    );
-    String url = '/vendor/addEmployee';
-    await ApiServices().addEmployee(employee, url);
-    provideEstimationCheckbox.refresh();
-    createOrderCheckbox.refresh();
-    editWorkFlowCheckbox.refresh();
-    createEmployeeCheckbox.refresh();
-    machineOperatorDashboardCheckbox.refresh();
-    addProcessesCheckbox.refresh();
-    nameController.clear();
-    emailAddressController.clear();
-    positionController.clear();
-    phoneNumberController.clear();
-    userIDController.clear();
-    passwordController.clear();
-    profileImageUrl.value = "";
-    fileUrls.value = [];
-    selectedImage.value = null;
-    selectedFiles.value = [];
+    try{
+      isLoading.value = true;
+      permissions = Permissions(
+        provideEstimation: provideEstimationCheckbox.value,
+        createEmployee: createEmployeeCheckbox.value,
+        editWorkFlow: editWorkFlowCheckbox.value,
+        createOrder: createOrderCheckbox.value,
+        addProcesses: addProcessesCheckbox.value,
+        machineOperatorDashboard: machineOperatorDashboardCheckbox.value,
+      );
+      AddEmployeeModel employee = AddEmployeeModel(
+        name: nameController.text.trim(),
+        email: emailAddressController.text.trim(),
+        position: positionController.text.trim(),
+        phone: phoneNumberController.text.trim(),
+        profileImage: profileImageUrl.value,
+        otherFiles: fileUrls.value,
+        userID: userIDController.text.trim(),
+        password: passwordController.text.trim(),
+        permissions: permissions,
+      );
+      String url = '/vendor/addEmployee';
+      await ApiServices().addEmployee(employee, url);
+      provideEstimationCheckbox.value = false;
+      createOrderCheckbox.value = false;
+      editWorkFlowCheckbox.value = false;
+      createEmployeeCheckbox.value = false;
+      machineOperatorDashboardCheckbox.value = false;
+      addProcessesCheckbox.value = false;
+      nameController.clear();
+      emailAddressController.clear();
+      positionController.clear();
+      phoneNumberController.clear();
+      userIDController.clear();
+      passwordController.clear();
+      profileImageUrl.value = "";
+      fileUrls.value = [];
+      selectedImage.value = null;
+      selectedFiles.value = [];
+
+    }catch(e){
+      print("Exception: $e");
+    }finally{
+      isLoading.value = false;
+    }
+
 
   }
 }

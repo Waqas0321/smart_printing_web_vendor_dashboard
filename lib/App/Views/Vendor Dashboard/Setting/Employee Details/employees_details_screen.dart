@@ -334,9 +334,12 @@ class EmployeesDetailsScreen extends StatelessWidget {
                                                 CircleAvatar(
                                                   radius: 20,
                                                   backgroundImage: NetworkImage(
-                                                    employees[index]
-                                                        .profileImage,
+                                                    employees[index].profileImage.toString(),
                                                   ),
+                                                  onBackgroundImageError: (exception, stackTrace) {
+                                                    // Handle image load error
+                                                    print("Error loading image: $exception");
+                                                  },
                                                 ),
                                                 CustomTextWidget(
                                                   text: employees[index].name,
@@ -378,7 +381,11 @@ class EmployeesDetailsScreen extends StatelessWidget {
                                       },
                                     ),
                                     Gap(18),
-                                    CustomPaginationClass(),
+                                    GestureDetector(
+                                        onTap:() {
+                                          employeesDetailsController.isImageUrlValid(employees.last.profileImage);
+                                        },
+                                        child: CustomPaginationClass()),
                                     Gap(18)
                                   ],
                                 );

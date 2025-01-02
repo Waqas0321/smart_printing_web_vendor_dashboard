@@ -1,14 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Product_Details/product_details_controller.dart';
 import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/settings_controller.dart';
 import 'package:smart_printing_web/App/Widgets/custom_divider.dart';
 import '../../../../Utils/Const/appColors.dart';
 import '../../../../Utils/Const/app_icons.dart';
-import '../../../../Utils/Const/app_images.dart';
 import '../../../../Utils/Const/app_sizes.dart';
 import '../../../../Widgets/custom_container_button.dart';
 import '../../../../Widgets/custom_outline_button.dart';
@@ -67,7 +64,7 @@ class ProductsDetailsScreen extends StatelessWidget {
                         hasRightIcon: false,
                         text: "Add Product",
                         onPress: () {
-                         productDetailsController.openProductServiceInfo(context);
+                          productDetailsController.selectedIndexProducts.value = 1;
                         },
                       )
                     ],

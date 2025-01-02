@@ -117,22 +117,6 @@ class Permissions {
     print('$permissionKey updated to $value');
   }
 
-  // Print a specific permission
-  void printPermission(String permissionKey, bool value) {
-    print('$permissionKey: $value');
-  }
-
-  // Print all selected permissions
-  void printAllSelectedPermissions() {
-    print('Selected Permissions:');
-    if (provideEstimation) print('  - Provide Estimation');
-    if (createEmployee) print('  - Create Employee');
-    if (editWorkFlow) print('  - Edit Work Flow');
-    if (createOrder) print('  - Create Order');
-    if (addProcesses) print('  - Add Processes');
-    if (machineOperatorDashboard) print('  - Machine Operator Dashboard');
-  }
-
   // Retrieve all selected permissions as a list
   List<String> getSelectedPermissions() {
     List<String> selectedPermissions = [];

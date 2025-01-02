@@ -60,4 +60,5 @@ class DefaultFirebaseOptions {
     authDomain: 'hours-app-e16c8.firebaseapp.com',
     storageBucket: 'hours-app-e16c8.firebasestorage.app',
   );
+
 }

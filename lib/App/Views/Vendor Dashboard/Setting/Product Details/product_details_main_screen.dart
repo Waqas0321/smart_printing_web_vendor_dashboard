@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Product_Details/product_details_controller.dart';
+import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/Product%20Details/add_product_screen.dart';
 import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/Product%20Details/products_details_screen.dart';
 import '../../../../Utils/Const/app_sizes.dart';
 
@@ -27,6 +28,7 @@ class ProductDetailsMainScreen extends StatelessWidget {
               index: productDetailsController.selectedIndexProducts.value,
               children: [
                 ProductsDetailsScreen(),
+                AddProductScreen()
               ],
             ),
           );
