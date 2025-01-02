@@ -271,23 +271,27 @@ class ProductsDetailsScreen extends StatelessWidget {
                                     defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                                     columnWidths: const <int, TableColumnWidth>{
                                       0: FixedColumnWidth(40),  // Checkbox
-                                      1: FlexColumnWidth(1.5), // Product ID
-                                      2: FixedColumnWidth(60), // Product Image
-                                      3: FlexColumnWidth(2),   // Product Name
-                                      4: FlexColumnWidth(1.5), // Category
+                                      1: FlexColumnWidth(1.5),  // Product ID
+                                      2: FixedColumnWidth(60),  // Product Image
+                                      3: FlexColumnWidth(2),    // Product Name
+                                      4: FlexColumnWidth(1.5),  // Category
                                     },
                                     children: [
                                       TableRow(
                                         decoration: BoxDecoration(color: AppColors.white),
                                         children: [
                                           Obx(() => Checkbox(
-                                            value: productDetailsController.boolList[index].value,
+                                            value: productDetailsController.selectedProductIds.contains(products[index].id), // Check if product ID is selected
                                             onChanged: (value) {
-                                              productDetailsController.toggleCheckbox(index, value);
+                                              if (value != null) {
+                                                productDetailsController.toggleSelection(products[index].id, value); // Toggle the selection state
+                                              }
                                             },
                                             activeColor: AppColors.lightPrimary,
                                             checkColor: AppColors.tertiary,
                                           )),
+
+
                                           CustomTextWidget(
                                             textOverflow: TextOverflow.ellipsis,
                                             text: "#${products[index].id}",

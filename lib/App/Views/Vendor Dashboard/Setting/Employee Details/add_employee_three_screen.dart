@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:smart_printing_web/App/Services/image_picker_services.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
 import '../../../../Controllers/Vendor Dashboard/Settings/Employee Details/add _emloyee_controller.dart';
 import '../../../../Controllers/Vendor Dashboard/Settings/Employee Details/emplyees_details_controller.dart';
@@ -20,6 +21,7 @@ class AddEmployeeThreeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final employeeDetailsController = Get.put(EmployeesDetailsController());
     final addEmployeeController = Get.put(AddEmployeeController());
+
     return LayoutBuilder(
       builder: (context, constraints) {
         final bool isLarge = AppSizes().isDesktop();
@@ -180,7 +182,7 @@ class AddEmployeeThreeScreen extends StatelessWidget {
                               hasBorder: false,
                               textColor: AppColors.brown,
                               onPress: () {
-                                addEmployeeController.handleAddEmployee();
+                                addEmployeeController.addEmployee();
                               },
                             ),
                           )

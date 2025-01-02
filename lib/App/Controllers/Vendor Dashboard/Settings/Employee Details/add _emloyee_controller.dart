@@ -6,9 +6,11 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Services/api_services.dart';
 import '../../../../Models/add_employ_model.dart';
+import '../../../../Services/image_picker_services.dart';
 
 class AddEmployeeController extends GetxController {
   Permissions permissions = Permissions();
+  final imageService = Get.put(ImagePickerService());
 
   /// Form key here
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -83,7 +85,7 @@ class AddEmployeeController extends GetxController {
   RxInt selectedIndexEmployee = 0.obs;
   /// Upload to backend
   RxBool isLoading = false.obs;
-  Future<void> handleAddEmployee() async {
+  Future<void> addEmployee() async {
     try{
       isLoading.value = true;
       permissions = Permissions(
@@ -123,6 +125,7 @@ class AddEmployeeController extends GetxController {
       fileUrls.value = [];
       selectedImage.value = null;
       selectedFiles.value = [];
+      imageService.selectedImage = Rx<File?>(null);
 
     }catch(e){
       print("Exception: $e");

@@ -6,13 +6,15 @@ import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/Product%
 
 
 class ProductDetailsController extends GetxController{
-  //check box
-  List<RxBool> boolList = List.generate(10, (_) => false.obs);
-
-  void toggleCheckbox(int index, bool? value) {
-    if (index >= 0 && index < boolList.length) {
-      boolList[index].value = value ?? false;
+  ///check box
+  RxList<String> selectedProductIds = <String>[].obs;
+  void toggleSelection(String productId, bool isSelected) {
+    if (isSelected) {
+      selectedProductIds.add(productId);
+    } else {
+      selectedProductIds.remove(productId);
     }
+    print('Selected Product IDs: ${selectedProductIds}');
   }
   RxInt selectedIndexProducts = 0.obs;
   final List<Widget> screens = [

@@ -169,8 +169,6 @@ class EmployeesDetailsScreen extends StatelessWidget {
                             ),
                           ),
                           Gap(12),
-
-                          // Dynamic Data Table using FutureBuilder
                           FutureBuilder(
                             future: employeesDetailsController.fetchEmployees(),
                             builder: (context, snapshot) {
@@ -309,12 +307,21 @@ class EmployeesDetailsScreen extends StatelessWidget {
                                                 Obx(() => Checkbox(
                                                       value:
                                                           employeesDetailsController
-                                                              .boolList[index]
-                                                              .value,
+                                                              .selectedEmployees
+                                                              .contains(
+                                                                  employees[
+                                                                          index]
+                                                                      .id),
+                                                      // Check if product ID is selected
                                                       onChanged: (value) {
-                                                        employeesDetailsController
-                                                            .toggleCheckbox(
-                                                                index, value);
+                                                        if (value != null) {
+                                                          employeesDetailsController
+                                                              .toggleSelection(
+                                                                  employees[
+                                                                          index]
+                                                                      .id,
+                                                                  value); // Toggle the selection state
+                                                        }
                                                       },
                                                       activeColor: AppColors
                                                           .lightPrimary,
@@ -334,11 +341,15 @@ class EmployeesDetailsScreen extends StatelessWidget {
                                                 CircleAvatar(
                                                   radius: 20,
                                                   backgroundImage: NetworkImage(
-                                                    employees[index].profileImage.toString(),
+                                                    employees[index]
+                                                        .profileImage
+                                                        .toString(),
                                                   ),
-                                                  onBackgroundImageError: (exception, stackTrace) {
+                                                  onBackgroundImageError:
+                                                      (exception, stackTrace) {
                                                     // Handle image load error
-                                                    print("Error loading image: $exception");
+                                                    print(
+                                                        "Error loading image: $exception");
                                                   },
                                                 ),
                                                 CustomTextWidget(
@@ -382,9 +393,7 @@ class EmployeesDetailsScreen extends StatelessWidget {
                                     ),
                                     Gap(18),
                                     GestureDetector(
-                                        onTap:() {
-                                          employeesDetailsController.isImageUrlValid(employees.last.profileImage);
-                                        },
+                                        onTap: () {},
                                         child: CustomPaginationClass()),
                                     Gap(18)
                                   ],
