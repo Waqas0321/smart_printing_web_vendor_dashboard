@@ -5,7 +5,7 @@ class AddEmployeeModel {
   final String email;
   final String position;
   final String phone;
-  final File profileImage;
+  final File? profileImage;
   final List<File?> otherFiles;
   final String userID;
   final String password;
@@ -45,7 +45,7 @@ class AddEmployeeModel {
       'email': email,
       'position': position,
       'phone': phone,
-      'profileImage': profileImage.path,
+      'profileImage': profileImage!.path,
       'otherFiles': otherFiles.map((file) => file!.path).toList(),
       'userID': userID,
       'password': password,

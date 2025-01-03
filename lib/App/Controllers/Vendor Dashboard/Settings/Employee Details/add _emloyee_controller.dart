@@ -1,7 +1,10 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
+import 'dart:html' as html;
+import 'dart:io' as io;
 import 'package:smart_printing_web/App/Services/api_services.dart';
 import '../../../../Models/add_employ_model.dart';
 import '../../../../Services/image_picker_services.dart';
@@ -25,6 +28,7 @@ class AddEmployeeController extends GetxController {
 
   /// Profile Image
   Rx<File?> selectedImage = Rx<File?>(null);
+  List<dynamic> convertedFiles = [];
 
   /// Multiple checkbox states for permissions
   RxBool provideEstimationCheckbox = false.obs;
@@ -41,7 +45,8 @@ class AddEmployeeController extends GetxController {
   }
 
   /// PDf files pick & Upload to firebase
-  RxList<File?> selectedFiles = <File?>[].obs;
+  RxList<PlatformFile?> selectedFiles = <PlatformFile?>[].obs;
+
   Future<void> pickAndUploadPDFs() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -49,18 +54,13 @@ class AddEmployeeController extends GetxController {
       allowMultiple: true,
     );
 
-    if (result != null && result.files.isNotEmpty) {
-      selectedFiles.addAll(result.files.map((platformFile) {
-        if (platformFile.path != null) {
-          return File(platformFile.path!);
-        }
-        return null;
-      }).toList());
-      print('Picked files: ${selectedFiles.map((file) => file?.path).toList()}');
+    if (result != null) {
+      selectedFiles.addAll(result.files);
     } else {
-      print('No files were selected.');
+      print('No files picked');  // This will be printed if no file is selected
     }
   }
+
   void removePDF(int index) {
     selectedFiles.removeAt(index);
   }
@@ -70,7 +70,27 @@ class AddEmployeeController extends GetxController {
   RxBool isLoading = false.obs;
   Future<void> addEmployee() async {
     try{
+      print(selectedFiles.length);
+      print(convertedFiles.length);
       isLoading.value = true;
+      // Print the values for debugging
+      print('provideEstimation: ${provideEstimationCheckbox.value}');
+      print('createEmployee: ${createEmployeeCheckbox.value}');
+      print('editWorkFlow: ${editWorkFlowCheckbox.value}');
+      print('createOrder: ${createOrderCheckbox.value}');
+      print('addProcesses: ${addProcessesCheckbox.value}');
+      print('machineOperatorDashboard: ${machineOperatorDashboardCheckbox.value}');
+
+      print('name: ${nameController.text.trim()}');
+      print('email: ${emailAddressController.text.trim()}');
+      print('position: ${positionController.text.trim()}');
+      print('phone: ${phoneNumberController.text.trim()}');
+      print('profileImage: ${imageService.selectedImage.value}');
+      print('otherFiles: $selectedFiles');
+      print('userID: ${userIDController.text.trim()}');
+      print('password: ${passwordController.text.trim()}');
+
+// Now create the Permissions object
       permissions = Permissions(
         provideEstimation: provideEstimationCheckbox.value,
         createEmployee: createEmployeeCheckbox.value,
@@ -79,17 +99,20 @@ class AddEmployeeController extends GetxController {
         addProcesses: addProcessesCheckbox.value,
         machineOperatorDashboard: machineOperatorDashboardCheckbox.value,
       );
+
+// Create the AddEmployeeModel object
       AddEmployeeModel employee = AddEmployeeModel(
         name: nameController.text.trim(),
         email: emailAddressController.text.trim(),
         position: positionController.text.trim(),
         phone: phoneNumberController.text.trim(),
-        profileImage: selectedImage.value!,
-        otherFiles: selectedFiles.value,
+        profileImage: imageService.selectedImage.value,
+        otherFiles: [],
         userID: userIDController.text.trim(),
         password: passwordController.text.trim(),
         permissions: permissions,
       );
+
       String url = '/vendor/addEmployee';
       await ApiServices().addEmployee(employee, url);
       provideEstimationCheckbox.value = false;

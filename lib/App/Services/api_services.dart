@@ -141,6 +141,7 @@ class ApiServices {
   /// Add Employee
   Future<void> addEmployee(AddEmployeeModel employee, String url) async {
     String apiUrl = baseUrl + url;
+    print(apiUrl);
     String? token = await SharedPreferencesService.getString('token');
     try {
       final response = await dio.post(
