@@ -130,9 +130,6 @@ class AddEmployeeScreen extends StatelessWidget {
                                         onTap: () {
                                           imageService
                                               .pickImageFromGallery(context);
-                                          addEmployeeController
-                                                  .profileImageUrl =
-                                              imageService.imageUrl;
                                           addEmployeeController.selectedImage =
                                               imageService.selectedImage;
                                         },

@@ -1,10 +1,12 @@
+import 'dart:io';
+
 class AddEmployeeModel {
   final String name;
   final String email;
   final String position;
   final String phone;
-  final String profileImage;
-  final List<String> otherFiles;
+  final File profileImage;
+  final List<File?> otherFiles;
   final String userID;
   final String password;
   final Permissions permissions;
@@ -27,8 +29,10 @@ class AddEmployeeModel {
       email: json['email'],
       position: json['position'],
       phone: json['phone'],
-      profileImage: json['profileImage'],
-      otherFiles: List<String>.from(json['otherFiles']),
+      profileImage: File(json['profileImage']),
+      otherFiles: (json['otherFiles'] as List<dynamic>)
+          .map((filePath) => File(filePath as String))
+          .toList(),
       userID: json['userID'],
       password: json['password'],
       permissions: Permissions.fromJson(json['permissions']),
@@ -41,8 +45,8 @@ class AddEmployeeModel {
       'email': email,
       'position': position,
       'phone': phone,
-      'profileImage': profileImage,
-      'otherFiles': otherFiles,
+      'profileImage': profileImage.path,
+      'otherFiles': otherFiles.map((file) => file!.path).toList(),
       'userID': userID,
       'password': password,
       'permissions': permissions.toJson(),

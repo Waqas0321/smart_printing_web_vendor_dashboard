@@ -1,11 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Employee%20Details/emplyees_details_controller.dart';
 import 'package:get/get.dart';
-import 'package:smart_printing_web/App/Models/get_employee_model.dart';
-import 'package:smart_printing_web/App/Utils/Const/app_images.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_sizes.dart';
 import 'package:smart_printing_web/App/Widgets/custom_divider.dart';
 import 'package:smart_printing_web/App/Widgets/custom_outline_button.dart';
@@ -17,9 +13,14 @@ import '../../../../Utils/Const/app_icons.dart';
 import '../../../../Widgets/custom_container_button.dart';
 import '../../../../Widgets/custom_pagination_class.dart';
 
-class EmployeesDetailsScreen extends StatelessWidget {
+class EmployeesDetailsScreen extends StatefulWidget {
   const EmployeesDetailsScreen({super.key});
 
+  @override
+  State<EmployeesDetailsScreen> createState() => _EmployeesDetailsScreenState();
+}
+
+class _EmployeesDetailsScreenState extends State<EmployeesDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     EmployeesDetailsController employeesDetailsController =
@@ -96,7 +97,11 @@ class EmployeesDetailsScreen extends StatelessWidget {
                       ),
                       Gap(8),
                       CustomOutlinedButton(
-                        onPressed: () {},
+                        onPressed: () async{
+                         await employeesDetailsController.deleteEmployees();
+                         setState(() {
+                         });
+                        },
                         isLarge: isLarge,
                         hasJustIcon: true,
                         iconColor: AppColors.red,
@@ -330,7 +335,7 @@ class EmployeesDetailsScreen extends StatelessWidget {
                                                     )),
                                                 CustomTextWidget(
                                                   text:
-                                                      "#${employees[index].id}",
+                                                      "#${index+1}",
                                                   maxLines: 1,
                                                   textOverflow:
                                                       TextOverflow.ellipsis,
@@ -345,12 +350,6 @@ class EmployeesDetailsScreen extends StatelessWidget {
                                                         .profileImage
                                                         .toString(),
                                                   ),
-                                                  onBackgroundImageError:
-                                                      (exception, stackTrace) {
-                                                    // Handle image load error
-                                                    print(
-                                                        "Error loading image: $exception");
-                                                  },
                                                 ),
                                                 CustomTextWidget(
                                                   text: employees[index].name,
@@ -398,7 +397,7 @@ class EmployeesDetailsScreen extends StatelessWidget {
                                     Gap(18)
                                   ],
                                 );
-                              } else {
+                              } else{
                                 return Center(
                                   child: CustomTextWidget(
                                     text: "No data available.",

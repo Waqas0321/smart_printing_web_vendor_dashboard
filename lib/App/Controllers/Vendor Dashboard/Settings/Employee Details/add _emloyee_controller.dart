@@ -1,15 +1,15 @@
 import 'dart:io';
-import 'dart:typed_data' as typed_data;
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:smart_printing_web/App/Services/api_services.dart';
 import '../../../../Models/add_employ_model.dart';
 import '../../../../Services/image_picker_services.dart';
+import 'emplyees_details_controller.dart';
 
 class AddEmployeeController extends GetxController {
   Permissions permissions = Permissions();
+  final employeeDetailsController = Get.put(EmployeesDetailsController());
   final imageService = Get.put(ImagePickerService());
 
   /// Form key here
@@ -24,7 +24,6 @@ class AddEmployeeController extends GetxController {
   TextEditingController passwordController = TextEditingController();
 
   /// Profile Image
-  RxString profileImageUrl = "".obs;
   Rx<File?> selectedImage = Rx<File?>(null);
 
   /// Multiple checkbox states for permissions
@@ -42,44 +41,28 @@ class AddEmployeeController extends GetxController {
   }
 
   /// PDf files pick & Upload to firebase
-  RxList<String> fileUrls = <String>[].obs;
-  RxList<PlatformFile> selectedFiles = <PlatformFile>[].obs;
+  RxList<File?> selectedFiles = <File?>[].obs;
   Future<void> pickAndUploadPDFs() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf'],
       allowMultiple: true,
     );
-    if (result != null) {
-      selectedFiles.addAll(result.files);
-      for (var file in result.files) {
-        String fileName =
-            "${DateTime.now().millisecondsSinceEpoch}_${file.name}";
-        Reference firebaseStorageRef =
-            FirebaseStorage.instance.ref().child('files/$fileName');
-        try {
-          if (file.bytes != null) {
-            typed_data.Uint8List fileBytes = file.bytes!;
-            UploadTask uploadTask = firebaseStorageRef.putData(fileBytes);
-            TaskSnapshot snapshot = await uploadTask;
-            String downloadUrl = await snapshot.ref.getDownloadURL();
-            print("File Url :$downloadUrl");
-            fileUrls.add(downloadUrl);
-            print(fileUrls);
-          } else {
-            print("Error: File has no valid bytes or path.");
-          }
-        } catch (e) {
-          print("Error uploading file: $e");
+
+    if (result != null && result.files.isNotEmpty) {
+      selectedFiles.addAll(result.files.map((platformFile) {
+        if (platformFile.path != null) {
+          return File(platformFile.path!);
         }
-      }
+        return null;
+      }).toList());
+      print('Picked files: ${selectedFiles.map((file) => file?.path).toList()}');
+    } else {
+      print('No files were selected.');
     }
-    print('Uploaded file URLs: ${fileUrls.join(', ')}');
   }
   void removePDF(int index) {
     selectedFiles.removeAt(index);
-    fileUrls.removeAt(index);
-    print(fileUrls);
   }
   /// Navigate Pages indexes
   RxInt selectedIndexEmployee = 0.obs;
@@ -101,8 +84,8 @@ class AddEmployeeController extends GetxController {
         email: emailAddressController.text.trim(),
         position: positionController.text.trim(),
         phone: phoneNumberController.text.trim(),
-        profileImage: profileImageUrl.value,
-        otherFiles: fileUrls.value,
+        profileImage: selectedImage.value!,
+        otherFiles: selectedFiles.value,
         userID: userIDController.text.trim(),
         password: passwordController.text.trim(),
         permissions: permissions,
@@ -121,11 +104,12 @@ class AddEmployeeController extends GetxController {
       phoneNumberController.clear();
       userIDController.clear();
       passwordController.clear();
-      profileImageUrl.value = "";
-      fileUrls.value = [];
+      selectedFiles.value = [];
       selectedImage.value = null;
       selectedFiles.value = [];
       imageService.selectedImage = Rx<File?>(null);
+      employeeDetailsController.selectedIndexEmployee.value = 0;
+      selectedIndexEmployee.value = 0;
 
     }catch(e){
       print("Exception: $e");

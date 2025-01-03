@@ -45,7 +45,7 @@ class _CustomOutlinedButtonState extends State<CustomOutlinedButton> {
           borderRadius: widget.isCircular ? null : BorderRadius.circular(8),
           shape: widget.isCircular ? BoxShape.circle : BoxShape.rectangle,
         ),
-        child: GestureDetector(
+        child: InkWell(
           onTap: widget.onPressed,
           child: widget.hasJustIcon
               ? Padding(

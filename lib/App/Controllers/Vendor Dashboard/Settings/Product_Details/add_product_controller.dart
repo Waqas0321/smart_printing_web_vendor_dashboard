@@ -1,14 +1,15 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Product_Details/product_details_controller.dart';
 import 'package:smart_printing_web/App/Models/product_model.dart';
 import 'package:smart_printing_web/App/Services/api_services.dart';
 import '../../../../Models/get_catagory_model.dart';
 import '../../../../Services/image_picker_services.dart';
 
 class AddProductController extends GetxController {
+  final productDetailsController = Get.put(ProductDetailsController());
   ApiServices apiServices = ApiServices();
   final imageService = Get.put(ImagePickerService());
   Rx<File?> selectedImage = Rx<File?>(null);
@@ -25,6 +26,7 @@ class AddProductController extends GetxController {
   void toggleCheckbox(bool? value) {
     includeTax.value = value ?? false;
   }
+
   void toggleCheckboxPurchase(bool? value) {
     frmSup.value = value ?? false;
   }
@@ -40,7 +42,6 @@ class AddProductController extends GetxController {
   }
 
   /// Product Image
-  RxString imageUrl = "".obs;
   RxString selectedIncomeAccount = "403 Services".obs;
   RxString selectedTax = "1000".obs;
 
@@ -54,6 +55,7 @@ class AddProductController extends GetxController {
   var selectedCategory = Rx<GetCategoryModel?>(null);
   var isLoading = true.obs;
 
+  /// Fetch Categories
   Future<void> fetchCategories() async {
     try {
       isLoading.value = true;
@@ -67,6 +69,7 @@ class AddProductController extends GetxController {
     }
   }
 
+  /// Select any Categories
   void selectCategory(GetCategoryModel? category) {
     selectedCategory.value = category;
   }
@@ -78,7 +81,7 @@ class AddProductController extends GetxController {
     try {
       isPosting.value = true;
       ProductModel productModel = ProductModel(
-          img: imageUrl.value,
+          img: selectedImage.value,
           name: nameController.text.toString().trim(),
           sku: skuController.text.toString().trim(),
           cat: [selectedCategory.value!.name],
@@ -88,9 +91,8 @@ class AddProductController extends GetxController {
           inclTax: includeTax.value,
           tax: convertTextToDouble(selectedTax.value),
           frmSup: frmSup.value);
-      apiServices.postProduct(
-          "/vendor/add-product", productModel);
-      imageUrl.value = "";
+      await apiServices.postProduct("/vendor/add-product", productModel);
+      selectedImage.value = null;
       nameController.clear();
       skuController.clear();
       selectedCategory = Rx<GetCategoryModel?>(null);
@@ -102,6 +104,7 @@ class AddProductController extends GetxController {
       frmSup.value = false;
       selectedImage = Rx<File?>(null);
       imageService.selectedImage = Rx<File?>(null);
+      productDetailsController.selectedIndexProducts.value = 0;
     } catch (e) {
       print("Exception: $e");
     } finally {

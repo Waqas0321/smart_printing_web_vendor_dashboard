@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
-import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Product_Details/product_details_controller.dart';
 import 'package:smart_printing_web/App/Models/add_employ_model.dart';
 import 'package:smart_printing_web/App/Models/get_employee_model.dart';
 import 'package:smart_printing_web/App/Models/get_product_model.dart';
@@ -8,24 +7,18 @@ import 'package:smart_printing_web/App/Models/product_model.dart';
 import 'package:smart_printing_web/App/Services/prefrence_services.dart';
 import 'package:smart_printing_web/App/Services/show_toast.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../Controllers/Vendor Dashboard/Settings/Employee Details/add _emloyee_controller.dart';
-import '../Controllers/Vendor Dashboard/Settings/Employee Details/emplyees_details_controller.dart';
 import '../Models/get_catagory_model.dart';
 import '../Routes/app_routes_name.dart';
 import '../Widgets/custom_dialgue_box.dart';
 
 class ApiServices {
-  final addEmployeeController = Get.put(AddEmployeeController());
-  final employeeDetailsController = Get.put(EmployeesDetailsController());
-  final productDetailsController = Get.put(ProductDetailsController());
   String baseUrl = "https://360-hour-print.vercel.app";
 
   final showToast = ShowToast();
   final dio = Dio();
 
   /// Login Admin
-  Future<void> loginWithEmailPassword(
-      String url, Map<String, String> requestBody) async {
+  Future<void> loginWithEmailPassword(String url, Map<String, String> requestBody) async {
     try {
       final response = await dio.post(
         baseUrl + url,
@@ -65,8 +58,7 @@ class ApiServices {
   }
 
   /// Forget Password Function
-  Future<void> forgetPassword(
-      String url, Map<String, dynamic> requestData) async {
+  Future<void> forgetPassword(String url, Map<String, dynamic> requestData) async {
     try {
       final response = await dio.post(
         baseUrl + url,
@@ -102,8 +94,7 @@ class ApiServices {
   }
 
   /// Create new password
-  Future<void> newPassword(
-      bool isLarge, String url, Map<String, String> requestBody) async {
+  Future<void> newPassword(bool isLarge, String url, Map<String, String> requestBody) async {
     try {
       final response = await dio.post(
         baseUrl + url,
@@ -163,8 +154,6 @@ class ApiServices {
       print("Response Status Code : ${response.statusCode}");
       print("Response Body : ${response.data}");
       if (response.statusCode == 200 || response.statusCode == 201) {
-        employeeDetailsController.selectedIndexEmployee.value = 0;
-        addEmployeeController.selectedIndexEmployee.value = 0;
         print("${response.data["message"]}");
         ShowToast().showTopToast("${response.data["message"]}");
       } else {
@@ -194,16 +183,7 @@ class ApiServices {
       print("Response Status Code: ${response.statusCode}");
       if (response.statusCode == 200) {
         final responseData = response.data;
-        if (responseData["success"] != true || responseData["data"] == null) {
-          print("Invalid or missing data in the response.");
-          return [];
-        }
         final employeesData = responseData["data"] as List<dynamic>;
-        if (employeesData.isEmpty) {
-          print("No employees data found.");
-          ShowToast().showTopToast("No employees found.");
-          return [];
-        }
         return employeesData
             .map<GetEmployeeModel>((json) => GetEmployeeModel.fromJson(json))
             .toList();
@@ -239,7 +219,7 @@ class ApiServices {
       if (response.statusCode == 200 || response.statusCode == 201) {
         print("Product added successfully: ${response.data}");
         ShowToast().showTopToast("${response.data["message"]}");
-        productDetailsController.selectedIndexProducts.value = 0;
+
 
       } else {
         ShowToast().showTopToast("${response.data["message"]}");
@@ -319,6 +299,33 @@ class ApiServices {
       }
     } catch (e) {
       throw Exception('Error: ${e.toString()}');
+    }
+  }
+
+  /// Delete Api
+  Future<void> deleteApi(String url, List<String> items) async {
+    String? token = await SharedPreferencesService.getString('token');
+    try {
+      String apiUrl = baseUrl + url;
+      final response = await dio.delete(
+        apiUrl,
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer $token"
+        }),
+        data: {
+      "ids": items
+      },
+      );
+      if (response.statusCode == 200) {
+        print("${response.data["message"]}");
+        ShowToast().showTopToast("${response.data["message"]}");
+      } else {
+        print("Failed to delete product. Status code: ${response.statusCode}");
+        ShowToast().showTopToast("${response.data["message"]}");
+      }
+    } catch (e) {
+      print("Error occurred while deleting the product: $e");
     }
   }
 }

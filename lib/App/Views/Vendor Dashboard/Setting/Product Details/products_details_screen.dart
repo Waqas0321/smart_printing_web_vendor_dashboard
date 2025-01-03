@@ -13,9 +13,14 @@ import '../../../../Widgets/custom_pagination_class.dart';
 import '../../../../Widgets/custom_text_button.dart';
 import '../../../../Widgets/custom_text_widget.dart';
 
-class ProductsDetailsScreen extends StatelessWidget {
+class ProductsDetailsScreen extends StatefulWidget {
   const ProductsDetailsScreen({super.key});
 
+  @override
+  State<ProductsDetailsScreen> createState() => _ProductsDetailsScreenState();
+}
+
+class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     ProductDetailsController productDetailsController =
@@ -26,10 +31,10 @@ class ProductsDetailsScreen extends StatelessWidget {
         final bool isLarge = AppSizes().isDesktop();
         return Padding(
           padding:
-          AppSizes().getCustomPadding(top: 1, bottom: 2, left: 1, right: 1),
+              AppSizes().getCustomPadding(top: 1, bottom: 2, left: 1, right: 1),
           child: ScrollConfiguration(
             behavior:
-            ScrollBehavior().copyWith(overscroll: false, scrollbars: false),
+                ScrollBehavior().copyWith(overscroll: false, scrollbars: false),
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -38,7 +43,6 @@ class ProductsDetailsScreen extends StatelessWidget {
                       InkWell(
                           onTap: () {
                             settingController.selectedIndex.value = 0;
-
                           },
                           child: Icon(Icons.arrow_back_ios_outlined)),
                       Gap(12),
@@ -64,7 +68,8 @@ class ProductsDetailsScreen extends StatelessWidget {
                         hasRightIcon: false,
                         text: "Add Product",
                         onPress: () {
-                          productDetailsController.selectedIndexProducts.value = 1;
+                          productDetailsController.selectedIndexProducts.value =
+                              1;
                         },
                       )
                     ],
@@ -92,7 +97,10 @@ class ProductsDetailsScreen extends StatelessWidget {
                       ),
                       Gap(8),
                       CustomOutlinedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          await productDetailsController.deleteProducts();
+                          setState(() {});
+                        },
                         isLarge: isLarge,
                         hasJustIcon: true,
                         iconColor: AppColors.red,
@@ -119,25 +127,29 @@ class ProductsDetailsScreen extends StatelessWidget {
                       children: [
                         Container(
                           width: AppSizes().getWidthPercentage(100),
-                          padding: AppSizes().getCustomPadding(top: 2, bottom: 2, right: 1, left: 1),
+                          padding: AppSizes().getCustomPadding(
+                              top: 2, bottom: 2, right: 1, left: 1),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(9),
                             color: AppColors.halfWhite2,
                           ),
                           child: Table(
-                            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                            defaultVerticalAlignment:
+                                TableCellVerticalAlignment.middle,
                             columnWidths: const <int, TableColumnWidth>{
-                              0: FixedColumnWidth(40),  // Checkbox
+                              0: FixedColumnWidth(40), // Checkbox
                               1: FlexColumnWidth(1.5), // Product ID
                               2: FixedColumnWidth(60), // Product Image
-                              3: FlexColumnWidth(2),   // Product Name
+                              3: FlexColumnWidth(2), // Product Name
                               4: FlexColumnWidth(1.5), // Category
                             },
                             children: [
                               TableRow(
-                                decoration: BoxDecoration(color: AppColors.halfWhite2),
+                                decoration:
+                                    BoxDecoration(color: AppColors.halfWhite2),
                                 children: [
-                                  SizedBox(), // Empty space for the checkbox header
+                                  SizedBox(),
+                                  // Empty space for the checkbox header
                                   CustomTextWidget(
                                     text: "PRODUCT ID",
                                     fontWeight: FontWeight.w600,
@@ -171,7 +183,8 @@ class ProductsDetailsScreen extends StatelessWidget {
                         FutureBuilder(
                           future: productDetailsController.fetchProducts(),
                           builder: (context, snapshot) {
-                            if(snapshot.connectionState == ConnectionState.waiting){
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
                               return ListView.separated(
                                 itemCount: 8,
                                 physics: NeverScrollableScrollPhysics(),
@@ -179,13 +192,12 @@ class ProductsDetailsScreen extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return Table(
                                     defaultVerticalAlignment:
-                                    TableCellVerticalAlignment.middle,
-                                    columnWidths: const <int,
-                                        TableColumnWidth>{
-                                      0: FixedColumnWidth(40),  // Checkbox
+                                        TableCellVerticalAlignment.middle,
+                                    columnWidths: const <int, TableColumnWidth>{
+                                      0: FixedColumnWidth(40), // Checkbox
                                       1: FlexColumnWidth(1.5), // Product ID
                                       2: FixedColumnWidth(60), // Product Image
-                                      3: FlexColumnWidth(2),   // Product Name
+                                      3: FlexColumnWidth(2), // Product Name
                                       4: FlexColumnWidth(1.5),
                                     },
                                     children: [
@@ -207,7 +219,7 @@ class ProductsDetailsScreen extends StatelessWidget {
                                           CircleAvatar(
                                             radius: 20,
                                             backgroundColor:
-                                            Colors.grey.shade300,
+                                                Colors.grey.shade300,
                                           ),
                                           Container(
                                             height: 15,
@@ -231,7 +243,7 @@ class ProductsDetailsScreen extends StatelessWidget {
                                   return CustomDivider();
                                 },
                               );
-                            }else if(snapshot.hasError){
+                            } else if (snapshot.hasError) {
                               return Center(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -259,8 +271,8 @@ class ProductsDetailsScreen extends StatelessWidget {
                                   ],
                                 ),
                               );
-                            }else if (snapshot.hasData ||
-                                snapshot.data!.isNotEmpty){
+                            } else if (snapshot.hasData ||
+                                snapshot.data!.isNotEmpty) {
                               final products = snapshot.data;
                               return ListView.separated(
                                 itemCount: products!.length,
@@ -268,40 +280,49 @@ class ProductsDetailsScreen extends StatelessWidget {
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
                                   return Table(
-                                    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                                    defaultVerticalAlignment:
+                                        TableCellVerticalAlignment.middle,
                                     columnWidths: const <int, TableColumnWidth>{
-                                      0: FixedColumnWidth(40),  // Checkbox
-                                      1: FlexColumnWidth(1.5),  // Product ID
-                                      2: FixedColumnWidth(60),  // Product Image
-                                      3: FlexColumnWidth(2),    // Product Name
-                                      4: FlexColumnWidth(1.5),  // Category
+                                      0: FixedColumnWidth(40), // Checkbox
+                                      1: FlexColumnWidth(1.5), // Product ID
+                                      2: FixedColumnWidth(60), // Product Image
+                                      3: FlexColumnWidth(2), // Product Name
+                                      4: FlexColumnWidth(1.5), // Category
                                     },
                                     children: [
                                       TableRow(
-                                        decoration: BoxDecoration(color: AppColors.white),
+                                        decoration: BoxDecoration(
+                                            color: AppColors.white),
                                         children: [
                                           Obx(() => Checkbox(
-                                            value: productDetailsController.selectedProductIds.contains(products[index].id), // Check if product ID is selected
-                                            onChanged: (value) {
-                                              if (value != null) {
-                                                productDetailsController.toggleSelection(products[index].id, value); // Toggle the selection state
-                                              }
-                                            },
-                                            activeColor: AppColors.lightPrimary,
-                                            checkColor: AppColors.tertiary,
-                                          )),
-
-
+                                                value: productDetailsController
+                                                    .selectedProductIds
+                                                    .contains(
+                                                        products[index].id),
+                                                // Check if product ID is selected
+                                                onChanged: (value) {
+                                                  if (value != null) {
+                                                    productDetailsController
+                                                        .toggleSelection(
+                                                            products[index].id,
+                                                            value); // Toggle the selection state
+                                                  }
+                                                },
+                                                activeColor:
+                                                    AppColors.lightPrimary,
+                                                checkColor: AppColors.tertiary,
+                                              )),
                                           CustomTextWidget(
                                             textOverflow: TextOverflow.ellipsis,
-                                            text: "#${products[index].id}",
+                                            text: "#${index + 1}",
                                             fontWeight: FontWeight.w600,
                                             fontSize: 12,
                                             textColor: AppColors.brown,
                                           ),
                                           CircleAvatar(
                                             radius: 20,
-                                            backgroundImage: NetworkImage(products[index].img),
+                                            backgroundImage: NetworkImage(
+                                                products[index].img),
                                           ),
                                           CustomTextWidget(
                                             textOverflow: TextOverflow.ellipsis,
@@ -312,7 +333,9 @@ class ProductsDetailsScreen extends StatelessWidget {
                                           ),
                                           CustomTextWidget(
                                             textOverflow: TextOverflow.ellipsis,
-                                            text: products[index].categories.first,
+                                            text: products[index]
+                                                .categories
+                                                .first,
                                             fontWeight: FontWeight.w500,
                                             fontSize: 12,
                                             textColor: AppColors.brown,
@@ -322,11 +345,12 @@ class ProductsDetailsScreen extends StatelessWidget {
                                     ],
                                   );
                                 },
-                                separatorBuilder: (BuildContext context, int index) {
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
                                   return CustomDivider();
                                 },
                               );
-                            }else{
+                            } else {
                               return Center(
                                 child: CustomTextWidget(
                                   text: "No data available.",
@@ -341,7 +365,6 @@ class ProductsDetailsScreen extends StatelessWidget {
                         Gap(18),
                         CustomPaginationClass(),
                         Gap(18)
-
                       ],
                     ),
                   )

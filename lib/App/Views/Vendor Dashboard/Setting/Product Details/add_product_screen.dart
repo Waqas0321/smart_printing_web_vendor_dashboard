@@ -505,8 +505,6 @@ class AddProductScreen extends StatelessWidget {
                                     onTap: () {
                                       imageService
                                           .pickImageFromGallery(context);
-                                      addProductController.imageUrl =
-                                          imageService.imageUrl;
                                       addProductController.selectedImage = imageService.selectedImage;
                                     },
                                     child: Container(
@@ -962,8 +960,8 @@ class AddProductScreen extends StatelessWidget {
                                       text: addProductController.isPosting.value?"Loading...": "Save & Proceed",
                                       hasBorder: false,
                                       textColor: AppColors.brown,
-                                      onPress: () {
-                                        addProductController.addProduct();
+                                      onPress: () async{
+                                       await addProductController.addProduct();
                                       },
                                     ),
                                   ),

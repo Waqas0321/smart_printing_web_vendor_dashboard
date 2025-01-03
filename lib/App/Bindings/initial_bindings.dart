@@ -11,7 +11,6 @@ import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/History/hi
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Orders/orders_controller.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/OverView/overview_controller.dart';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/settings_controller.dart';
-import 'package:smart_printing_web/App/Views/Vendor%20Dashboard/Setting/Employee%20Details/employees_details_screen.dart';
 import '../Controllers/Vendor Dashboard/home_controller.dart';
 
 class InitialBindings extends Bindings{
@@ -58,9 +57,6 @@ class InitialBindings extends Bindings{
    Get.lazyPut(() => ProductDetailsController(),);
    Get.put(() => ProductDetailsController(),);
 
-   //Vendor Dashboard Settings Product Details
-   Get.lazyPut(() => EmployeesDetailsScreen(),);
-   Get.put(() => EmployeesDetailsScreen(),);
 
    //Vendor Dashboard Settings Product Details
    Get.lazyPut(() => ProcessesController(),);

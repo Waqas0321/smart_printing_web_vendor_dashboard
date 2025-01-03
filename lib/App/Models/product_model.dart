@@ -1,5 +1,7 @@
+import 'dart:io';
+
 class ProductModel {
-  final String img;
+  final File? img;
   final String name;
   final String sku;
   final List<String> cat;
@@ -26,7 +28,7 @@ class ProductModel {
   /// Convert JSON to ProductModel
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      img: json['img'],
+      img: json['img'] != null ? File(json['img']) : null,
       name: json['name'],
       sku: json['sku'],
       cat: List<String>.from(json['cat']),
@@ -42,7 +44,7 @@ class ProductModel {
   /// Convert ProductModel to JSON
   Map<String, dynamic> toJson() {
     return {
-      'img': img,
+      'img': img?.path, // Convert File to String path
       'name': name,
       'sku': sku,
       'cat': cat,
