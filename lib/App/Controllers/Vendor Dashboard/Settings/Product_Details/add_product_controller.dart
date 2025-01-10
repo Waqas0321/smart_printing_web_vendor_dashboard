@@ -91,12 +91,13 @@ class AddProductController extends GetxController {
       );
 
       await apiServices.postProduct("/vendor/add-product", productModel);
-      resetFormFields();
+
     } catch (e) {
       print("Exception: $e");
     } finally {
-
+      resetFormFields();
       isPosting.value = false;
+
     }
   }
 
