@@ -27,7 +27,7 @@ class AddEmployeeController extends GetxController {
   TextEditingController passwordController = TextEditingController();
 
   /// Profile Image
-  Rx<File?> selectedImage = Rx<File?>(null);
+  Rx<File?> selectedImage = Rx<File?>(File('assets/images/card-image.png'));
   List<dynamic> convertedFiles = [];
 
   /// Multiple checkbox states for permissions
@@ -57,7 +57,7 @@ class AddEmployeeController extends GetxController {
     if (result != null) {
       selectedFiles.addAll(result.files);
     } else {
-      print('No files picked');  // This will be printed if no file is selected
+      print('No files picked');
     }
   }
 
@@ -73,24 +73,6 @@ class AddEmployeeController extends GetxController {
       print(selectedFiles.length);
       print(convertedFiles.length);
       isLoading.value = true;
-      // Print the values for debugging
-      print('provideEstimation: ${provideEstimationCheckbox.value}');
-      print('createEmployee: ${createEmployeeCheckbox.value}');
-      print('editWorkFlow: ${editWorkFlowCheckbox.value}');
-      print('createOrder: ${createOrderCheckbox.value}');
-      print('addProcesses: ${addProcessesCheckbox.value}');
-      print('machineOperatorDashboard: ${machineOperatorDashboardCheckbox.value}');
-
-      print('name: ${nameController.text.trim()}');
-      print('email: ${emailAddressController.text.trim()}');
-      print('position: ${positionController.text.trim()}');
-      print('phone: ${phoneNumberController.text.trim()}');
-      print('profileImage: ${imageService.selectedImage.value}');
-      print('otherFiles: $selectedFiles');
-      print('userID: ${userIDController.text.trim()}');
-      print('password: ${passwordController.text.trim()}');
-
-// Now create the Permissions object
       permissions = Permissions(
         provideEstimation: provideEstimationCheckbox.value,
         createEmployee: createEmployeeCheckbox.value,
@@ -106,7 +88,7 @@ class AddEmployeeController extends GetxController {
         email: emailAddressController.text.trim(),
         position: positionController.text.trim(),
         phone: phoneNumberController.text.trim(),
-        profileImage: imageService.selectedImage.value,
+        profileImage: selectedImage.value,
         otherFiles: [],
         userID: userIDController.text.trim(),
         password: passwordController.text.trim(),

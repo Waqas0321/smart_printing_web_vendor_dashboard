@@ -1,7 +1,7 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:io';
 import 'package:smart_printing_web/App/Controllers/Vendor%20Dashboard/Settings/Product_Details/product_details_controller.dart';
 import 'package:smart_printing_web/App/Models/product_model.dart';
 import 'package:smart_printing_web/App/Services/api_services.dart';
@@ -42,7 +42,7 @@ class AddProductController extends GetxController {
   }
 
   /// Product Image
-  RxString selectedIncomeAccount = "403 Services".obs;
+  RxInt selectedIncomeAccount = 403.obs;
   RxString selectedTax = "1000".obs;
 
   /// Select field
@@ -73,42 +73,51 @@ class AddProductController extends GetxController {
   void selectCategory(GetCategoryModel? category) {
     selectedCategory.value = category;
   }
-
-  /// Post Product
   final RxBool isPosting = false.obs;
-
   Future<void> addProduct() async {
     try {
       isPosting.value = true;
       ProductModel productModel = ProductModel(
-          img: selectedImage.value,
-          name: nameController.text.toString().trim(),
-          sku: skuController.text.toString().trim(),
-          cat: [selectedCategory.value!.name],
-          desc: descriptionController.text.toString().trim(),
-          rate: convertTextToDouble(rateController.text.toString().trim()),
-          incm: convertTextToDouble(selectedIncomeAccount.value),
-          inclTax: includeTax.value,
-          tax: convertTextToDouble(selectedTax.value),
-          frmSup: frmSup.value);
+        img: imageService.selectedImage.value,
+        name: nameController.text.trim(),
+        sku: skuController.text.trim(),
+        cat: [selectedCategory.value?.name ?? ''],
+        desc: descriptionController.text.trim(),
+        rate: convertTextToDouble(rateController.text.trim()),
+        incm: selectedIncomeAccount.value.toString(),
+        inclTax: includeTax.value,
+        tax: convertTextToDouble(selectedTax.value),
+        frmSup: frmSup.value,
+      );
+
       await apiServices.postProduct("/vendor/add-product", productModel);
-      selectedImage.value = null;
-      nameController.clear();
-      skuController.clear();
-      selectedCategory = Rx<GetCategoryModel?>(null);
-      descriptionController.clear();
-      rateController.clear();
-      selectedIncomeAccount.value = "403 Services";
-      selectedTax.value = "1000";
-      includeTax.value = false;
-      frmSup.value = false;
-      selectedImage = Rx<File?>(null);
-      imageService.selectedImage = Rx<File?>(null);
-      productDetailsController.selectedIndexProducts.value = 0;
+      resetFormFields();
     } catch (e) {
       print("Exception: $e");
     } finally {
+
       isPosting.value = false;
     }
   }
+
+
+
+
+  void resetFormFields() {
+    selectedImage.value = null;
+    nameController.clear();
+    skuController.clear();
+    selectedCategory = Rx<GetCategoryModel?>(null);
+    descriptionController.clear();
+    rateController.clear();
+    selectedIncomeAccount.value = 403;
+    selectedTax.value = "1000";
+    includeTax.value = false;
+    frmSup.value = false;
+    selectedImage = Rx<File?>(null);
+    imageService.selectedImage = Rx<File?>(null);
+    productDetailsController.selectedIndexProducts.value = 0;
+  }
+
+
 }

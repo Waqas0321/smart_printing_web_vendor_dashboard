@@ -463,41 +463,6 @@ class AddProductScreen extends StatelessWidget {
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
                               ),
-                              Gap(8),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    padding: AppSizes().getCustomPadding(),
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: AppColors.lightPrimary,
-                                    ),
-                                    child: Center(
-                                      child: SvgPicture.asset(
-                                        AppIcons.inventoryIcon,
-                                        color: AppColors.brown,
-                                      ),
-                                    ),
-                                  ),
-                                  CustomTextWidget(
-                                    textAlign: TextAlign.start,
-                                    text: "Non-Inventory",
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13,
-                                    textColor: AppColors.black,
-                                  ),
-                                  Spacer(),
-                                  CustomTextWidget(
-                                    textAlign: TextAlign.start,
-                                    text: "Change Type",
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 11,
-                                    textColor: AppColors.blue,
-                                  ),
-                                ],
-                              ),
                               Gap(16),
                               Obx(
                                 () {
@@ -758,7 +723,7 @@ class AddProductScreen extends StatelessWidget {
                                                       .withOpacity(
                                                           0.5)), // Border color
                                             ),
-                                            child: DropdownButton<String>(
+                                            child: DropdownButton<int>(
                                               focusColor: Colors.transparent,
                                               icon: Icon(
                                                 Icons
@@ -778,7 +743,7 @@ class AddProductScreen extends StatelessWidget {
                                                   .selectedIncomeAccount.value,
                                               items: [
                                                 DropdownMenuItem(
-                                                  value: "403 Services",
+                                                  value: 403,
                                                   child: CustomTextWidget(
                                                     text: "403 Services",
                                                     fontSize: 12,
@@ -787,7 +752,7 @@ class AddProductScreen extends StatelessWidget {
                                                   ),
                                                 ),
                                                 DropdownMenuItem(
-                                                  value: "404 Services",
+                                                  value: 404,
                                                   child: CustomTextWidget(
                                                     text: "404 Services",
                                                     fontSize: 12,
@@ -796,7 +761,7 @@ class AddProductScreen extends StatelessWidget {
                                                   ),
                                                 ),
                                                 DropdownMenuItem(
-                                                  value: "405 Services",
+                                                  value: 405,
                                                   child: CustomTextWidget(
                                                     text: "405 Services",
                                                     fontSize: 12,
@@ -980,41 +945,6 @@ class AddProductScreen extends StatelessWidget {
                                 text: "Product Services Information",
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
-                              ),
-                              Gap(8),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    padding: AppSizes().getCustomPadding(),
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: AppColors.lightPrimary,
-                                    ),
-                                    child: Center(
-                                      child: SvgPicture.asset(
-                                        AppIcons.servicesIcon,
-                                        color: AppColors.brown,
-                                      ),
-                                    ),
-                                  ),
-                                  CustomTextWidget(
-                                    textAlign: TextAlign.start,
-                                    text: "Services",
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13,
-                                    textColor: AppColors.black,
-                                  ),
-                                  Spacer(),
-                                  CustomTextWidget(
-                                    textAlign: TextAlign.start,
-                                    text: "Change Type",
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 11,
-                                    textColor: AppColors.blue,
-                                  ),
-                                ],
                               ),
                               Gap(16),
                             ],

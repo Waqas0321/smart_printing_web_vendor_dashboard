@@ -7,7 +7,7 @@ class ProductModel {
   final List<String> cat;
   final String desc;
   final double rate;
-  final double incm;
+  final String incm;
   final bool inclTax;
   final double tax;
   final bool frmSup;
@@ -28,13 +28,13 @@ class ProductModel {
   /// Convert JSON to ProductModel
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      img: json['img'] != null ? File(json['img']) : null,
+      img: File(json['img']),
       name: json['name'],
       sku: json['sku'],
       cat: List<String>.from(json['cat']),
       desc: json['desc'],
       rate: (json['rate'] as num).toDouble(),
-      incm: (json['incm'] as num).toDouble(),
+      incm: json['incm'],
       inclTax: json['inclTax'],
       tax: (json['tax'] as num).toDouble(),
       frmSup: json['frmSup'],
@@ -44,7 +44,7 @@ class ProductModel {
   /// Convert ProductModel to JSON
   Map<String, dynamic> toJson() {
     return {
-      'img': img?.path, // Convert File to String path
+      'img': img!.path,
       'name': name,
       'sku': sku,
       'cat': cat,

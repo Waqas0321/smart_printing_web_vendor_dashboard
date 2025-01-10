@@ -142,6 +142,7 @@ class ApiServices {
   Future<void> addEmployee(AddEmployeeModel employee, String url) async {
     String apiUrl = baseUrl + url;
     print(apiUrl);
+    print(employee.toJson());
     String? token = await SharedPreferencesService.getString('token');
     try {
       final response = await dio.post(
@@ -220,17 +221,13 @@ class ApiServices {
       if (response.statusCode == 200 || response.statusCode == 201) {
         print("Product added successfully: ${response.data}");
         ShowToast().showTopToast("${response.data["message"]}");
-
-
       } else {
         ShowToast().showTopToast("${response.data["message"]}");
-        print(
-            "Failed to add product. Status code: ${response.statusCode}, Response: ${response.data}");
+        print("Failed to add product. Status code: ${response.statusCode}, Response: ${response.data}");
       }
     } on DioException catch (dioError) {
       if (dioError.response != null) {
-        print(
-            "DioError: ${dioError.response?.statusCode} - ${dioError.response?.data}");
+        print("DioError: ${dioError.response?.statusCode} - ${dioError.response?.data}");
       } else {
         print("DioError: ${dioError.message}");
       }

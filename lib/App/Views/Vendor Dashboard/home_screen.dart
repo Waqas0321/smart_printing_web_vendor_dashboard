@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:smart_printing_web/App/Routes/app_routes_name.dart';
 import 'package:smart_printing_web/App/Utils/Const/appColors.dart';
 import 'package:smart_printing_web/App/Utils/Const/app_icons.dart';
